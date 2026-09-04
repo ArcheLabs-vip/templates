@@ -20,21 +20,21 @@ const {
   description = site.description,
   canonical,
   image,
-  noindex = false,
+  noindex = site.demo.enabled,
   showHeader = true,
   showFooter = true,
 } = Astro.props;
 
 const pageTitle = title === site.title ? title : `${title} | ${site.name}`;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).toString();
-const socialImage = image ? new URL(image, site.url).toString() : undefined;
+const socialImage = new URL(image ?? site.seo.socialImage, site.url).toString();
 ---
 
 <!doctype html>
 <html lang={site.locale}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -46,13 +46,26 @@ const socialImage = image ? new URL(image, site.url).toString() : undefined;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    {socialImage && <meta property="og:image" content={socialImage} />}
-    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${site.name} — atendimento local`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <script is:inline>
+      if (
+        "IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        document.documentElement.classList.add("motion-enabled");
+      }
+    </script>
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
+    {site.demo.enabled && <p class="demo-notice">{site.demo.notice}</p>}
     {showHeader && <Header />}
     <main id="main-content">
       <slot />
@@ -61,6 +74,8 @@ const socialImage = image ? new URL(image, site.url).toString() : undefined;
     <WhatsAppFab />
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        if (!document.documentElement.classList.contains("motion-enabled")) return;
+
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {

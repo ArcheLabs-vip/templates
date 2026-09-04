@@ -1,11 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
 import Section from "../ui/Section.astro";
-
-export interface FAQItem {
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from "../../data/site";
 
 interface Props {
   id?: string;
@@ -68,6 +64,9 @@ const { id, title, description, items }: Props = Astro.props;
 
   summary {
     position: relative;
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
     padding-inline-end: 2.5rem;
     color: var(--color-primary);
     font-family: var(--font-heading);

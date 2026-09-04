@@ -149,6 +149,9 @@ const isCurrent = (href: string) =>
     }
 
     summary {
+      display: inline-flex;
+      min-height: 2.75rem;
+      align-items: center;
       padding: var(--space-2) var(--space-3);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-sm);
@@ -180,5 +183,33 @@ const isCurrent = (href: string) =>
       display: grid;
       gap: var(--space-4);
     }
+
+    .site-header__mobile li a {
+      display: flex;
+      min-height: 2.75rem;
+      align-items: center;
+    }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>(".site-header__mobile").forEach((menu) => {
+    menu.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.open = false;
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (menu.open && event.target instanceof Node && !menu.contains(event.target)) {
+        menu.open = false;
+      }
+    });
+
+    menu.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !menu.open) return;
+      menu.open = false;
+      menu.querySelector("summary")?.focus();
+    });
+  });
+</script>

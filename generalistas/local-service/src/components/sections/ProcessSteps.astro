@@ -2,11 +2,7 @@
 import Container from "../ui/Container.astro";
 import Section from "../ui/Section.astro";
 import SectionTitle from "../ui/SectionTitle.astro";
-
-export interface ProcessItem {
-  title: string;
-  description: string;
-}
+import type { ProcessItem } from "../../data/site";
 
 interface Props {
   id?: string;
@@ -18,7 +14,7 @@ interface Props {
 const { id, title, description, steps }: Props = Astro.props;
 ---
 
-<Section id={id} tone="muted">
+<Section id={id} tone="dark">
   <Container>
     <SectionTitle title={title} description={description} />
 

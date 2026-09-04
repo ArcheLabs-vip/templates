@@ -1,22 +1,32 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   /* Colors */
-  --color-primary: #15363d;
-  --color-primary-contrast: #f8f5ef;
-  --color-brand: #15363d;
-  --color-brand-contrast: #f8f5ef;
-  --color-secondary: #59696b;
-  --color-accent: #c9583e;
-  --color-accent-hover: #aa432d;
-  --color-accent-contrast: #fff9f5;
-  --color-background: #f4f5f1;
-  --color-surface: #e8ece8;
-  --color-surface-raised: #fbfbf8;
-  --color-text: #193338;
-  --color-text-muted: #59696b;
-  --color-border: #c8d1ce;
-  --color-focus: #c9583e;
+  --color-primary: #1c2935;
+  --color-primary-contrast: #fffaf0;
+  --color-brand: #1c2935;
+  --color-brand-contrast: #fffaf0;
+  --color-secondary: #697078;
+  --color-accent: #a8431d;
+  --color-accent-hover: #873414;
+  --color-accent-contrast: #fffaf3;
+  --color-accent-on-dark: #e98246;
+  --color-accent-on-dark-hover: #f0945c;
+  --color-hero-accent: #e98246;
+  --color-background: #f7f3eb;
+  --color-surface: #ede7dc;
+  --color-surface-raised: #fffdf8;
+  --color-text: #27333e;
+  --color-text-muted: #555d63;
+  --color-border: #d8d0c3;
+  --color-focus: #d7682c;
+  --color-dark: #18232e;
+  --color-dark-surface: #22303d;
+  --color-dark-raised: #2a3946;
+  --color-dark-brand: #111b24;
+  --color-dark-text: #fffaf0;
+  --color-dark-muted: #c2c8cb;
+  --color-dark-border: #40505e;
   --color-whatsapp: #25d366;
   --color-whatsapp-hover: #20bd5a;
   --color-whatsapp-contrast: #10291b;
@@ -53,8 +63,8 @@
   --radius-pill: 999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgb(21 54 61 / 0.08);
-  --shadow-md: 0 18px 48px rgb(21 54 61 / 0.14);
+  --shadow-sm: 0 1px 2px rgb(28 41 53 / 0.08);
+  --shadow-md: 0 18px 48px rgb(28 41 53 / 0.15);
   --shadow-action: 0 8px 22px rgb(37 211 102 / 0.2);
 
   /* Containers */
@@ -72,30 +82,4 @@
   /* Transitions */
   --transition-fast: 140ms ease;
   --transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #edf3f1;
-    --color-primary-contrast: #152c31;
-    --color-brand: #244950;
-    --color-brand-contrast: #edf3f1;
-    --color-secondary: #afbfbc;
-    --color-accent: #ed795a;
-    --color-accent-hover: #f28c71;
-    --color-accent-contrast: #202725;
-    --color-background: #10272c;
-    --color-surface: #17343a;
-    --color-surface-raised: #1c3c43;
-    --color-text: #e9f0ed;
-    --color-text-muted: #afbfbc;
-    --color-border: #38545a;
-    --color-focus: #ed795a;
-    --color-whatsapp: #25d366;
-    --color-whatsapp-hover: #3add77;
-    --color-whatsapp-contrast: #10291b;
-    --shadow-sm: 0 1px 2px rgb(3 15 18 / 0.28);
-    --shadow-md: 0 18px 48px rgb(3 15 18 / 0.4);
-    --shadow-action: 0 8px 24px rgb(3 15 18 / 0.36);
-  }
 }

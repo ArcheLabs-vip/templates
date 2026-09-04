@@ -1,11 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
 import Section from "../ui/Section.astro";
-
-export interface BenefitItem {
-  title: string;
-  description: string;
-}
+import type { BenefitItem } from "../../data/site";
 
 interface Props {
   id?: string;
@@ -19,7 +15,7 @@ interface Props {
 const { id, title, description, image, imageAlt = "", benefits }: Props = Astro.props;
 ---
 
-<Section id={id}>
+<Section id={id} tone="dark">
   <Container class="benefits">
     <div class="benefits__content reveal-on-scroll">
       <h2>{title}</h2>

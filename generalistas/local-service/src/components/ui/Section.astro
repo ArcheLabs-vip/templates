@@ -3,7 +3,7 @@ import type { HTMLTag } from "astro/types";
 
 interface Props {
   as?: HTMLTag;
-  tone?: "default" | "muted";
+  tone?: "default" | "muted" | "dark";
   spacing?: "sm" | "md" | "lg";
   class?: string;
   [key: string]: unknown;
@@ -41,6 +41,23 @@ const {
 
   .section--muted {
     background: var(--color-surface);
+  }
+
+  .section--dark {
+    --color-primary: var(--color-dark-text);
+    --color-text: var(--color-dark-text);
+    --color-text-muted: var(--color-dark-muted);
+    --color-surface: var(--color-dark-surface);
+    --color-surface-raised: var(--color-dark-raised);
+    --color-border: var(--color-dark-border);
+    --color-brand: var(--color-dark-brand);
+    --color-brand-contrast: var(--color-dark-text);
+    --color-accent: var(--color-accent-on-dark);
+    --color-accent-hover: var(--color-accent-on-dark-hover);
+    --color-accent-contrast: var(--color-dark);
+    color-scheme: dark;
+    background: var(--color-dark);
+    color: var(--color-dark-text);
   }
 
   .section--space-sm {

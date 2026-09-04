@@ -1,0 +1,61 @@
+---
+interface Props {
+  name?: "repair" | "install" | "preventive" | "mount" | "electric" | "hydraulic";
+}
+
+const { name = "repair" }: Props = Astro.props;
+---
+
+<span class="service-icon" aria-hidden="true">
+  {
+    name === "install" ? (
+      <svg viewBox="0 0 24 24"><path d="M12 3v4m0 10v4M4.2 7.5l3.5 2m8.6 5 3.5 2M4.2 16.5l3.5-2m8.6-5 3.5-2"/><circle cx="12" cy="12" r="4"/></svg>
+    ) : name === "preventive" ? (
+      <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="m8.8 12 2 2 4.5-4.5"/></svg>
+    ) : name === "mount" ? (
+      <svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10"/></svg>
+    ) : name === "electric" ? (
+      <svg viewBox="0 0 24 24"><path d="m13.5 2-8 11h6l-1 9 8-12h-6l1-8Z"/></svg>
+    ) : name === "hydraulic" ? (
+      <svg viewBox="0 0 24 24"><path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/><path d="M9 15.5c.5 1.3 1.5 2 3 2"/></svg>
+    ) : (
+      <svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5-5l2.2 2.2-2.8 2.8-2.2-2.2a4 4 0 0 0 5 5L19 16.8a2 2 0 1 1-2.8 2.8l-6.6-7.3a4 4 0 0 0-5 5l2.2-2.2 2.8 2.8-2.2 2.2a4 4 0 0 0 5-5"/></svg>
+    )
+  }
+</span>
+
+<style>
+  .service-icon {
+    position: relative;
+    display: grid;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-accent) 13%, var(--color-surface-raised));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: var(--color-accent);
+  }
+
+  .service-icon::after {
+    position: absolute;
+    inset-block-start: -0.25rem;
+    inset-inline-end: -0.25rem;
+    width: 0.7rem;
+    aspect-ratio: 1;
+    border-radius: 0.14rem;
+    background: var(--color-brand);
+    content: "";
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.65;
+  }
+</style>

@@ -2,146 +2,294 @@
 import Container from "../ui/Container.astro";
 import Section from "../ui/Section.astro";
 import SectionTitle from "../ui/SectionTitle.astro";
-
-export interface TestimonialItem {
-  quote: string;
-  name: string;
-  context: string;
-  rating?: number;
-}
+import type { TestimonialItem } from "../../data/site";
 
 interface Props {
   id?: string;
   title: string;
   description?: string;
   testimonials: TestimonialItem[];
+  sourceLabel?: string;
+  showGoogleBrand?: boolean;
 }
 
-const { id, title, description, testimonials }: Props = Astro.props;
-const [featured, ...others] = testimonials;
+const {
+  id,
+  title,
+  description,
+  testimonials,
+  sourceLabel = "Avaliações de clientes",
+  showGoogleBrand = false,
+}: Props = Astro.props;
+const getInitials = (name: string) =>
+  name.split(" ").slice(0, 2).map((part) => part.charAt(0)).join("").toUpperCase();
 ---
 
-<Section id={id}>
+<Section id={id} tone="muted">
   <Container>
-    <SectionTitle title={title} description={description} />
+    <div class="reviews__heading">
+      <SectionTitle title={title} description={description} />
+      <div class="reviews__source" aria-label={sourceLabel}>
+        {showGoogleBrand && (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285f4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.06H12v3.9h5.38a4.6 4.6 0 0 1-2 3.02v2.53h3.24c1.9-1.75 2.98-4.33 2.98-7.39Z"></path>
+            <path fill="#34a853" d="M12 22c2.7 0 4.98-.9 6.63-2.38l-3.24-2.53c-.9.6-2.05.96-3.39.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.61A10 10 0 0 0 12 22Z"></path>
+            <path fill="#fbbc05" d="M6.39 13.92A6 6 0 0 1 6.08 12c0-.67.11-1.32.31-1.92V7.47H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.53l3.35-2.61Z"></path>
+            <path fill="#ea4335" d="M12 5.95c1.47 0 2.79.51 3.83 1.5l2.87-2.87A9.64 9.64 0 0 0 12 2a10 10 0 0 0-8.96 5.47l3.35 2.61C7.18 7.71 9.39 5.95 12 5.95Z"></path>
+          </svg>
+        )}
+        <span>{sourceLabel}</span>
+      </div>
+    </div>
 
     {
-      featured ? (
-        <div class="testimonials">
-          <figure class="testimonial testimonial--featured reveal-on-scroll">
-            {featured.rating && (
-              <p class="testimonial__rating" aria-label={`${featured.rating} de 5 estrelas`}>
-                {"★".repeat(featured.rating)}
-              </p>
-            )}
-            <blockquote>“{featured.quote}”</blockquote>
-            <figcaption>
-              <strong>{featured.name}</strong>
-              <span>{featured.context}</span>
-            </figcaption>
-          </figure>
-
-          <div class="testimonials__secondary">
-            {others.map((testimonial, index) => (
-              <figure class:list={["testimonial", "reveal-on-scroll", index < 3 && `reveal-delay-${(index + 1) * 100}`]}>
-                {testimonial.rating && (
-                  <p class="testimonial__rating" aria-label={`${testimonial.rating} de 5 estrelas`}>
-                    {"★".repeat(testimonial.rating)}
-                  </p>
-                )}
-                <blockquote>“{testimonial.quote}”</blockquote>
-                <figcaption>
+      testimonials.length ? (
+        <div class="reviews" data-reviews-grid>
+          {testimonials.map((testimonial, index) => (
+            <figure class="review" data-review style={`--review-delay: ${index * 110}ms`}>
+              <header class="review__author">
+                <span class:list={["review__avatar", `review__avatar--${(index % 3) + 1}`]} aria-hidden="true">
+                  {getInitials(testimonial.name)}
+                </span>
+                <span class="review__identity">
                   <strong>{testimonial.name}</strong>
-                  <span>{testimonial.context}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+                  <small>{testimonial.context}</small>
+                </span>
+                {showGoogleBrand && <svg class="review__google" viewBox="0 0 24 24" role="img" aria-label="Google">
+                  <path fill="#4285f4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.06H12v3.9h5.38a4.6 4.6 0 0 1-2 3.02v2.53h3.24c1.9-1.75 2.98-4.33 2.98-7.39Z"></path>
+                  <path fill="#34a853" d="M12 22c2.7 0 4.98-.9 6.63-2.38l-3.24-2.53c-.9.6-2.05.96-3.39.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.61A10 10 0 0 0 12 22Z"></path>
+                  <path fill="#fbbc05" d="M6.39 13.92A6 6 0 0 1 6.08 12c0-.67.11-1.32.31-1.92V7.47H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.53l3.35-2.61Z"></path>
+                  <path fill="#ea4335" d="M12 5.95c1.47 0 2.79.51 3.83 1.5l2.87-2.87A9.64 9.64 0 0 0 12 2a10 10 0 0 0-8.96 5.47l3.35 2.61C7.18 7.71 9.39 5.95 12 5.95Z"></path>
+                </svg>}
+              </header>
+
+              {testimonial.rating && (
+                <div class="review__rating" aria-label={`${testimonial.rating} de 5 estrelas`}>
+                  {Array.from({ length: testimonial.rating }).map(() => (
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="m10 1.7 2.45 4.96 5.48.8-3.97 3.86.94 5.46L10 14.2l-4.9 2.58.94-5.46-3.97-3.87 5.48-.79L10 1.7Z"></path>
+                    </svg>
+                  ))}
+                </div>
+              )}
+
+              <blockquote>{testimonial.quote}</blockquote>
+            </figure>
+          ))}
         </div>
       ) : (
-        <p class="testimonials__empty">As avaliações serão exibidas aqui.</p>
+        <p class="reviews__empty">As avaliações serão exibidas aqui.</p>
       )
     }
   </Container>
 </Section>
 
 <style>
-  .testimonials {
+  .reviews__heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .reviews__source {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+  }
+
+  .reviews__source svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .reviews {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
-    gap: var(--space-7);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
     margin-top: var(--space-8);
   }
 
-  .testimonial {
-    padding: var(--space-6) 0;
-    margin: 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .testimonial--featured {
+  .review {
     display: flex;
-    min-height: 25rem;
+    min-height: 18rem;
     flex-direction: column;
-    justify-content: space-between;
-    padding: clamp(2rem, 5vw, 4rem);
-    border: 0;
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 65%, transparent);
-  }
-
-  .testimonials__secondary {
-    display: grid;
-    align-content: start;
-  }
-
-  .testimonial__rating {
-    margin: 0 0 var(--space-5);
-    color: var(--color-accent);
-    font-size: var(--font-size-lg);
-    letter-spacing: 0.12em;
-  }
-
-  blockquote {
-    max-width: 32ch;
+    padding: clamp(1.5rem, 3vw, 2rem);
     margin: 0;
-    color: var(--color-primary);
-    font-family: var(--font-heading);
-    font-size: clamp(1.25rem, 2.7vw, 2.25rem);
-    font-weight: 620;
-    letter-spacing: -0.025em;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-raised);
+    box-shadow: 0 12px 32px rgb(28 41 53 / 0.08);
+  }
+
+  .review__author {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .review__avatar {
+    display: grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    border-radius: 50%;
+    color: #fffaf4;
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .review__avatar--1 { background: #3f6d62; }
+  .review__avatar--2 { background: #496d91; }
+  .review__avatar--3 { background: #9a5a3d; }
+
+  .review__identity {
+    display: grid;
+    min-width: 0;
     line-height: 1.3;
   }
 
-  .testimonial:not(.testimonial--featured) blockquote {
-    font-size: var(--font-size-lg);
+  .review__identity strong {
+    color: var(--color-primary);
+    font-size: 0.95rem;
   }
 
-  figcaption {
-    display: grid;
-    gap: var(--space-1);
-    margin-top: var(--space-6);
+  .review__identity small {
+    overflow: hidden;
+    margin-top: 0.2rem;
     color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
+    font-size: 0.78rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  figcaption strong {
+  .review__google {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .review__rating {
+    display: flex;
+    gap: 0.12rem;
+    margin-top: var(--space-6);
+    color: #f9ab00;
+  }
+
+  .review__rating svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentColor;
+  }
+
+  blockquote {
+    margin: var(--space-5) 0 0;
     color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: 540;
+    line-height: 1.55;
   }
 
-  .testimonials__empty {
+  .reviews.is-motion-ready .review {
+    opacity: 0.01;
+    clip-path: inset(0 0 12% 0 round var(--radius-lg));
+    transform: translateY(1rem);
+    transition:
+      opacity 420ms ease var(--review-delay),
+      clip-path 680ms cubic-bezier(0.16, 1, 0.3, 1) var(--review-delay),
+      transform 680ms cubic-bezier(0.16, 1, 0.3, 1) var(--review-delay),
+      box-shadow var(--transition-base);
+  }
+
+  .reviews.is-motion-ready .review__rating svg {
+    opacity: 0;
+    transform: scale(0.45) rotate(-12deg);
+    transition: opacity 300ms ease, transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reviews.is-motion-ready .review.is-in-view {
+    opacity: 1;
+    clip-path: inset(0 round var(--radius-lg));
+    transform: translateY(0);
+  }
+
+  .reviews.is-motion-ready .review.is-in-view .review__rating svg {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reviews.is-motion-ready .review.is-in-view .review__rating svg:nth-child(2) { transition-delay: 50ms; }
+  .reviews.is-motion-ready .review.is-in-view .review__rating svg:nth-child(3) { transition-delay: 100ms; }
+  .reviews.is-motion-ready .review.is-in-view .review__rating svg:nth-child(4) { transition-delay: 150ms; }
+  .reviews.is-motion-ready .review.is-in-view .review__rating svg:nth-child(5) { transition-delay: 200ms; }
+
+  .reviews__empty {
     margin-top: var(--space-7);
     color: var(--color-text-muted);
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    .review:hover,
+    .reviews.is-motion-ready .review.is-in-view:hover {
+      box-shadow: 0 18px 42px rgb(28 41 53 / 0.13);
+      transform: translateY(-0.2rem);
+    }
+  }
+
+  @media (max-width: 63.99rem) {
+    .reviews { grid-template-columns: 1fr; }
+    .review { min-height: auto; }
+  }
+
   @media (max-width: 47.99rem) {
-    .testimonials {
-      grid-template-columns: 1fr;
+    .reviews__heading {
+      align-items: stretch;
+      flex-direction: column;
     }
 
-    .testimonial--featured {
-      min-height: 20rem;
+    .reviews__source { align-self: flex-start; }
+    .reviews { margin-top: var(--space-6); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reviews.is-motion-ready .review,
+    .reviews.is-motion-ready .review.is-in-view,
+    .reviews.is-motion-ready .review__rating svg,
+    .reviews.is-motion-ready .review.is-in-view .review__rating svg {
+      opacity: 1;
+      clip-path: none;
+      transform: none;
     }
   }
 </style>
+
+<script>
+  const reviewGrids = document.querySelectorAll<HTMLElement>("[data-reviews-grid]");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in-view");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18 },
+    );
+
+    reviewGrids.forEach((grid) => {
+      grid.classList.add("is-motion-ready");
+      grid.querySelectorAll<HTMLElement>("[data-review]").forEach((review) => observer.observe(review));
+    });
+  }
+</script>
