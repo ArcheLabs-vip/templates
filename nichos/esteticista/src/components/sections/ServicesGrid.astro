@@ -1,0 +1,417 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import ServiceIcon from "../ui/ServiceIcon.astro";
+import type { ServiceItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  services: ServiceItem[];
+  actionHref?: string;
+}
+
+const { id, title, description, services, actionHref }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="services-grid">
+      {
+        services.map((service, index) => (
+          <article class:list={["service", "reveal-on-scroll", index > 0 && index < 4 && `reveal-delay-${index * 100}`]}>
+            <div class="service__heading">
+              <div>
+                {service.detail && <small>{service.detail}</small>}
+                <h3>{service.title}</h3>
+              </div>
+              <ServiceIcon name={service.icon} />
+            </div>
+            <p>{service.description}</p>
+            <button
+              class="service__trigger"
+              type="button"
+              data-service-trigger
+              data-title={service.title}
+              data-description={service.description}
+              data-detail={service.detail}
+              data-includes={JSON.stringify(service.includes ?? [])}
+              aria-haspopup="dialog"
+            >
+              Ver detalhes <span aria-hidden="true">→</span>
+            </button>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<dialog class="service-modal" data-service-modal aria-labelledby="service-modal-title">
+  <div class="service-modal__shell">
+    <form method="dialog" class="service-modal__topbar">
+      <span>Detalhes do serviço</span>
+      <button class="service-modal__close" type="submit" aria-label="Fechar detalhes">×</button>
+    </form>
+
+    <div class="service-modal__content">
+      <p class="service-modal__eyebrow" data-modal-detail></p>
+      <h2 id="service-modal-title" data-modal-title></h2>
+      <p class="service-modal__description" data-modal-description></p>
+      <div class="service-modal__list-wrap" data-modal-list-wrap>
+        <h3>O que pode estar incluído</h3>
+        <ul data-modal-list></ul>
+      </div>
+    </div>
+
+    <div class="service-modal__actions">
+      {actionHref && <a class="service-modal__cta" href={actionHref}>Pedir orçamento</a>}
+      <form method="dialog"><button class="service-modal__cancel" type="submit">Voltar aos serviços</button></form>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>("[data-service-modal]");
+  const title = modal?.querySelector<HTMLElement>("[data-modal-title]");
+  const description = modal?.querySelector<HTMLElement>("[data-modal-description]");
+  const detail = modal?.querySelector<HTMLElement>("[data-modal-detail]");
+  const list = modal?.querySelector<HTMLUListElement>("[data-modal-list]");
+  const listWrap = modal?.querySelector<HTMLElement>("[data-modal-list-wrap]");
+  let activeTrigger: HTMLButtonElement | null = null;
+
+  document.querySelectorAll<HTMLButtonElement>("[data-service-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      if (!modal || !title || !description || !detail || !list || !listWrap) return;
+
+      activeTrigger = trigger;
+      title.textContent = trigger.dataset.title ?? "Serviço";
+      description.textContent = trigger.dataset.description ?? "";
+      detail.textContent = trigger.dataset.detail ?? "Atendimento sob consulta";
+
+      const includes = JSON.parse(trigger.dataset.includes ?? "[]") as string[];
+      list.replaceChildren(...includes.map((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        return li;
+      }));
+      listWrap.hidden = includes.length === 0;
+
+      modal.showModal();
+      document.body.classList.add("has-open-modal");
+    });
+  });
+
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) modal.close();
+  });
+
+  modal?.addEventListener("close", () => {
+    document.body.classList.remove("has-open-modal");
+    activeTrigger?.focus();
+  });
+</script>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .service {
+    position: relative;
+    display: grid;
+    min-height: 22rem;
+    grid-template-rows: auto 1fr auto;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-raised);
+    transition: border-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .service::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: var(--space-4);
+    height: 3px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    background: var(--color-brand);
+    content: "";
+    transition: background-color var(--transition-base);
+  }
+
+  .service:hover {
+    border-color: color-mix(in srgb, var(--color-brand) 60%, var(--color-border));
+    background: color-mix(in srgb, var(--color-surface-raised) 94%, var(--color-accent));
+  }
+
+  .service:hover::before {
+    background: var(--color-accent);
+  }
+
+  .service__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .service h3 {
+    max-width: 16ch;
+    margin: var(--space-3) 0 0;
+    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .service p {
+    max-width: 42ch;
+    margin: var(--space-6) 0;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .service small {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .service__trigger {
+    display: inline-flex;
+    width: 100%;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+    border: 1px solid var(--color-brand);
+    border-radius: var(--radius-sm);
+    background: var(--color-brand);
+    color: var(--color-brand-contrast);
+    font-weight: 740;
+    cursor: pointer;
+    transition: background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .service__trigger:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+
+  .service__trigger span {
+    transition: transform var(--transition-base);
+  }
+
+  .service__trigger:hover span {
+    transform: translateX(0.25rem);
+  }
+
+  .service__trigger:active {
+    transform: translateY(1px);
+  }
+
+  .service-modal {
+    width: min(calc(100% - 2rem), 42rem);
+    max-height: min(48rem, calc(100dvh - 2rem));
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-raised);
+    box-shadow: 0 30px 90px rgb(9 32 36 / 0.32);
+    color: var(--color-text);
+  }
+
+  .service-modal::backdrop {
+    background: rgb(8 28 32 / 0.66);
+    backdrop-filter: blur(5px);
+  }
+
+  .service-modal__shell {
+    overflow: auto;
+  }
+
+  .service-modal__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 760;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .service-modal__close {
+    display: grid;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .service-modal__close:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    transform: rotate(4deg);
+  }
+
+  .service-modal__content {
+    padding: clamp(2rem, 6vw, 4rem);
+  }
+
+  .service-modal__eyebrow {
+    margin: 0 0 var(--space-3);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 740;
+  }
+
+  .service-modal h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: -0.045em;
+  }
+
+  .service-modal__description {
+    max-width: 54ch;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .service-modal__list-wrap {
+    padding-top: var(--space-6);
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .service-modal__list-wrap h3 {
+    margin: 0;
+    font-size: var(--font-size-base);
+  }
+
+  .service-modal ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3) var(--space-5);
+    padding: 0;
+    margin: var(--space-4) 0 0;
+    list-style: none;
+  }
+
+  .service-modal li {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .service-modal li::before {
+    position: absolute;
+    inset-block-start: 0.7em;
+    inset-inline-start: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    content: "";
+  }
+
+  .service-modal__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .service-modal__cta,
+  .service-modal__cancel {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding-inline: var(--space-5);
+    border-radius: var(--radius-md);
+    font-weight: 720;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .service-modal__cta {
+    border: 1px solid var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  .service-modal__cancel {
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .service-modal__cancel:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    transform: translateY(-1px);
+  }
+
+  :global(body.has-open-modal) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 63.99rem) {
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service {
+      min-height: 20rem;
+    }
+
+    .service-modal ul {
+      grid-template-columns: 1fr;
+    }
+
+    .service-modal__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .service-modal__actions form,
+    .service-modal__cancel {
+      width: 100%;
+    }
+  }
+</style>
