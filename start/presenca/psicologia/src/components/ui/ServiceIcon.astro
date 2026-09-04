@@ -1,0 +1,61 @@
+---
+interface Props {
+  name?: "face" | "sparkle" | "leaf" | "hand" | "body" | "brow";
+}
+
+const { name = "face" }: Props = Astro.props;
+---
+
+<span class="service-icon" aria-hidden="true">
+  {
+    name === "sparkle" ? (
+      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2Z"/></svg>
+    ) : name === "leaf" ? (
+      <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.2 3.9 19.9M5 21c.5-4 2-8.5 7-10.5"/><path d="M20 4s-3-.5-6 .5c-3 1-6 4-7.5 8.5 4-2 7-2.5 10-2.5h3.5V4Z"/></svg>
+    ) : name === "hand" ? (
+      <svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v1m0 0V4a2 2 0 0 0-4 0v3m0 0V5a2 2 0 0 0-4 0v5l-1.5-1.5a2 2 0 0 0-2.83 2.83L8 17.7A5 5 0 0 0 12 20h2a5 5 0 0 0 5-5v-4a2 2 0 0 0-4 0"/></svg>
+    ) : name === "body" ? (
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M16 22V12l3-4M8 22V12L5 8m7-2v6m-3 0h6"/></svg>
+    ) : name === "brow" ? (
+      <svg viewBox="0 0 24 24"><path d="M3 11c3-4 7-4 9-2m3-2c2-2 6-2 9 2"/><circle cx="8" cy="14" r="2"/><circle cx="16" cy="14" r="2"/></svg>
+    ) : (
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="7"/><path d="M8.5 14c1 1.5 2.2 2 3.5 2s2.5-.5 3.5-2"/><path d="M9 8.5h.01M15 8.5h.01"/></svg>
+    )
+  }
+</span>
+
+<style>
+  .service-icon {
+    position: relative;
+    display: grid;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-accent) 13%, var(--color-surface-raised));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: var(--color-accent);
+  }
+
+  .service-icon::after {
+    position: absolute;
+    inset-block-start: -0.25rem;
+    inset-inline-end: -0.25rem;
+    width: 0.7rem;
+    aspect-ratio: 1;
+    border-radius: 0.14rem;
+    background: var(--color-brand);
+    content: "";
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.65;
+  }
+</style>
