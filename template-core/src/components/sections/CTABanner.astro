@@ -1,0 +1,92 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary" | "text" | "whatsapp";
+  icon?: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  primaryAction: Action;
+  secondaryAction?: Action;
+}
+
+const { id, title, description, primaryAction, secondaryAction }: Props = Astro.props;
+---
+
+<Section id={id} spacing="sm">
+  <Container>
+    <div class="cta-banner">
+      <div>
+        <h2>{title}</h2>
+        {description && <p>{description}</p>}
+      </div>
+      <div class="cta-banner__actions">
+        <Button href={primaryAction.href} variant={primaryAction.variant} icon={primaryAction.icon}>
+          {primaryAction.label}
+        </Button>
+        {
+          secondaryAction && (
+            <Button
+              href={secondaryAction.href}
+              variant={secondaryAction.variant ?? "secondary"}
+              icon={secondaryAction.icon}
+            >
+              {secondaryAction.label}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .cta-banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-6);
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    max-width: 44rem;
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  .cta-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 47.99rem) {
+    .cta-banner {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-banner__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

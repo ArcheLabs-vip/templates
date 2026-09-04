@@ -1,0 +1,57 @@
+---
+import type { HTMLTag } from "astro/types";
+
+interface Props {
+  as?: HTMLTag;
+  tone?: "default" | "muted";
+  spacing?: "sm" | "md" | "lg";
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "section",
+  tone = "default",
+  spacing = "md",
+  class: className,
+  ...attrs
+}: Props = Astro.props;
+---
+
+<Tag
+  class:list={[
+    "section",
+    `section--${tone}`,
+    `section--space-${spacing}`,
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+</Tag>
+
+<style>
+  .section {
+    padding-block: var(--section-spacing);
+  }
+
+  .section--default {
+    background: var(--color-background);
+  }
+
+  .section--muted {
+    background: var(--color-surface);
+  }
+
+  .section--space-sm {
+    --section-spacing: var(--space-section-sm);
+  }
+
+  .section--space-md {
+    --section-spacing: var(--space-section);
+  }
+
+  .section--space-lg {
+    --section-spacing: var(--space-section-lg);
+  }
+</style>

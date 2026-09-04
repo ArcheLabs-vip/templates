@@ -1,0 +1,64 @@
+---
+interface Props {
+  href: string;
+  label?: string;
+}
+
+const { href, label = "Chamar no WhatsApp" }: Props = Astro.props;
+---
+
+<a class="whatsapp-floating" href={href} aria-label={label}>
+  <span aria-hidden="true">WA</span>
+  <strong>{label}</strong>
+</a>
+
+<style>
+  .whatsapp-floating {
+    position: fixed;
+    inset-inline-end: max(var(--space-4), env(safe-area-inset-right));
+    inset-block-end: max(var(--space-4), env(safe-area-inset-bottom));
+    z-index: 30;
+    display: inline-flex;
+    min-height: 3.25rem;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+    border: 1px solid color-mix(in srgb, var(--color-accent-contrast) 24%, transparent);
+    border-radius: var(--radius-md);
+    background: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    color: var(--color-accent-contrast);
+    text-decoration: none;
+    transition: background-color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .whatsapp-floating:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .whatsapp-floating:active {
+    transform: translateY(1px);
+  }
+
+  .whatsapp-floating span {
+    font-size: 0.72rem;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+  }
+
+  .whatsapp-floating strong {
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 30rem) {
+    .whatsapp-floating strong {
+      display: none;
+    }
+
+    .whatsapp-floating {
+      width: 3.25rem;
+      justify-content: center;
+      padding-inline: 0;
+    }
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+
+export interface ServiceItem {
+  title: string;
+  description: string;
+  detail?: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  services: ServiceItem[];
+}
+
+const { id, title, description, services }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="services-grid">
+      {
+        services.map((service, index) => (
+          <article class:list={["service", index === 0 && "service--featured"]}>
+            <div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              {service.detail && <small>{service.detail}</small>}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .service {
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .service--featured {
+    grid-row: span 2;
+    align-content: end;
+    min-height: 22rem;
+    padding: var(--space-6);
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--color-brand);
+    box-shadow: var(--shadow-md);
+    color: var(--color-brand-contrast);
+  }
+
+  .service--featured p,
+  .service--featured small,
+  .service--featured h3 {
+    color: inherit;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    max-width: 36rem;
+    margin: var(--space-3) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  small {
+    display: block;
+    margin-top: var(--space-4);
+    color: var(--color-text-muted);
+    font-weight: 700;
+  }
+
+  @media (max-width: 47.99rem) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .service--featured {
+      grid-row: auto;
+      min-height: 17rem;
+      margin-bottom: var(--space-3);
+    }
+  }
+</style>

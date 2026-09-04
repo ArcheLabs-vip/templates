@@ -1,0 +1,120 @@
+---
+import Button from "../components/ui/Button.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+import SectionTitle from "../components/ui/SectionTitle.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Section class="hero" spacing="lg">
+    <Container>
+      <SectionTitle
+        as="h1"
+        title="Uma base simples para sites distintos"
+        description="Estrutura Astro portátil para criar sites rápidos, acessíveis e fáceis de transferir."
+      >
+        <div class="hero__actions">
+          <Button href="#base">Explorar a base</Button>
+          <Button href="#componentes" variant="secondary">Ver componentes</Button>
+        </div>
+      </SectionTitle>
+    </Container>
+  </Section>
+
+  <Section id="base" tone="muted">
+    <Container>
+      <SectionTitle
+        title="O essencial, bem separado"
+        description="Conteúdo, estrutura e apresentação vivem em lugares previsíveis para reduzir acoplamento e facilitar cada novo projeto."
+      />
+
+      <dl class="foundation-grid">
+        <div>
+          <dt>Conteúdo</dt>
+          <dd>Dados editáveis em <code>src/data</code>.</dd>
+        </div>
+        <div>
+          <dt>Apresentação</dt>
+          <dd>Tokens e estilos globais em <code>src/styles</code>.</dd>
+        </div>
+        <div>
+          <dt>Estrutura</dt>
+          <dd>Componentes Astro pequenos e sem JavaScript no cliente.</dd>
+        </div>
+        <div>
+          <dt>Entrega</dt>
+          <dd>Build estático pronto para hospedagem independente.</dd>
+        </div>
+      </dl>
+    </Container>
+  </Section>
+
+  <Section id="componentes">
+    <Container size="narrow">
+      <SectionTitle
+        title="Componentes incluídos nesta versão"
+        description="BaseLayout, Header, Footer, Container, Button, Section e SectionTitle formam o ponto de partida do Core."
+      />
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .hero {
+    display: grid;
+    min-height: calc(100dvh - 4.5rem);
+    align-items: center;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .foundation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-8);
+    margin: var(--space-8) 0 0;
+  }
+
+  .foundation-grid div {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  dt {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+  }
+
+  dd {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  code {
+    color: var(--color-text);
+    font-size: 0.92em;
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .foundation-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

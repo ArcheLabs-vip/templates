@@ -1,0 +1,106 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+
+interface Props {
+  id?: string;
+  title: string;
+  description: string;
+  areas: string[];
+  image: string;
+  imageAlt: string;
+  action?: {
+    label: string;
+    href: string;
+  };
+}
+
+const { id, title, description, areas, image, imageAlt, action }: Props = Astro.props;
+---
+
+<Section id={id}>
+  <Container class="service-area">
+    <div class="service-area__media">
+      <img src={image} alt={imageAlt} width="1536" height="1024" loading="lazy" />
+    </div>
+
+    <div class="service-area__content">
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <ul>
+        {areas.map((area) => <li>{area}</li>)}
+      </ul>
+      {action && <Button href={action.href} variant="secondary">{action.label}</Button>}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .service-area {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+    align-items: stretch;
+    gap: clamp(2rem, 7vw, 7rem);
+  }
+
+  .service-area__media {
+    min-height: 31rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    object-fit: cover;
+  }
+
+  .service-area__content {
+    align-self: center;
+  }
+
+  h2 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    max-width: 34rem;
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    margin: var(--space-6) 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 0.55rem 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 680;
+  }
+
+  @media (max-width: 47.99rem) {
+    .service-area {
+      width: min(calc(100% - (var(--container-gutter) * 2)), var(--container-default));
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+
+    .service-area__media {
+      min-height: 22rem;
+    }
+  }
+</style>
