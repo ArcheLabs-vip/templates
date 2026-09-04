@@ -1,6 +1,8 @@
-# Arche Template Core
+# Start — Coleção Presença — Core
 
-Base técnica reutilizável para os sites da Arche Labs. O projeto usa Astro, TypeScript e CSS nativo, sem framework de interface ou JavaScript enviado ao navegador por padrão.
+Base técnica e estrutural exclusiva da Coleção Presença. O projeto usa Astro, TypeScript e CSS nativo e origina as aplicações de nicho desta coleção.
+
+Este core não é uma base visual universal da Arche Labs. As outras coleções terão cores próprios, preservando apenas os padrões técnicos descritos em [`referencias/cores-de-colecao.md`](../../../referencias/cores-de-colecao.md).
 
 ## Requisitos
 
@@ -43,7 +45,7 @@ src/
 └── styles/        Design tokens e estilos globais
 ```
 
-## Começando um projeto
+## Criando um nicho da Coleção Presença
 
 1. Atualize `src/data/site.ts` com os dados reais do cliente.
 2. Ajuste os tokens em `src/styles/tokens.css` para a identidade visual.
@@ -69,7 +71,7 @@ O valor padrão de `site.url` é apenas um placeholder. Substitua-o pelo domíni
 - `ServiceArea`
 - `WhatsAppFloating`
 
-Todos recebem conteúdo por propriedades e não dependem dos dados de um nicho específico. Ao iniciar um projeto de cliente, copie apenas os componentes usados para manter o resultado independente do Core.
+Todos recebem conteúdo por propriedades e não dependem dos dados de um nicho específico. Ao iniciar uma aplicação da Coleção Presença, copie apenas os componentes usados para manter o resultado independente do `presenca-core`.
 
 ## Princípios
 

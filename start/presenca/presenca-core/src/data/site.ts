@@ -24,10 +24,10 @@ export interface SiteConfig {
 }
 
 export const site = {
-  name: "Arche Template",
-  title: "Arche Template Core",
+  name: "Arche Presença",
+  title: "Core da Coleção Presença",
   description:
-    "Base Astro portátil para criar sites rápidos, acessíveis e fáceis de manter.",
+    "Base da Coleção Presença para criar sites rápidos, acessíveis e fáceis de manter.",
   url: "https://example.com",
   locale: "pt-BR",
   contact: {

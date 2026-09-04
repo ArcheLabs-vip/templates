@@ -614,7 +614,7 @@ Após handoff definitivo, o cliente pode receber propriedade ou acesso ao reposi
 # 24. Arquitetura ideal para a operação
 
 ```text
-Arche Template Core
+Core da coleção escolhida
         ↓
 Template escolhido
         ↓

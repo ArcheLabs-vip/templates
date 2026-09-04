@@ -138,7 +138,7 @@ export const site = {
   title: "Arruma Casa | Manutenção residencial em São Paulo",
   description:
     "Reparos, instalações e manutenção residencial com agendamento claro e orçamento antes do serviço em São Paulo.",
-  url: "https://local-service.example.com",
+  url: "https://servicos-residenciais.example.com",
   locale: "pt-BR",
   demo: {
     enabled: true,

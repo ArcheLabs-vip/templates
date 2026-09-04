@@ -1,6 +1,6 @@
-# Pele & Forma — Template Esteticista
+# Start — Coleção Presença — Estética
 
-Template demonstrativo de nicho para clínicas e profissionais de estética. Desenvolvido com a arquitetura Arche Template Core.
+Aplicação da Coleção Presença, do plano Start, para clínicas e profissionais de estética. Derivada do `presenca-core`.
 
 ## Requisitos
 

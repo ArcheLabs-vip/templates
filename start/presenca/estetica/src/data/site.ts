@@ -144,7 +144,7 @@ export const site = {
   title: "Pele & Forma | Estética facial e corporal em São Paulo",
   description:
     "Procedimentos estéticos com protocolos personalizados, produtos dermatológicos e ambiente acolhedor em São Paulo.",
-  url: "https://esteticista.example.com",
+  url: "https://estetica.example.com",
   locale: "pt-BR",
   demo: {
     enabled: true,

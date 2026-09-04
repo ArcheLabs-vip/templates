@@ -1,1 +1,22 @@
-# templates
+# Arche Labs — Templates
+
+Biblioteca de templates organizada por plano, coleção e nicho.
+
+```text
+templates/
+├── start/
+│   └── presenca/
+│       ├── presenca-core/
+│       ├── servicos-residenciais/
+│       └── estetica/
+├── pro/
+└── referencias/
+```
+
+- **Plano** define a oferta comercial, como `start` ou futuramente `pro`.
+- **Coleção** define o molde visual e estrutural, como `presenca`.
+- **Nicho** apresenta esse molde aplicado a um mercado específico.
+
+Cada pasta de nicho é um projeto Astro autônomo. Para executar um deles, entre em sua pasta e use `npm run dev`. Consulte [referencias/templates.md](referencias/templates.md) para as regras completas da biblioteca.
+
+Cada coleção possui seu próprio core. Consulte [referencias/cores-de-colecao.md](referencias/cores-de-colecao.md) para o padrão técnico usado na criação dos próximos cores.
