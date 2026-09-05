@@ -1,0 +1,87 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  action: {
+    label: string;
+    href: string;
+    variant?: "primary" | "secondary" | "text" | "whatsapp";
+    icon?: string;
+  };
+  secondaryText?: string;
+}
+
+const { title, description, action, secondaryText }: Props = Astro.props;
+---
+
+<aside class="quick-contact" aria-label={title}>
+  <Container class="quick-contact__inner">
+    <div>
+      <strong>{title}</strong>
+      <p>{description}</p>
+    </div>
+    <div class="quick-contact__action">
+      {secondaryText && <span>{secondaryText}</span>}
+      <Button href={action.href} variant={action.variant} icon={action.icon}>{action.label}</Button>
+    </div>
+  </Container>
+</aside>
+
+<style>
+  .quick-contact {
+    border-block: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .quick-contact__inner {
+    display: flex;
+    min-height: 7.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--space-5);
+  }
+
+  strong {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+  }
+
+  p {
+    margin: var(--space-1) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  .quick-contact__action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .quick-contact__action span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 47.99rem) {
+    .quick-contact__inner,
+    .quick-contact__action {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .quick-contact__inner {
+      padding-block: var(--space-6);
+    }
+
+    .quick-contact__action {
+      gap: var(--space-3);
+    }
+  }
+</style>

@@ -1,0 +1,234 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary" | "text" | "whatsapp";
+  icon?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  primaryAction: Action;
+  secondaryAction?: Action;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  image,
+  imageAlt,
+  primaryAction,
+  secondaryAction,
+}: Props = Astro.props;
+
+const transparentPixel =
+  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+---
+
+<section class="hero-service">
+  <Container size="wide" class="hero-service__grid">
+    <div class="hero-service__content reveal-on-scroll">
+      {eyebrow && <p class="hero-service__eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <p class="hero-service__description">{description}</p>
+      <div class="hero-service__actions">
+        <Button href={primaryAction.href} variant={primaryAction.variant} icon={primaryAction.icon}>
+          {primaryAction.label}
+        </Button>
+        {
+          secondaryAction && (
+            <Button
+              href={secondaryAction.href}
+              variant={secondaryAction.variant ?? "secondary"}
+              icon={secondaryAction.icon}
+            >
+              {secondaryAction.label}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="hero-service__media reveal-on-scroll reveal-delay-200">
+      <picture>
+        <source media="(max-width: 47.99rem)" srcset={transparentPixel} />
+        <img
+          src={image}
+          alt={imageAlt}
+          width="1536"
+          height="1024"
+          fetchpriority="high"
+        />
+      </picture>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .hero-service {
+    display: grid;
+    min-height: max(34rem, calc(100dvh - 11.5rem));
+    align-items: center;
+    padding-block: clamp(2rem, 4vw, 3rem);
+    overflow: clip;
+    background:
+      radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--color-accent) 13%, transparent), transparent 28rem),
+      var(--color-background);
+  }
+
+  .hero-service__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(26rem, 1.18fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+
+  .hero-service__content {
+    position: relative;
+    z-index: 1;
+    padding-inline-start: clamp(0rem, 3vw, 3rem);
+  }
+
+  .hero-service__eyebrow {
+    max-width: 32rem;
+    padding-inline-start: var(--space-3);
+    margin: 0 0 var(--space-5);
+    border-inline-start: 2px solid var(--color-hero-accent);
+    color: var(--color-hero-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 750;
+    line-height: 1.4;
+  }
+
+  h1 {
+    max-width: 11ch;
+    margin: 0;
+    font-size: var(--font-size-display);
+    letter-spacing: -0.04em;
+  }
+
+  .hero-service__description {
+    max-width: 34rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .hero-service__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .hero-service__media {
+    position: relative;
+    width: min(100%, 47rem);
+    aspect-ratio: 6 / 5;
+    justify-self: end;
+    isolation: isolate;
+  }
+
+  .hero-service__media::before {
+    position: absolute;
+    inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+    z-index: -1;
+    border-radius: var(--radius-lg);
+    background: var(--color-hero-accent);
+    content: "";
+  }
+
+  .hero-service__media::after {
+    position: absolute;
+    inset-inline-end: -1.45rem;
+    inset-block-end: clamp(2.5rem, 7vw, 5rem);
+    z-index: -1;
+    width: 0.35rem;
+    height: clamp(4.5rem, 9vw, 7rem);
+    border-radius: var(--radius-sm);
+    background: var(--color-dark);
+    content: "";
+  }
+
+  picture {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 26px 70px rgb(28 41 53 / 0.2);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% center;
+  }
+
+  @media (max-width: 63.99rem) {
+    .hero-service__grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(22rem, 1.1fr);
+      gap: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero-service {
+      min-height: auto;
+      padding-block: var(--space-7) var(--space-5);
+    }
+
+    .hero-service__grid {
+      width: min(calc(100% - (var(--container-gutter) * 2)), var(--container-wide));
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .hero-service__content {
+      padding-inline-start: 0;
+    }
+
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(2.55rem, 13vw, 4rem);
+    }
+
+    .hero-service__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .hero-service__media {
+      position: absolute;
+      width: 0;
+      height: 0;
+      display: none !important;
+      overflow: hidden;
+      aspect-ratio: auto;
+      visibility: hidden;
+    }
+
+    .hero-service__media::before,
+    .hero-service__media::after {
+      display: none !important;
+      content: none;
+    }
+
+    .hero-service__media picture,
+    .hero-service__media img {
+      display: none !important;
+    }
+  }
+</style>

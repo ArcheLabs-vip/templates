@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light;
+
+  /* Colors — midnight blue / cobalt / platinum palette */
+  --color-primary: #0f172a;
+  --color-primary-contrast: #f8fafc;
+  --color-brand: #0f172a;
+  --color-brand-contrast: #f8fafc;
+  --color-secondary: #475569;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-contrast: #f8fafc;
+  --color-accent-on-dark: #3b82f6;
+  --color-accent-on-dark-hover: #60a5fa;
+  --color-hero-accent: #3b82f6;
+  --color-background: #f8fafc;
+  --color-surface: #f1f5f9;
+  --color-surface-raised: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-border: #cbd5e1;
+  --color-focus: #2563eb;
+  --color-dark: #020617;
+  --color-dark-surface: #0f172a;
+  --color-dark-raised: #1e293b;
+  --color-dark-brand: #020617;
+  --color-dark-text: #f8fafc;
+  --color-dark-muted: #94a3b8;
+  --color-dark-border: #334155;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+  --color-whatsapp-contrast: #10291b;
+
+  /* Typography */
+  --font-heading: "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: clamp(1.75rem, 3vw, 2.75rem);
+  --font-size-display: clamp(3rem, 6vw, 5.35rem);
+  --line-height-tight: 1.06;
+  --line-height-body: 1.65;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-section-sm: clamp(3rem, 7vw, 5rem);
+  --space-section: clamp(4.5rem, 10vw, 7rem);
+  --space-section-lg: clamp(6rem, 13vw, 9rem);
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 18px 48px rgb(15 23 42 / 0.12);
+  --shadow-action: 0 8px 22px rgb(37 99 235 / 0.2);
+
+  /* Containers */
+  --container-narrow: 48rem;
+  --container-default: 75rem;
+  --container-wide: 87.5rem;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+
+  /* Breakpoints for documentation and JavaScript parity */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  /* Transitions */
+  --transition-fast: 140ms ease;
+  --transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}

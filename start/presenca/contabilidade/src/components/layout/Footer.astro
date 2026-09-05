@@ -1,0 +1,102 @@
+---
+import { site, type NavigationItem } from "../../data/site";
+import Container from "../ui/Container.astro";
+
+interface Props {
+  navigation?: NavigationItem[];
+}
+
+const { navigation = site.navigation } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <Container class="site-footer__inner">
+    <div>
+      <a class="site-footer__brand" href="/">{site.name}</a>
+      <p>{site.description}</p>
+    </div>
+
+    <nav aria-label="Navegação do rodapé">
+      <ul>
+        {
+          navigation.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <p class="site-footer__legal">© {year} {site.name}. Todos os direitos reservados.</p>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-7) var(--space-6);
+    padding-block: var(--space-8);
+  }
+
+  .site-footer__brand {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .site-footer p {
+    max-width: 34rem;
+    margin-block: var(--space-3) 0;
+    color: var(--color-text-muted);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-4) var(--space-5);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  nav a {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--color-text);
+  }
+
+  .site-footer__legal {
+    grid-column: 1 / -1;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 47.99rem) {
+    .site-footer__inner {
+      grid-template-columns: 1fr;
+    }
+
+    ul {
+      justify-content: flex-start;
+    }
+
+    .site-footer__legal {
+      grid-column: auto;
+    }
+  }
+</style>

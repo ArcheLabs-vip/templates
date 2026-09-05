@@ -1,0 +1,172 @@
+---
+import { site, type NavigationItem } from "../../data/site";
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+
+interface Props {
+  navigation?: NavigationItem[];
+  cta?: NavigationItem & {
+    variant?: "primary" | "secondary" | "text" | "whatsapp";
+    icon?: string;
+  };
+}
+
+const {
+  navigation = site.navigation,
+  cta = site.contact.whatsapp
+    ? {
+        label: "Fale conosco",
+        href: `https://wa.me/${site.contact.whatsapp}`,
+      }
+    : { label: "Fale conosco", href: `mailto:${site.contact.email}` },
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href.startsWith("/#") ? false : href === currentPath;
+---
+
+<header class="site-header">
+  <Container class="site-header__inner">
+    <a class="site-header__brand" href="/" aria-label={`${site.name}, início`}>
+      {site.name}
+    </a>
+
+    <nav class="site-header__desktop" aria-label="Navegação principal">
+      <ul>
+        {
+          navigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <Button href={cta.href} size="sm" variant={cta.variant} icon={cta.icon}>{cta.label}</Button>
+    </nav>
+
+    <details class="site-header__mobile">
+      <summary>Menu</summary>
+      <nav aria-label="Navegação móvel">
+        <ul>
+          {
+            navigation.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))
+          }
+        </ul>
+        <Button href={cta.href} size="sm" variant={cta.variant} icon={cta.icon}>{cta.label}</Button>
+      </nav>
+    </details>
+  </Container>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-background) 94%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .site-header__inner {
+    position: relative;
+    display: flex;
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .site-header__brand {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-header__desktop {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  nav a:not([class]) {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  nav a:not([class]):hover,
+  nav a[aria-current="page"] {
+    color: var(--color-text);
+  }
+
+  .site-header__mobile {
+    display: none;
+  }
+
+  @media (max-width: 47.99rem) {
+    .site-header__desktop {
+      display: none;
+    }
+
+    .site-header__mobile {
+      display: block;
+    }
+
+    summary {
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: 650;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .site-header__mobile nav {
+      position: absolute;
+      inset-block-start: calc(100% + var(--space-2));
+      inset-inline-end: 0;
+      display: grid;
+      min-width: min(18rem, calc(100vw - (var(--container-gutter) * 2)));
+      gap: var(--space-5);
+      padding: var(--space-5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-background);
+      box-shadow: var(--shadow-md);
+    }
+
+    .site-header__mobile ul {
+      display: grid;
+      gap: var(--space-4);
+    }
+  }
+</style>
