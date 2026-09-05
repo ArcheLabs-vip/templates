@@ -1,0 +1,61 @@
+---
+interface Props {
+  name?: "flame" | "wine" | "plate" | "cake" | "cocktail" | "leaf";
+}
+
+const { name = "flame" }: Props = Astro.props;
+---
+
+<span class="service-icon" aria-hidden="true">
+  {
+    name === "wine" ? (
+      <svg viewBox="0 0 24 24"><path d="M8 2h8l-1 9a5 5 0 0 1-10 0L8 2Z"/><path d="M12 15v7m-4 0h8"/></svg>
+    ) : name === "plate" ? (
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 3v2m0 14v2"/></svg>
+    ) : name === "cake" ? (
+      <svg viewBox="0 0 24 24"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16h16"/><path d="M12 4c.5-1 2-2 2-2s1.5 1 2 2-1 2-2 2-2-1-2-2Z"/><path d="M12 7v4"/></svg>
+    ) : name === "cocktail" ? (
+      <svg viewBox="0 0 24 24"><path d="M8 2h8l-4 9v11m-4 0h8"/><path d="M5 4h14"/></svg>
+    ) : name === "leaf" ? (
+      <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.2 3.9 19.9M5 21c.5-4 2-8.5 7-10.5"/><path d="M20 4s-3-.5-6 .5c-3 1-6 4-7.5 8.5 4-2 7-2.5 10-2.5h3.5V4Z"/></svg>
+    ) : (
+      <svg viewBox="0 0 24 24"><path d="M12 12c0-4 3-8 6-8-1 8-3 10-6 10s-5-2-6-10c3 0 6 4 6 8Z"/><path d="M12 12v10"/></svg>
+    )
+  }
+</span>
+
+<style>
+  .service-icon {
+    position: relative;
+    display: grid;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-accent) 13%, var(--color-surface-raised));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: var(--color-accent);
+  }
+
+  .service-icon::after {
+    position: absolute;
+    inset-block-start: -0.25rem;
+    inset-inline-end: -0.25rem;
+    width: 0.7rem;
+    aspect-ratio: 1;
+    border-radius: 0.14rem;
+    background: var(--color-brand);
+    content: "";
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.65;
+  }
+</style>

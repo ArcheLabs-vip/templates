@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light;
+
+  /* Colors — charcoal / amber / terracotta palette */
+  --color-primary: #1a1714;
+  --color-primary-contrast: #f5ece2;
+  --color-brand: #1a1714;
+  --color-brand-contrast: #f5ece2;
+  --color-secondary: #6b5e52;
+  --color-accent: #c4713b;
+  --color-accent-hover: #a85e2f;
+  --color-accent-contrast: #fdf8f4;
+  --color-accent-on-dark: #d4894f;
+  --color-accent-on-dark-hover: #e09d66;
+  --color-hero-accent: #d4894f;
+  --color-background: #f5ece2;
+  --color-surface: #ede3d6;
+  --color-surface-raised: #faf6f0;
+  --color-text: #2b241e;
+  --color-text-muted: #6b5e52;
+  --color-border: #d9cfc2;
+  --color-focus: #c4713b;
+  --color-dark: #1a1714;
+  --color-dark-surface: #2a2420;
+  --color-dark-raised: #362f2a;
+  --color-dark-brand: #12100d;
+  --color-dark-text: #f5ece2;
+  --color-dark-muted: #c4b8aa;
+  --color-dark-border: #4a413a;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+  --color-whatsapp-contrast: #10291b;
+
+  /* Typography */
+  --font-heading: "Playfair Display", "Georgia", serif;
+  --font-body: "DM Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: clamp(1.75rem, 3vw, 2.75rem);
+  --font-size-display: clamp(3rem, 6vw, 5.35rem);
+  --line-height-tight: 1.06;
+  --line-height-body: 1.65;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-section-sm: clamp(3rem, 7vw, 5rem);
+  --space-section: clamp(4.5rem, 10vw, 7rem);
+  --space-section-lg: clamp(6rem, 13vw, 9rem);
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgb(26 23 20 / 0.06);
+  --shadow-md: 0 18px 48px rgb(26 23 20 / 0.12);
+  --shadow-action: 0 8px 22px rgb(37 211 102 / 0.2);
+
+  /* Containers */
+  --container-narrow: 48rem;
+  --container-default: 75rem;
+  --container-wide: 87.5rem;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+
+  /* Breakpoints for documentation and JavaScript parity */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  /* Transitions */
+  --transition-fast: 140ms ease;
+  --transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
