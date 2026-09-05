@@ -1,0 +1,61 @@
+---
+interface Props {
+  name?: "scale" | "shield" | "file" | "building" | "family" | "briefcase";
+}
+
+const { name = "scale" }: Props = Astro.props;
+---
+
+<span class="service-icon" aria-hidden="true">
+  {
+    name === "shield" ? (
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+    ) : name === "file" ? (
+      <svg viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a1 1 0 0 0 1 1h3"/><path d="M10 13h4m-4 4h4m-6-8h1"/></svg>
+    ) : name === "building" ? (
+      <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg>
+    ) : name === "family" ? (
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="2.5"/><circle cx="17" cy="7" r="2"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M17 11a3 3 0 0 1 3 3v2"/></svg>
+    ) : name === "briefcase" ? (
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12h.01"/><path d="M2 12h20"/></svg>
+    ) : (
+      <svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Z"/><path d="m2 15 10 6 10-6"/><path d="m2 12 10 6 10-6"/></svg>
+    )
+  }
+</span>
+
+<style>
+  .service-icon {
+    position: relative;
+    display: grid;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-accent) 13%, var(--color-surface-raised));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: var(--color-accent);
+  }
+
+  .service-icon::after {
+    position: absolute;
+    inset-block-start: -0.25rem;
+    inset-inline-end: -0.25rem;
+    width: 0.7rem;
+    aspect-ratio: 1;
+    border-radius: 0.14rem;
+    background: var(--color-brand);
+    content: "";
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.65;
+  }
+</style>
