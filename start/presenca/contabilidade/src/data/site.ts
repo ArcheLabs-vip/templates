@@ -140,8 +140,8 @@ export interface HomePageContent {
 }
 
 export const site = {
-  name: "Exato Contabilidade",
-  title: "Exato Contabilidade | Inteligência e Segurança Tributária",
+  name: "Prado & Associados Contabilidade",
+  title: "Prado & Associados Contabilidade | Inteligência e Segurança Tributária",
   description:
     "Escritório de contabilidade especializado em contabilidade digital, BPO financeiro e gestão tributária para impulsionar o seu negócio.",
   url: "https://contabilidade.exemplo.com",
