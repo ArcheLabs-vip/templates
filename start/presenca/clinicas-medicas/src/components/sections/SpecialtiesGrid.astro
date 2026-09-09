@@ -1,0 +1,93 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import SpecialtyIcon from "../ui/SpecialtyIcon.astro";
+import type { SpecialtyItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  specialties: SpecialtyItem[];
+}
+
+const { id, title, description, specialties }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="specialties-grid">
+      {
+        specialties.map((specialty, index) => (
+          <article class:list={["specialty", "reveal-on-scroll", index > 0 && index < 4 && `reveal-delay-${index * 100}`]}>
+            <div class="specialty__heading">
+              <SpecialtyIcon name={specialty.icon} />
+              <h3>{specialty.title}</h3>
+            </div>
+            <p>{specialty.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .specialties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .specialty {
+    display: grid;
+    gap: var(--space-4);
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-raised);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  }
+
+  .specialty:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    box-shadow: 0 8px 24px rgb(12 25 41 / 0.06);
+    transform: translateY(-0.15rem);
+  }
+
+  .specialty__heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    max-width: 38ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+  }
+
+  @media (max-width: 63.99rem) {
+    .specialties-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .specialties-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

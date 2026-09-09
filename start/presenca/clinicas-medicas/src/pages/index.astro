@@ -1,0 +1,174 @@
+---
+import BenefitsChecklist from "../components/sections/BenefitsChecklist.astro";
+import CTAAppointment from "../components/sections/CTAAppointment.astro";
+import FAQAccordion from "../components/sections/FAQAccordion.astro";
+import HeroClinic from "../components/sections/HeroClinic.astro";
+import InfrastructureGallery from "../components/sections/InfrastructureGallery.astro";
+import InsurancesLogos from "../components/sections/InsurancesLogos.astro";
+import ProcessSteps from "../components/sections/ProcessSteps.astro";
+import SpecialtiesGrid from "../components/sections/SpecialtiesGrid.astro";
+import TeamGrid from "../components/sections/TeamGrid.astro";
+import TestimonialsFeatured from "../components/sections/TestimonialsFeatured.astro";
+import TrustMetrics from "../components/sections/TrustMetrics.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  benefits,
+  faq,
+  homePage,
+  infrastructure,
+  insurances,
+  process,
+  site,
+  specialties,
+  team,
+  testimonials,
+  trustMetrics,
+} from "../data/site";
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": site.business.schemaType,
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  image: new URL(site.seo.socialImage, site.url).toString(),
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  priceRange: site.business.priceRange,
+  openingHours: site.business.openingHours,
+  sameAs: Object.values(site.social).filter(Boolean),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.location.streetAddress,
+    addressLocality: site.location.locality,
+    addressRegion: site.location.region,
+    postalCode: site.location.postalCode,
+    addressCountry: site.location.country,
+  },
+};
+---
+
+<BaseLayout>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={homePage.hero.image}
+      media="(min-width: 48rem)"
+      fetchpriority="high"
+    />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+  </Fragment>
+
+  <HeroClinic
+    eyebrow={homePage.hero.eyebrow}
+    title={homePage.hero.title}
+    description={homePage.hero.description}
+    image={homePage.hero.image}
+    imageAlt={homePage.hero.imageAlt}
+    primaryAction={{
+      label: homePage.hero.primaryActionLabel,
+      href: site.contact.whatsappHref,
+      variant: "whatsapp",
+      icon: "/icons/whatsapp.svg",
+    }}
+    secondaryAction={{ label: homePage.hero.secondaryActionLabel, href: site.contact.phoneHref }}
+  />
+
+  {homePage.sections.trustMetrics && trustMetrics.length > 0 && <TrustMetrics metrics={trustMetrics} />}
+
+  {homePage.sections.specialties && specialties.length > 0 && (
+    <SpecialtiesGrid
+      id="especialidades"
+      title={homePage.specialties.title}
+      description={homePage.specialties.description}
+      specialties={specialties}
+    />
+  )}
+
+  {homePage.sections.team && team.length > 0 && (
+    <TeamGrid
+      id="corpo-clinico"
+      title={homePage.team.title}
+      description={homePage.team.description}
+      members={team}
+    />
+  )}
+
+  {homePage.sections.insurances && insurances.length > 0 && (
+    <InsurancesLogos
+      id="convenios"
+      title={homePage.insurances.title}
+      description={homePage.insurances.description}
+      insurances={insurances}
+    />
+  )}
+
+  {homePage.sections.benefits && benefits.length > 0 && (
+    <BenefitsChecklist
+      title={homePage.benefits.title}
+      description={homePage.benefits.description}
+      image={homePage.benefits.image}
+      imageAlt={homePage.benefits.imageAlt}
+      benefits={benefits}
+    />
+  )}
+
+  {homePage.sections.infrastructure && infrastructure.length > 0 && (
+    <InfrastructureGallery
+      id="estrutura"
+      title={homePage.infrastructure.title}
+      description={homePage.infrastructure.description}
+      items={infrastructure}
+      action={{ label: homePage.infrastructure.actionLabel, href: site.contact.whatsappHref }}
+    />
+  )}
+
+  {homePage.sections.process && process.length > 0 && (
+    <ProcessSteps
+      id="como-funciona"
+      title={homePage.process.title}
+      description={homePage.process.description}
+      steps={process}
+    />
+  )}
+
+  {homePage.sections.testimonials && testimonials.length > 0 && (
+    <TestimonialsFeatured
+      id="depoimentos"
+      title={homePage.testimonials.title}
+      description={homePage.testimonials.description}
+      testimonials={testimonials}
+      sourceLabel={homePage.testimonials.sourceLabel}
+      showGoogleBrand={homePage.testimonials.showGoogleBrand}
+    />
+  )}
+
+  {homePage.sections.faq && faq.length > 0 && (
+    <FAQAccordion
+      id="duvidas"
+      title={homePage.faq.title}
+      description={homePage.faq.description}
+      items={faq}
+    />
+  )}
+
+  {homePage.sections.finalCta && (
+    <CTAAppointment
+      title={homePage.finalCta.title}
+      description={homePage.finalCta.description}
+      phone={{
+        label: homePage.finalCta.phoneLabel,
+        number: site.contact.phone,
+        href: site.contact.phoneHref,
+      }}
+      schedule={site.contact.schedule}
+      primaryAction={{
+        label: homePage.finalCta.primaryActionLabel,
+        href: site.contact.whatsappHref,
+        variant: "whatsapp",
+        icon: "/icons/whatsapp.svg",
+      }}
+    />
+  )}
+</BaseLayout>

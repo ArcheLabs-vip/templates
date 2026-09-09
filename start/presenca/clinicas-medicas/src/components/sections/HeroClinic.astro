@@ -1,0 +1,236 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary" | "text" | "whatsapp";
+  icon?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  primaryAction: Action;
+  secondaryAction?: Action;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  image,
+  imageAlt,
+  primaryAction,
+  secondaryAction,
+}: Props = Astro.props;
+
+const transparentPixel =
+  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+---
+
+<section class="hero-clinic">
+  <Container size="wide" class="hero-clinic__grid">
+    <div class="hero-clinic__content reveal-on-scroll">
+      {eyebrow && <p class="hero-clinic__eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <p class="hero-clinic__description">{description}</p>
+      <div class="hero-clinic__actions">
+        <Button href={primaryAction.href} variant={primaryAction.variant} icon={primaryAction.icon}>
+          {primaryAction.label}
+        </Button>
+        {
+          secondaryAction && (
+            <Button
+              href={secondaryAction.href}
+              variant={secondaryAction.variant ?? "secondary"}
+              icon={secondaryAction.icon}
+            >
+              {secondaryAction.label}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="hero-clinic__media reveal-on-scroll reveal-delay-200">
+      <picture>
+        <source media="(max-width: 47.99rem)" srcset={transparentPixel} />
+        <img
+          src={image}
+          alt={imageAlt}
+          width="1536"
+          height="1024"
+          fetchpriority="high"
+        />
+      </picture>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .hero-clinic {
+    display: grid;
+    min-height: max(34rem, calc(100dvh - 11.5rem));
+    align-items: center;
+    padding-block: clamp(2rem, 4vw, 3rem);
+    overflow: clip;
+    background:
+      radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--color-accent) 6%, transparent), transparent 30rem),
+      var(--color-background);
+  }
+
+  .hero-clinic__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(24rem, 1.12fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+
+  .hero-clinic__content {
+    position: relative;
+    z-index: 1;
+    padding-inline-start: clamp(0rem, 3vw, 3rem);
+  }
+
+  .hero-clinic__eyebrow {
+    max-width: 34rem;
+    padding-inline-start: var(--space-3);
+    margin: 0 0 var(--space-5);
+    border-inline-start: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    max-width: 14ch;
+    margin: 0;
+    font-size: var(--font-size-display);
+    letter-spacing: -0.035em;
+  }
+
+  .hero-clinic__description {
+    max-width: 36rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    font-weight: 400;
+  }
+
+  .hero-clinic__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .hero-clinic__media {
+    position: relative;
+    width: min(100%, 47rem);
+    aspect-ratio: 6 / 5;
+    justify-self: end;
+    isolation: isolate;
+  }
+
+  .hero-clinic__media::before {
+    position: absolute;
+    inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+    z-index: -1;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent);
+    content: "";
+  }
+
+  .hero-clinic__media::after {
+    position: absolute;
+    inset-inline-end: -1.45rem;
+    inset-block-end: clamp(2.5rem, 7vw, 5rem);
+    z-index: -1;
+    width: 0.35rem;
+    height: clamp(4.5rem, 9vw, 7rem);
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    content: "";
+  }
+
+  picture {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 26px 70px rgb(12 25 41 / 0.18);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% center;
+  }
+
+  @media (max-width: 63.99rem) {
+    .hero-clinic__grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(22rem, 1.1fr);
+      gap: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero-clinic {
+      min-height: auto;
+      padding-block: var(--space-7) var(--space-5);
+    }
+
+    .hero-clinic__grid {
+      width: min(calc(100% - (var(--container-gutter) * 2)), var(--container-wide));
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .hero-clinic__content {
+      padding-inline-start: 0;
+    }
+
+    h1 {
+      max-width: 14ch;
+      font-size: clamp(2.55rem, 13vw, 4rem);
+    }
+
+    .hero-clinic__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .hero-clinic__media {
+      position: absolute;
+      width: 0;
+      height: 0;
+      display: none !important;
+      overflow: hidden;
+      aspect-ratio: auto;
+      visibility: hidden;
+    }
+
+    .hero-clinic__media::before,
+    .hero-clinic__media::after {
+      display: none !important;
+      content: none;
+    }
+
+    .hero-clinic__media picture,
+    .hero-clinic__media img {
+      display: none !important;
+    }
+  }
+</style>

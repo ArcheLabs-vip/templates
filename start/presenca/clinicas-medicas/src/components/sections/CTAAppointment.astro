@@ -1,0 +1,263 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary" | "text" | "whatsapp";
+  icon?: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  phone?: {
+    label: string;
+    number: string;
+    href: string;
+  };
+  schedule?: Array<{
+    days: string;
+    hours: string;
+  }>;
+  primaryAction: Action;
+  secondaryAction?: Action;
+}
+
+const {
+  id,
+  title,
+  description,
+  phone,
+  schedule = [],
+  primaryAction,
+  secondaryAction,
+}: Props = Astro.props;
+---
+
+<Section id={id} spacing="sm">
+  <Container>
+    <div class="cta-banner">
+      <div class="cta-banner__content">
+        <h2>{title}</h2>
+        {description && <p class="cta-banner__description">{description}</p>}
+
+        <div class="cta-banner__actions">
+          <Button href={primaryAction.href} variant={primaryAction.variant} icon={primaryAction.icon}>
+            {primaryAction.label}
+          </Button>
+          {
+            secondaryAction && (
+              <Button
+                href={secondaryAction.href}
+                variant={secondaryAction.variant ?? "secondary"}
+                icon={secondaryAction.icon}
+              >
+                {secondaryAction.label}
+              </Button>
+            )
+          }
+        </div>
+      </div>
+
+      {
+        (phone || schedule.length > 0) && (
+          <aside class="cta-banner__contact" aria-label="Contato e horários de funcionamento">
+            {phone && (
+              <div class="cta-banner__phone">
+                <div class="cta-banner__phone-label">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8.2 3.5 10 7.7 7.9 9.4a14.6 14.6 0 0 0 6.7 6.7l1.7-2.1 4.2 1.8v3a2 2 0 0 1-2 2C10 20.8 3.2 14 3.2 5.5a2 2 0 0 1 2-2h3Z" />
+                  </svg>
+                  <span>{phone.label}</span>
+                </div>
+                <a href={phone.href}>{phone.number}</a>
+              </div>
+            )}
+
+            {schedule.length > 0 && (
+              <div class="cta-banner__schedule">
+                <h3>Horários de funcionamento</h3>
+                <dl>
+                  {schedule.map((item) => (
+                    <div>
+                      <dt>{item.days}</dt>
+                      <dd>{item.hours}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+          </aside>
+        )
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .cta-banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(20rem, 0.82fr);
+    min-height: 21rem;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent);
+    box-shadow: 0 24px 64px rgb(13 148 136 / 0.12);
+    color: var(--color-accent-contrast);
+  }
+
+  .cta-banner__content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2.25rem, 4vw, 3.25rem);
+  }
+
+  h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+    color: inherit;
+  }
+
+  .cta-banner__description {
+    max-width: 37rem;
+    margin: var(--space-4) 0 0;
+    color: color-mix(in srgb, var(--color-accent-contrast) 85%, transparent);
+    font-size: 1.05rem;
+    font-weight: 400;
+  }
+
+  .cta-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .cta-banner__contact {
+    display: grid;
+    align-content: center;
+    gap: var(--space-5);
+    padding: clamp(2rem, 3.5vw, 3rem);
+    border-inline-start: 1px solid color-mix(in srgb, var(--color-accent-contrast) 18%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 70%, #065f46);
+  }
+
+  .cta-banner__phone {
+    display: grid;
+    gap: var(--space-3);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent-contrast) 16%, transparent);
+  }
+
+  .cta-banner__phone-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .cta-banner__phone-label svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: var(--color-accent-contrast);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  .cta-banner__phone-label span {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-accent-contrast) 72%, transparent);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  .cta-banner__phone a {
+    width: max-content;
+    color: var(--color-accent-contrast);
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3vw, 2.45rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    text-decoration-color: var(--color-accent-contrast);
+    text-decoration-thickness: 0.08em;
+    transition: color var(--transition-base);
+  }
+
+  .cta-banner__phone a:hover {
+    color: var(--color-background);
+  }
+
+  .cta-banner__schedule dl {
+    display: grid;
+    gap: 0;
+    margin: var(--space-4) 0 0;
+  }
+
+  .cta-banner__schedule h3 {
+    margin: 0;
+    color: var(--color-accent-contrast);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .cta-banner__schedule dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    align-items: baseline;
+    min-height: 2.5rem;
+    padding-block: 0.55rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent-contrast) 14%, transparent);
+  }
+
+  .cta-banner__schedule dt,
+  .cta-banner__schedule dd {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-accent-contrast) 82%, transparent);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+  }
+
+  .cta-banner__schedule dt {
+    font-weight: 520;
+  }
+
+  .cta-banner__schedule dd {
+    color: var(--color-accent-contrast);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    text-align: end;
+  }
+
+  @media (max-width: 47.99rem) {
+    .cta-banner {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .cta-banner__contact {
+      border-top: 1px solid color-mix(in srgb, var(--color-accent-contrast) 18%, transparent);
+      border-inline-start: 0;
+    }
+
+    .cta-banner__actions {
+      align-items: stretch;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,264 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import type { InfrastructureItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  items: InfrastructureItem[];
+  action?: {
+    label: string;
+    href: string;
+  };
+}
+
+const { id, title, description, items, action }: Props = Astro.props;
+---
+
+<Section
+  id={id}
+  spacing="lg"
+  tone="muted"
+>
+  <Container>
+    <div class="infra__heading">
+      <div class="infra__intro">
+        <SectionTitle title={title} description={description} />
+      </div>
+      {action && <Button href={action.href} variant="secondary">{action.label}</Button>}
+    </div>
+
+    <div class="infra" data-infra-gallery>
+      {
+        items.map((item, index) => (
+          <figure
+            class:list={["infra-item", index === 0 && "infra-item--featured"]}
+            data-infra-item
+            style={`--reveal-delay: ${index * 110}ms`}
+          >
+            <img src={item.image} alt={item.imageAlt} width="1536" height="1024" loading="lazy" />
+            <figcaption>
+              <span>{item.category}</span>
+              <h3>{item.title}</h3>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .infra__heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .infra__intro {
+    max-width: 46rem;
+  }
+
+  .infra {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    grid-template-rows: repeat(2, minmax(14rem, 19rem));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .infra-item {
+    position: relative;
+    min-height: 0;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--color-surface-raised);
+    isolation: isolate;
+  }
+
+  .infra-item--featured {
+    grid-row: 1 / -1;
+    border-radius: var(--radius-lg);
+  }
+
+  .infra-item::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(12 25 41 / 0.78), transparent 58%);
+    content: "";
+    transition: opacity 500ms ease;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  figcaption {
+    position: absolute;
+    inset-inline: clamp(1.25rem, 3vw, 2rem);
+    inset-block-end: clamp(1.25rem, 3vw, 2rem);
+    z-index: 1;
+    color: #f0f4f8;
+  }
+
+  figcaption::before {
+    display: block;
+    width: 2.4rem;
+    height: 2px;
+    margin-bottom: var(--space-3);
+    background: var(--color-accent);
+    content: "";
+    transform-origin: left;
+  }
+
+  figcaption span {
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: var(--space-2) 0 0;
+    color: inherit;
+    font-size: clamp(1.3rem, 2.5vw, 2.3rem);
+    letter-spacing: -0.03em;
+  }
+
+  .infra-item:not(.infra-item--featured) h3 {
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+  }
+
+  .infra.is-motion-ready .infra-item {
+    opacity: 0.01;
+    clip-path: inset(7% 0 0 0 round var(--radius-md));
+    transform: translateY(1.15rem);
+    transition:
+      opacity 450ms ease var(--reveal-delay),
+      clip-path 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay),
+      transform 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay);
+  }
+
+  .infra.is-motion-ready .infra-item img {
+    filter: saturate(0.72);
+    transform: scale(1.075);
+  }
+
+  .infra.is-motion-ready .infra-item figcaption {
+    opacity: 0;
+    transform: translateY(0.8rem);
+    transition:
+      opacity 450ms ease calc(var(--reveal-delay) + 180ms),
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--reveal-delay) + 180ms);
+  }
+
+  .infra.is-motion-ready .infra-item figcaption::before {
+    transform: scaleX(0);
+    transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--reveal-delay) + 260ms);
+  }
+
+  .infra.is-motion-ready .infra-item.is-in-view {
+    opacity: 1;
+    clip-path: inset(0 round var(--radius-md));
+    transform: translateY(0);
+  }
+
+  .infra.is-motion-ready .infra-item.is-in-view img {
+    filter: saturate(1);
+    transform: scale(1);
+  }
+
+  .infra.is-motion-ready .infra-item.is-in-view figcaption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .infra.is-motion-ready .infra-item.is-in-view figcaption::before {
+    transform: scaleX(1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .infra-item:hover img,
+    .infra.is-motion-ready .infra-item.is-in-view:hover img {
+      transform: scale(1.035);
+    }
+
+    .infra-item:hover::after {
+      opacity: 0.9;
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .infra__heading {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .infra {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+    }
+
+    .infra-item,
+    .infra-item--featured {
+      min-height: 20rem;
+      grid-row: auto;
+    }
+
+    .infra-item:not(.infra-item--featured) {
+      min-height: 15rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .infra.is-motion-ready .infra-item,
+    .infra.is-motion-ready .infra-item.is-in-view {
+      opacity: 1;
+      clip-path: none;
+      transform: none;
+    }
+
+    .infra.is-motion-ready .infra-item img,
+    .infra.is-motion-ready .infra-item.is-in-view img,
+    .infra.is-motion-ready .infra-item figcaption,
+    .infra.is-motion-ready .infra-item figcaption::before {
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const galleries = document.querySelectorAll<HTMLElement>("[data-infra-gallery]");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in-view");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16 },
+    );
+
+    galleries.forEach((gallery) => {
+      gallery.classList.add("is-motion-ready");
+      gallery.querySelectorAll<HTMLElement>("[data-infra-item]").forEach((item) => observer.observe(item));
+    });
+  }
+</script>

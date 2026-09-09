@@ -1,0 +1,93 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import Button from "../ui/Button.astro";
+import type { InsuranceItem } from "../../data/site";
+import { site } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  insurances: InsuranceItem[];
+}
+
+const { id, title, description, insurances }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="insurances-grid">
+      {
+        insurances.map((insurance, index) => (
+          <div class:list={["insurance-item", "reveal-on-scroll", index > 0 && index < 6 && `reveal-delay-${index * 100}`]}>
+            <span>{insurance.name}</span>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="insurances-note">
+      Não encontrou seu convênio? <Button href={site.contact.whatsappHref} variant="text">Entre em contato</Button> para verificar a cobertura.
+    </p>
+  </Container>
+</Section>
+
+<style>
+  .insurances-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .insurance-item {
+    display: grid;
+    place-items: center;
+    min-height: 4.5rem;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-raised);
+    transition: border-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .insurance-item:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+    transform: translateY(-0.1rem);
+  }
+
+  span {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-sm);
+    font-weight: 650;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+
+  .insurances-note {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+  }
+
+  @media (max-width: 63.99rem) {
+    .insurances-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .insurances-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
