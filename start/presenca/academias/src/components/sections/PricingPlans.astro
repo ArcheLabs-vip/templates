@@ -1,0 +1,166 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import Button from "../ui/Button.astro";
+import type { PricingPlan } from "../../data/site";
+import { site } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  plans: PricingPlan[];
+}
+
+const { id, title, description, plans }: Props = Astro.props;
+---
+
+<Section id={id}>
+  <Container>
+    <SectionTitle title={title} description={description} align="center" />
+
+    <div class="pricing-grid">
+      {
+        plans.map((plan, index) => (
+          <article class:list={["pricing-card", plan.highlighted && "pricing-card--highlighted", "reveal-on-scroll", index > 0 && `reveal-delay-${index * 100}`]}>
+            {plan.badge && <span class="pricing-card__badge">{plan.badge}</span>}
+            <h3>{plan.title}</h3>
+            <p class="pricing-card__price">
+              <strong>{plan.price}</strong>
+              <span>{plan.period}</span>
+            </p>
+            <ul>
+              {plan.features.map((feature) => (
+                <li>
+                  <span aria-hidden="true">✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <Button
+              href={site.contact.whatsappHref}
+              variant={plan.highlighted ? "primary" : "secondary"}
+              icon={plan.highlighted ? "/icons/whatsapp.svg" : undefined}
+            >
+              {plan.highlighted ? "Começar agora" : "Escolher plano"}
+            </Button>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+    align-items: start;
+  }
+
+  .pricing-card {
+    position: relative;
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(2rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-raised);
+    text-align: center;
+    transition: border-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .pricing-card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    transform: translateY(-0.15rem);
+  }
+
+  .pricing-card--highlighted {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent), 0 20px 50px rgb(163 230 53 / 0.08);
+  }
+
+  .pricing-card__badge {
+    position: absolute;
+    inset-block-start: -0.75rem;
+    inset-inline: 0;
+    margin-inline: auto;
+    width: max-content;
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    letter-spacing: -0.02em;
+  }
+
+  .pricing-card__price {
+    margin: 0;
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .pricing-card__price strong {
+    display: block;
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  .pricing-card__price span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: start;
+  }
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  li span {
+    color: var(--color-accent);
+    font-weight: 800;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 63.99rem) {
+    .pricing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

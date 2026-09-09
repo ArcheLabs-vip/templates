@@ -1,0 +1,99 @@
+---
+import Container from "../ui/Container.astro";
+import type { MetricItem } from "../../data/site";
+
+interface Props {
+  metrics: MetricItem[];
+}
+
+const { metrics }: Props = Astro.props;
+---
+
+<aside class="trust-metrics" aria-label="Números da academia">
+  <Container class="trust-metrics__inner">
+    {
+      metrics.map((metric, index) => (
+        <div class:list={["trust-metrics__item", "reveal-on-scroll", index > 0 && `reveal-delay-${index * 100}`]}>
+          <strong>{metric.value}</strong>
+          <div>
+            <span>{metric.label}</span>
+            {metric.detail && <small>{metric.detail}</small>}
+          </div>
+        </div>
+      ))
+    }
+  </Container>
+</aside>
+
+<style>
+  .trust-metrics {
+    border-block: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .trust-metrics__inner {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .trust-metrics__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-6) clamp(1rem, 3vw, 2.5rem);
+    border-inline-start: 1px solid var(--color-border);
+  }
+
+  .trust-metrics__item:first-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+
+  strong {
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: clamp(1.85rem, 3.2vw, 3rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .trust-metrics__item div {
+    display: grid;
+  }
+
+  span {
+    color: var(--color-primary);
+    font-weight: 720;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  small {
+    margin-top: 0.15rem;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  @media (max-width: 47.99rem) {
+    .trust-metrics__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .trust-metrics__item,
+    .trust-metrics__item:first-child {
+      padding: var(--space-5) 0;
+      border-inline-start: 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .trust-metrics__item:first-child {
+      border-top: 0;
+    }
+  }
+</style>

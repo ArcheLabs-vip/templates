@@ -1,0 +1,61 @@
+---
+interface Props {
+  name?: "dumbbell" | "flame" | "heart" | "zap" | "shield" | "music";
+}
+
+const { name = "dumbbell" }: Props = Astro.props;
+---
+
+<span class="modality-icon" aria-hidden="true">
+  {
+    name === "flame" ? (
+      <svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14 0-5.5 2.5-7 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.5-2.5 1.5-3 0 1.38.62 2.5 2.5 2.5Z"/></svg>
+    ) : name === "heart" ? (
+      <svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+    ) : name === "zap" ? (
+      <svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
+    ) : name === "shield" ? (
+      <svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+    ) : name === "music" ? (
+      <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    ) : (
+      <svg viewBox="0 0 24 24"><path d="M6.5 6.5h0M17.5 6.5h0M6.5 17.5h0M17.5 17.5h0M2 12h3M19 12h3M12 2v3M12 19v3M7.5 7.5 5 5M16.5 7.5 19 5M7.5 16.5 5 19M16.5 16.5 19 19"/><circle cx="12" cy="12" r="4"/></svg>
+    )
+  }
+</span>
+
+<style>
+  .modality-icon {
+    position: relative;
+    display: grid;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-accent) 13%, var(--color-surface-raised));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: var(--color-accent);
+  }
+
+  .modality-icon::after {
+    position: absolute;
+    inset-block-start: -0.25rem;
+    inset-inline-end: -0.25rem;
+    width: 0.7rem;
+    aspect-ratio: 1;
+    border-radius: 0.14rem;
+    background: var(--color-accent);
+    content: "";
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.65;
+  }
+</style>

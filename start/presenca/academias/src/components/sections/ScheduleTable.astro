@@ -1,0 +1,110 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import type { ScheduleDay } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  days: ScheduleDay[];
+}
+
+const { id, title, description, days }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="schedule-table reveal-on-scroll">
+      <div class="schedule-table__scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="schedule-table__header-time">Horário</th>
+              {days.map((day) => <th>{day.day}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {(() => {
+              const allTimes = [...new Set(days.flatMap((d) => d.classes.map((c) => c.time)))].sort();
+              return allTimes.map((time) => (
+                <tr>
+                  <td class="schedule-table__time">{time}</td>
+                  {days.map((day) => {
+                    const classAtTime = day.classes.find((c) => c.time === time);
+                    return <td class:list={[classAtTime && "schedule-table__filled"]}>{classAtTime?.modality ?? ""}</td>;
+                  })}
+                </tr>
+              ));
+            })()}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .schedule-table {
+    margin-top: var(--space-8);
+  }
+
+  .schedule-table__scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    min-width: 48rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  thead {
+    border-bottom: 2px solid var(--color-accent);
+  }
+
+  th {
+    padding: var(--space-4) var(--space-3);
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .schedule-table__header-time {
+    width: 8rem;
+  }
+
+  td {
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    text-transform: none;
+    white-space: nowrap;
+  }
+
+  .schedule-table__time {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .schedule-table__filled {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  tr:hover td {
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+  }
+</style>

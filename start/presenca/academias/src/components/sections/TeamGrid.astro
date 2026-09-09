@@ -1,0 +1,117 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import type { TeamMember } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  members: TeamMember[];
+}
+
+const { id, title, description, members }: Props = Astro.props;
+
+const getInitials = (name: string) =>
+  name.split(" ").slice(0, 2).map((part) => part.charAt(0)).join("").toUpperCase();
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="team-grid">
+      {
+        members.map((member, index) => (
+          <article class:list={["team-card", "reveal-on-scroll", index > 0 && index < 4 && `reveal-delay-${index * 100}`]}>
+            <span class:list={["team-card__avatar", `team-card__avatar--${(index % 3) + 1}`]} aria-hidden="true">
+              {getInitials(member.name)}
+            </span>
+            <h3>{member.name}</h3>
+            <p class="team-card__role">{member.role}</p>
+            <p class="team-card__bio">{member.bio}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .team-card {
+    padding: clamp(2rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-raised);
+    text-align: center;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  }
+
+  .team-card:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-border));
+    box-shadow: 0 14px 36px rgb(0 0 0 / 0.18);
+    transform: translateY(-0.15rem);
+  }
+
+  .team-card__avatar {
+    display: grid;
+    width: 4.2rem;
+    height: 4.2rem;
+    place-items: center;
+    margin-inline: auto;
+    margin-bottom: var(--space-5);
+    border-radius: 50%;
+    color: var(--color-accent-contrast);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .team-card__avatar--1 { background: var(--color-accent); }
+  .team-card__avatar--2 { background: #64748b; }
+  .team-card__avatar--3 { background: #475569; }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 2vw, 1.45rem);
+    letter-spacing: -0.02em;
+  }
+
+  .team-card__role {
+    margin: var(--space-2) 0 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .team-card__bio {
+    max-width: 30ch;
+    margin: var(--space-4) auto 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  @media (max-width: 63.99rem) {
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

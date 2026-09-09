@@ -1,0 +1,429 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import ModalityIcon from "../ui/ModalityIcon.astro";
+import type { ModalityItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  modalities: ModalityItem[];
+  actionHref?: string;
+}
+
+const { id, title, description, modalities, actionHref }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="modalities-grid">
+      {
+        modalities.map((modality, index) => (
+          <article class:list={["modality", "reveal-on-scroll", index > 0 && index < 4 && `reveal-delay-${index * 100}`]}>
+            <div class="modality__heading">
+              <div>
+                {modality.detail && <small>{modality.detail}</small>}
+                <h3>{modality.title}</h3>
+              </div>
+              <ModalityIcon name={modality.icon} />
+            </div>
+            <p>{modality.description}</p>
+            <button
+              class="modality__trigger"
+              type="button"
+              data-modality-trigger
+              data-title={modality.title}
+              data-description={modality.description}
+              data-detail={modality.detail}
+              data-includes={JSON.stringify(modality.includes ?? [])}
+              aria-haspopup="dialog"
+            >
+              Ver detalhes <span aria-hidden="true">→</span>
+            </button>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<dialog class="modality-modal" data-modality-modal aria-labelledby="modality-modal-title">
+  <div class="modality-modal__shell">
+    <form method="dialog" class="modality-modal__topbar">
+      <span>Detalhes da modalidade</span>
+      <button class="modality-modal__close" type="submit" aria-label="Fechar detalhes">×</button>
+    </form>
+
+    <div class="modality-modal__content">
+      <p class="modality-modal__eyebrow" data-modal-detail></p>
+      <h2 id="modality-modal-title" data-modal-title></h2>
+      <p class="modality-modal__description" data-modal-description></p>
+      <div class="modality-modal__list-wrap" data-modal-list-wrap>
+        <h3>O que está incluído</h3>
+        <ul data-modal-list></ul>
+      </div>
+    </div>
+
+    <div class="modality-modal__actions">
+      {actionHref && <a class="modality-modal__cta" href={actionHref}>Agendar aula experimental</a>}
+      <form method="dialog"><button class="modality-modal__cancel" type="submit">Voltar às modalidades</button></form>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>("[data-modality-modal]");
+  const title = modal?.querySelector<HTMLElement>("[data-modal-title]");
+  const description = modal?.querySelector<HTMLElement>("[data-modal-description]");
+  const detail = modal?.querySelector<HTMLElement>("[data-modal-detail]");
+  const list = modal?.querySelector<HTMLUListElement>("[data-modal-list]");
+  const listWrap = modal?.querySelector<HTMLElement>("[data-modal-list-wrap]");
+  let activeTrigger: HTMLButtonElement | null = null;
+
+  document.querySelectorAll<HTMLButtonElement>("[data-modality-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      if (!modal || !title || !description || !detail || !list || !listWrap) return;
+
+      activeTrigger = trigger;
+      title.textContent = trigger.dataset.title ?? "Modalidade";
+      description.textContent = trigger.dataset.description ?? "";
+      detail.textContent = trigger.dataset.detail ?? "Modalidade";
+
+      const includes = JSON.parse(trigger.dataset.includes ?? "[]") as string[];
+      list.replaceChildren(...includes.map((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        return li;
+      }));
+      listWrap.hidden = includes.length === 0;
+
+      modal.showModal();
+      document.body.classList.add("has-open-modal");
+    });
+  });
+
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) modal.close();
+  });
+
+  modal?.addEventListener("close", () => {
+    document.body.classList.remove("has-open-modal");
+    activeTrigger?.focus();
+  });
+</script>
+
+<style>
+  .modalities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .modality {
+    position: relative;
+    display: grid;
+    min-height: 22rem;
+    grid-template-rows: auto 1fr auto;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-raised);
+    transition: border-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .modality::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: var(--space-4);
+    height: 3px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    background: var(--color-accent);
+    content: "";
+    transition: background-color var(--transition-base);
+  }
+
+  .modality:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+    background: color-mix(in srgb, var(--color-surface-raised) 94%, var(--color-accent));
+  }
+
+  .modality:hover::before {
+    background: var(--color-accent-hover);
+  }
+
+  .modality__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .modality h3 {
+    max-width: 16ch;
+    margin: var(--space-3) 0 0;
+    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .modality p {
+    max-width: 42ch;
+    margin: var(--space-6) 0;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .modality small {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: none;
+  }
+
+  .modality__trigger {
+    display: inline-flex;
+    width: 100%;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-weight: 740;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .modality__trigger:hover {
+    border-color: var(--color-accent-hover);
+    background: var(--color-accent-hover);
+  }
+
+  .modality__trigger span {
+    transition: transform var(--transition-base);
+  }
+
+  .modality__trigger:hover span {
+    transform: translateX(0.25rem);
+  }
+
+  .modality__trigger:active {
+    transform: translateY(1px);
+  }
+
+  .modality-modal {
+    width: min(calc(100% - 2rem), 42rem);
+    max-height: min(48rem, calc(100dvh - 2rem));
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-raised);
+    box-shadow: 0 30px 90px rgb(0 0 0 / 0.5);
+    color: var(--color-text);
+  }
+
+  .modality-modal::backdrop {
+    background: rgb(0 0 0 / 0.72);
+    backdrop-filter: blur(5px);
+  }
+
+  .modality-modal__shell {
+    overflow: auto;
+  }
+
+  .modality-modal__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 760;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .modality-modal__close {
+    display: grid;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .modality-modal__close:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    transform: rotate(4deg);
+  }
+
+  .modality-modal__content {
+    padding: clamp(2rem, 6vw, 4rem);
+  }
+
+  .modality-modal__eyebrow {
+    margin: 0 0 var(--space-3);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 740;
+    text-transform: none;
+  }
+
+  .modality-modal h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: -0.045em;
+  }
+
+  .modality-modal__description {
+    max-width: 54ch;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .modality-modal__list-wrap {
+    padding-top: var(--space-6);
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .modality-modal__list-wrap h3 {
+    margin: 0;
+    font-size: var(--font-size-base);
+  }
+
+  .modality-modal ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3) var(--space-5);
+    padding: 0;
+    margin: var(--space-4) 0 0;
+    list-style: none;
+  }
+
+  .modality-modal li {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-muted);
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .modality-modal li::before {
+    position: absolute;
+    inset-block-start: 0.7em;
+    inset-inline-start: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    content: "";
+  }
+
+  .modality-modal__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .modality-modal__cta,
+  .modality-modal__cancel {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding-inline: var(--space-5);
+    border-radius: var(--radius-md);
+    font-weight: 720;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+  }
+
+  .modality-modal__cta {
+    border: 1px solid var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  .modality-modal__cancel {
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .modality-modal__cancel:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    transform: translateY(-1px);
+  }
+
+  :global(body.has-open-modal) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 63.99rem) {
+    .modalities-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .modalities-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .modality {
+      min-height: 20rem;
+    }
+
+    .modality-modal ul {
+      grid-template-columns: 1fr;
+    }
+
+    .modality-modal__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .modality-modal__actions form,
+    .modality-modal__cancel {
+      width: 100%;
+    }
+  }
+</style>
