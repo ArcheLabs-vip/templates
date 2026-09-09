@@ -1,0 +1,130 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import type { BenefitItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  benefits: BenefitItem[];
+}
+
+const { id, title, description, image, imageAlt = "", benefits }: Props = Astro.props;
+---
+
+<Section id={id}>
+  <Container class="benefits">
+    <div class="benefits__content">
+      <h2>{title}</h2>
+      {description && <p class="benefits__intro">{description}</p>}
+
+      <ul>
+        {
+          benefits.map((benefit) => (
+            <li>
+              <span aria-hidden="true">✓</span>
+              <div>
+                <h3>{benefit.title}</h3>
+                <p>{benefit.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {
+      image && (
+        <div class="benefits__media">
+          <img src={image} alt={imageAlt} width="1536" height="1024" loading="lazy" />
+        </div>
+      )
+    }
+  </Container>
+</Section>
+
+<style>
+  .benefits {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 1.08fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  h2 {
+    max-width: 13ch;
+    margin: 0;
+    font-size: var(--font-size-xl);
+    letter-spacing: -0.03em;
+  }
+
+  .benefits__intro {
+    max-width: 36rem;
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-5);
+    padding: 0;
+    margin: var(--space-7) 0 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: var(--space-3);
+  }
+
+  li > span {
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: var(--font-size-lg);
+  }
+
+  li p {
+    margin: var(--space-1) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  .benefits__media {
+    min-height: 34rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+  }
+
+  @media (max-width: 47.99rem) {
+    .benefits {
+      width: min(calc(100% - (var(--container-gutter) * 2)), var(--container-default));
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+
+    .benefits__media {
+      min-height: 24rem;
+    }
+  }
+</style>

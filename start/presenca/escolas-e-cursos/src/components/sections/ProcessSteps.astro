@@ -1,0 +1,85 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import type { ProcessItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  steps: ProcessItem[];
+}
+
+const { id, title, description, steps }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <ol>
+      {
+        steps.map((step, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</Section>
+
+<style>
+  ol {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    list-style: none;
+    counter-reset: process;
+  }
+
+  li {
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  li > span {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+  }
+
+  h3 {
+    margin: var(--space-6) 0 0;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  p {
+    max-width: 28rem;
+    margin: var(--space-3) 0 0;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 63.99rem) {
+    ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    ol {
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+
+    h3 {
+      margin-top: var(--space-3);
+    }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import WhatsAppFab from "../components/ui/WhatsAppFab.astro";
+import { site } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  canonical,
+  image,
+  noindex = site.demo.enabled,
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
+
+const pageTitle = title === site.title ? title : `${title} | ${site.name}`;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).toString();
+const socialImage = new URL(image ?? site.seo.socialImage, site.url).toString();
+---
+
+<!doctype html>
+<html lang={site.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.locale.replace("-", "_")} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${site.name} — cursos de idiomas, reforço escolar e preparatório`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <script is:inline>
+      if (
+        "IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        document.documentElement.classList.add("motion-enabled");
+      }
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
+    {site.demo.enabled && <p class="demo-notice">{site.demo.notice}</p>}
+    {showHeader && <Header />}
+    <main id="main-content">
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+    <WhatsAppFab />
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!document.documentElement.classList.contains("motion-enabled")) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { root: null, rootMargin: "0px", threshold: 0.15 }
+        );
+
+        document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+          observer.observe(el);
+        });
+      });
+    </script>
+  </body>
+</html>
