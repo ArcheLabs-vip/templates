@@ -1,0 +1,221 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import Button from "../ui/Button.astro";
+
+import { whatsappInquiry, type PropertyItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  properties: PropertyItem[];
+  actionLabel?: string;
+  actionHref?: string;
+}
+
+const { id = "imoveis-destaque", title, description, properties, actionLabel, actionHref } = Astro.props;
+---
+
+<Section id={id} class="featured-properties">
+  <Container>
+    <div class="featured-properties__header">
+      <SectionTitle title={title} description={description} />
+      {actionLabel && actionHref && (
+        <Button href={actionHref} variant="secondary" class="featured-properties__view-all">
+          {actionLabel}
+        </Button>
+      )}
+    </div>
+
+    <div class="property-grid">
+      {properties.map((property) => (
+        <article class="property-card reveal-on-scroll">
+          <div class="property-card__image-wrapper">
+            <div class="property-card__badge">{property.type}</div>
+            <img 
+              src={property.image} 
+              alt={`Foto do imóvel ${property.title}`} 
+              width="600" 
+              height="400"
+              loading="lazy"
+              class="property-card__image"
+            />
+          </div>
+          <div class="property-card__content">
+            <p class="property-card__neighborhood">{property.neighborhood}</p>
+            <h3 class="property-card__title">{property.title}</h3>
+            <p class="property-card__price">{property.price}</p>
+            
+            <div class="property-card__features">
+              <span class="feature" title="Quartos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+                {property.beds}
+              </span>
+              <span class="feature" title="Banheiros">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" x2="8" y1="5" y2="7"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="7" x2="7" y1="19" y2="21"/><line x1="17" x2="17" y1="19" y2="21"/></svg>
+                {property.baths}
+              </span>
+              <span class="feature" title="Vagas">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a2 2 0 0 0-1.6-.8H11l-4.5 6H3a2 2 0 0 0-2 2v2h2m0 0a2 2 0 1 0 4 0m-4 0a2 2 0 1 1 4 0m11 0a2 2 0 1 0 4 0m-4 0a2 2 0 1 1 4 0"/></svg>
+                {property.parking}
+              </span>
+              <span class="feature" title="Área Útil">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 12h16"/><path d="M12 4v16"/></svg>
+                {property.area}m²
+              </span>
+            </div>
+            
+            <a href={whatsappInquiry(`Olá, gostaria de saber mais sobre ${property.title} (${property.id}), em ${property.neighborhood}.`)} aria-label={`Consultar ${property.title}`} class="property-card__link">
+              Consultar imóvel <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .featured-properties__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-bottom: var(--space-section-sm);
+  }
+
+  .property-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .property-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .property-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .property-card__image-wrapper {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .property-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  .property-card:hover .property-card__image {
+    transform: scale(1.05);
+  }
+
+  .property-card__badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    z-index: 2;
+    background: var(--color-background);
+    color: var(--color-text);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .property-card__content {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .property-card__neighborhood {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 var(--space-1);
+  }
+
+  .property-card__title {
+    font-size: var(--font-size-lg);
+    margin: 0 0 var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .property-card__price {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 var(--space-4);
+  }
+
+  .property-card__features {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: 0 0 var(--space-5);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .feature svg {
+    opacity: 0.7;
+  }
+
+  .property-card__link {
+    min-height: 2.75rem;
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .property-card__link:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 48rem) {
+    .featured-properties__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    .property-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

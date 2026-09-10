@@ -1,0 +1,108 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+
+import { whatsappInquiry, type RegionItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  regions: RegionItem[];
+}
+
+const { id = "regioes-atendidas", title, description, regions } = Astro.props;
+---
+
+<Section id={id} tone="muted" class="regions-covered">
+  <Container>
+    <SectionTitle title={title} description={description} align="center" />
+    
+    <div class="regions-grid">
+      {regions.map((region) => (
+        <a href={whatsappInquiry(`Olá, procuro imóveis em ${region.name}.`)} class="region-card reveal-on-scroll">
+          <img 
+            src={region.image} 
+            alt={`Imóveis em ${region.name}`}
+            width="400"
+            height="500"
+            loading="lazy"
+            class="region-card__image"
+          />
+          <div class="region-card__overlay">
+            <h3 class="region-card__name">{region.name}</h3>
+            <p class="region-card__count">{region.propertyCount} imóveis</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .regions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-section-sm);
+  }
+
+  .region-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    text-decoration: none;
+    display: block;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .region-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .region-card:hover .region-card__image {
+    transform: scale(1.08);
+  }
+
+  .region-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-5);
+    transition: background 300ms ease;
+  }
+
+  .region-card:hover .region-card__overlay {
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.1) 100%);
+  }
+
+  .region-card__name {
+    color: #ffffff;
+    font-size: var(--font-size-xl);
+    margin: 0 0 var(--space-1);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .region-card__count {
+    color: var(--color-accent-on-dark);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 48rem) {
+    .regions-grid {
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+    }
+  }
+</style>
