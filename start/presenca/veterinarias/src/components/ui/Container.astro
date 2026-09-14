@@ -1,0 +1,43 @@
+---
+import type { HTMLTag } from "astro/types";
+
+interface Props {
+  as?: HTMLTag;
+  size?: "narrow" | "default" | "wide";
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = "div",
+  size = "default",
+  class: className,
+  ...attrs
+}: Props = Astro.props;
+---
+
+<Tag class:list={["container", `container--${size}`, className]} {...attrs}>
+  <slot />
+</Tag>
+
+<style>
+  .container {
+    width: min(
+      calc(100% - (var(--container-gutter) * 2)),
+      var(--container-width)
+    );
+    margin-inline: auto;
+  }
+
+  .container--narrow {
+    --container-width: var(--container-narrow);
+  }
+
+  .container--default {
+    --container-width: var(--container-default);
+  }
+
+  .container--wide {
+    --container-width: var(--container-wide);
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+import { site } from "../../data/site";
+
+interface Props {
+  label?: string;
+  phone?: string;
+  phoneHref?: string;
+  hours?: string;
+}
+
+const emergency = site.emergency;
+const {
+  label = emergency?.label ?? "Emergência 24h",
+  phone = emergency?.phone ?? site.contact.phone,
+  phoneHref = emergency?.phoneHref ?? site.contact.phoneHref,
+  hours = emergency?.hours ?? "",
+} = Astro.props;
+
+const showBanner = emergency?.enabled !== false;
+---
+
+{showBanner && (
+  <div class="emergency-banner">
+    <div class="emergency-banner__inner">
+      <div class="emergency-banner__indicator" aria-hidden="true"></div>
+      <span class="emergency-banner__label">{label}</span>
+      <a class="emergency-banner__phone" href={phoneHref}>{phone}</a>
+      {hours && <span class="emergency-banner__hours">{hours}</span>}
+    </div>
+  </div>
+)}
+
+<style>
+  .emergency-banner {
+    padding: 0.5rem var(--container-gutter);
+    background: var(--color-emergency);
+    color: var(--color-emergency-contrast);
+  }
+
+  .emergency-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    max-width: var(--container-default);
+    margin-inline: auto;
+  }
+
+  .emergency-banner__indicator {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-emergency-contrast);
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .emergency-banner__label {
+    font-size: var(--font-size-sm);
+    font-weight: 780;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .emergency-banner__phone {
+    color: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+
+  .emergency-banner__phone:hover {
+    text-decoration-thickness: 0.13em;
+  }
+
+  .emergency-banner__hours {
+    display: none;
+    color: color-mix(in srgb, var(--color-emergency-contrast) 82%, transparent);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+
+  @media (min-width: 48rem) {
+    .emergency-banner__hours {
+      display: inline;
+    }
+
+    .emergency-banner__inner::before {
+      content: "";
+    }
+
+    .emergency-banner__phone::before {
+      content: "— ";
+      text-decoration: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .emergency-banner__indicator {
+      animation: none;
+    }
+  }
+</style>
