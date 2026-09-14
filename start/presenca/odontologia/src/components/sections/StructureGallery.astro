@@ -1,0 +1,89 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+
+export interface StructureImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  images: StructureImage[];
+}
+
+const { id, title, description, images }: Props = Astro.props;
+---
+
+<Section id={id} tone="muted">
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    <div class="gallery">
+      {
+        images.map((image, index) => (
+          <div class:list={["gallery__item", index === 0 && "gallery__item--featured"]}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .gallery__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    min-height: 18rem;
+  }
+
+  .gallery__item--featured {
+    grid-row: span 2;
+    min-height: 100%;
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery__item:hover img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 47.99rem) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery__item--featured {
+      grid-row: auto;
+    }
+
+    .gallery__item {
+      min-height: 16rem;
+    }
+  }
+</style>

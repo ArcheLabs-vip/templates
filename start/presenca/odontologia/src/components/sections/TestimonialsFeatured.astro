@@ -1,0 +1,170 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import type { TestimonialItem } from "../../data/site";
+
+interface Props {
+  id?: string;
+  title: string;
+  description?: string;
+  testimonials: TestimonialItem[];
+  sourceLabel?: string;
+  showGoogleBrand?: boolean;
+}
+
+const { id, title, description, testimonials, sourceLabel, showGoogleBrand = false }: Props = Astro.props;
+const [featured, ...others] = testimonials;
+---
+
+<Section id={id}>
+  <Container>
+    <SectionTitle title={title} description={description} />
+
+    {
+      featured ? (
+        <div class="testimonials">
+          <figure class="testimonial testimonial--featured reveal-on-scroll">
+            {featured.rating && (
+              <p class="testimonial__rating" aria-label={`${featured.rating} de 5 estrelas`}>
+                {"★".repeat(featured.rating)}
+              </p>
+            )}
+            <blockquote>“{featured.quote}”</blockquote>
+            <figcaption>
+              <strong>{featured.name}</strong>
+              <span>{featured.context}</span>
+            </figcaption>
+          </figure>
+
+          <div class="testimonials__secondary">
+            {others.map((testimonial, index) => (
+              <figure class:list={["testimonial", "reveal-on-scroll", `reveal-delay-${(index + 1) * 100}`]}>
+                {testimonial.rating && (
+                  <p class="testimonial__rating" aria-label={`${testimonial.rating} de 5 estrelas`}>
+                    {"★".repeat(testimonial.rating)}
+                  </p>
+                )}
+                <blockquote>“{testimonial.quote}”</blockquote>
+                <figcaption>
+                  <strong>{testimonial.name}</strong>
+                  <span>{testimonial.context}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p class="testimonials__empty">As avaliações serão exibidas aqui.</p>
+      )
+    }
+
+    {sourceLabel && (
+      <p class="testimonials__source">
+        {showGoogleBrand && <span class="testimonials__google-icon" aria-hidden="true">G</span>}
+        {sourceLabel}
+      </p>
+    )}
+  </Container>
+</Section>
+
+<style>
+  .testimonials {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .testimonial {
+    padding: var(--space-6) 0;
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .testimonial--featured {
+    display: flex;
+    min-height: 25rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(2rem, 5vw, 4rem);
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .testimonials__secondary {
+    display: grid;
+    align-content: start;
+  }
+
+  .testimonial__rating {
+    margin: 0 0 var(--space-5);
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    letter-spacing: 0.12em;
+  }
+
+  blockquote {
+    max-width: 32ch;
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 2.7vw, 2.25rem);
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .testimonial:not(.testimonial--featured) blockquote {
+    font-size: var(--font-size-lg);
+  }
+
+  figcaption {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  figcaption strong {
+    color: var(--color-text);
+  }
+
+  .testimonials__empty {
+    margin-top: var(--space-7);
+    color: var(--color-text-muted);
+  }
+
+  .testimonials__source {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-7) 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  .testimonials__google-icon {
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 47.99rem) {
+    .testimonials {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonial--featured {
+      min-height: 20rem;
+    }
+  }
+</style>

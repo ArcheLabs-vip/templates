@@ -1,0 +1,161 @@
+---
+import BenefitsChecklist from "../components/sections/BenefitsChecklist.astro";
+import CTABanner from "../components/sections/CTABanner.astro";
+import FAQAccordion from "../components/sections/FAQAccordion.astro";
+import HeroService from "../components/sections/HeroService.astro";
+import ProcessSteps from "../components/sections/ProcessSteps.astro";
+import ServicesGrid from "../components/sections/ServicesGrid.astro";
+import StructureGallery from "../components/sections/StructureGallery.astro";
+import Team from "../components/sections/Team.astro";
+import TestimonialsFeatured from "../components/sections/TestimonialsFeatured.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  benefits,
+  faq,
+  homePage,
+  process,
+  services,
+  site,
+  structureImages,
+  team,
+  testimonials,
+} from "../data/site";
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": site.business.schemaType,
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  image: new URL(site.seo.socialImage, site.url).toString(),
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  priceRange: site.business.priceRange,
+  openingHours: site.business.openingHours,
+  sameAs: Object.values(site.social).filter(Boolean),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.location.streetAddress,
+    addressLocality: site.location.locality,
+    addressRegion: site.location.region,
+    postalCode: site.location.postalCode,
+    addressCountry: site.location.country,
+  },
+};
+---
+
+<BaseLayout>
+  <Fragment slot="head">
+    {homePage.sections.hero && <link
+      rel="preload"
+      as="image"
+      href={homePage.hero.image}
+      media="(min-width: 48rem)"
+      fetchpriority="high"
+    />}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(businessSchema).replace(/</g, "\\u003c")} />
+  </Fragment>
+
+  {homePage.sections.hero && <HeroService
+    eyebrow={homePage.hero.eyebrow}
+    title={homePage.hero.title}
+    description={homePage.hero.description}
+    image={homePage.hero.image}
+    imageAlt={homePage.hero.imageAlt}
+    primaryAction={{
+      label: homePage.hero.primaryActionLabel,
+      href: site.contact.whatsappHref,
+      variant: "primary",
+    }}
+    secondaryAction={{
+      label: homePage.hero.secondaryActionLabel,
+      href: site.contact.whatsappHref,
+      variant: "whatsapp",
+      icon: "/icons/whatsapp.svg",
+    }}
+  />}
+
+  {homePage.sections.services && services.length > 0 && (
+    <ServicesGrid
+      id="tratamentos"
+      title={homePage.services.title}
+      description={homePage.services.description}
+      services={services}
+    />
+  )}
+
+  {homePage.sections.team && team.length > 0 && (
+    <Team
+      id="equipe"
+      title={homePage.team.title}
+      description={homePage.team.description}
+      members={team}
+    />
+  )}
+
+  {homePage.sections.structure && structureImages.length > 0 && (
+    <StructureGallery
+      id="a-clinica"
+      title={homePage.structure.title}
+      description={homePage.structure.description}
+      images={structureImages}
+    />
+  )}
+
+  {homePage.sections.benefits && benefits.length > 0 && (
+    <BenefitsChecklist
+      title={homePage.benefits.title}
+      description={homePage.benefits.description}
+      image={homePage.benefits.image}
+      imageAlt={homePage.benefits.imageAlt}
+      benefits={benefits}
+    />
+  )}
+
+  {homePage.sections.process && process.length > 0 && (
+    <ProcessSteps
+      id="como-funciona"
+      title={homePage.process.title}
+      description={homePage.process.description}
+      steps={process}
+    />
+  )}
+
+  {homePage.sections.testimonials && testimonials.length > 0 && (
+    <TestimonialsFeatured
+      id="depoimentos"
+      title={homePage.testimonials.title}
+      description={homePage.testimonials.description}
+      testimonials={testimonials}
+    />
+  )}
+
+  {homePage.sections.faq && faq.length > 0 && (
+    <FAQAccordion
+      id="duvidas"
+      title={homePage.faq.title}
+      description={homePage.faq.description}
+      items={faq}
+    />
+  )}
+
+  {homePage.sections.finalCta && (
+    <CTABanner
+      id="contato"
+      title={homePage.finalCta.title}
+      description={homePage.finalCta.description}
+      phone={{
+        label: homePage.finalCta.phoneLabel,
+        number: site.contact.phone,
+        href: site.contact.phoneHref,
+      }}
+      schedule={site.contact.schedule}
+      primaryAction={{
+        label: homePage.finalCta.primaryActionLabel,
+        href: site.contact.whatsappHref,
+        variant: "whatsapp",
+        icon: "/icons/whatsapp.svg",
+      }}
+    />
+  )}
+</BaseLayout>
