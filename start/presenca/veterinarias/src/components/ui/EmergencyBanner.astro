@@ -16,7 +16,7 @@ const {
   hours = emergency?.hours ?? "",
 } = Astro.props;
 
-const showBanner = emergency?.enabled !== false;
+const showBanner = emergency?.enabled ?? true;
 ---
 
 {showBanner && (
