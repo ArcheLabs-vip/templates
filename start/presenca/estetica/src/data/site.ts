@@ -85,6 +85,6 @@ export const site = {
 };
 
 const digits = site.whatsapp.replace(/\D/g, "");
-export const contactUrl = !site.demo && /^\d{10,15}$/.test(digits)
+export const contactUrl = /^\d{10,15}$/.test(digits)
   ? `https://wa.me/${digits}?text=${encodeURIComponent(site.message)}`
   : "#contato-demo";

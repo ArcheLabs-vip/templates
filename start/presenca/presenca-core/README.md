@@ -29,7 +29,7 @@ Validate executa astro check e build. Publique dist em hospedagem estática, com
 - public/fonts/: fontes locais e licenças OFL.
 - public/images/: fotografias WebP locais.
 
-Para ativar o contato, configure whatsapp com DDI, DDD e número e altere demo para false. Ajuste site.url para o domínio final, título, descrição e mensagem. Robots, sitemap e noindex seguem demo automaticamente. Na demonstração, o CTA abre um aviso local, sem enviar mensagens.
+Para ativar o contato, configure whatsapp com DDI, DDD e número. O link funciona também com demo ativo; altere demo para false somente quando o site estiver pronto para indexação. Ajuste site.url para o domínio final, título, descrição e mensagem. Robots, sitemap e noindex seguem demo automaticamente. Sem número válido configurado, os CTAs da página abrem um aviso local. O botão flutuante abre o WhatsApp com a mensagem preenchida, sem destinatário definido; nenhuma mensagem é enviada automaticamente.
 
 Substitua a marca e as imagens conceituais por material autorizado da clínica. Confirme tratamentos, equipe, credenciais, endereço e informações de atendimento. Depoimentos, profissionais e resultados não foram inventados; acrescente essas seções apenas com dados reais aprovados. Não há formulário, coleta de dados, cookies, analytics ou reserva automática.
 
