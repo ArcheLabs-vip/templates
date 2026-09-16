@@ -2,29 +2,44 @@
 import { site } from '../../data/site';
 import Button from '../ui/Button.astro';
 ---
-<section id="inicio" class="container hero" aria-labelledby="hero-title">
-  <div class="hero-copy"><p class="eyebrow">{site.hero.eyebrow}</p><h1 id="hero-title">{site.hero.title}<br /><em>{site.hero.accent}</em></h1><p class="hero-description">{site.hero.text}</p><Button href="#contato">{site.contactLabel}</Button><a class="explore" href="#tratamentos">{site.hero.secondaryLabel} <span aria-hidden="true">↓</span></a></div>
-  <figure><img src={site.hero.image} alt={site.hero.imageAlt} width="1000" height="1500" fetchpriority="high" /><figcaption>{site.hero.note}</figcaption></figure>
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <div class="hero-inner container">
+    <div class="hero-copy">
+      <p class="eyebrow">{site.hero.eyebrow}</p>
+      <h1 id="hero-title">{site.hero.title}<br /><em>{site.hero.accent}</em></h1>
+      <p class="hero-description">{site.hero.text}</p>
+      <div class="hero-actions">
+        <Button href="#contato">{site.contactLabel}</Button>
+        <a class="explore" href="#tratamentos">{site.hero.secondaryLabel} <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <figure>
+      <img src={site.hero.image} alt={site.hero.imageAlt} width="1000" height="1500" fetchpriority="high" />
+      <figcaption>{site.hero.note}</figcaption>
+    </figure>
+  </div>
 </section>
-<div class="container principles" aria-label="Princípios de atendimento">{site.principles.map(item => <span>{item}</span>)}</div>
 <style>
-  .hero { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 7%; padding-top: 40px; padding-bottom: 46px; }
-  .hero-copy { padding-block: 28px; }
-  h1 { font-size: clamp(66px, 7.2vw, 106px); letter-spacing: -.045em; line-height: .98; }
+  .hero { min-height: 85vh; display: flex; align-items: center; }
+  .hero-inner { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 6%; padding-block: 48px; }
+  .hero-copy { padding-bottom: 20px; }
+  h1 { font-size: clamp(72px, 5.5vw, 110px); letter-spacing: -.05em; line-height: .93; }
   h1 em { color: var(--color-accent); font-weight: 400; }
-  .hero-description { max-width: 365px; margin: 30px 0 32px; font-size: 14px; }
-  .explore { display: flex; align-items: center; gap: 20px; width: fit-content; margin-top: 22px; font-size: 11px; color: var(--color-muted); }
+  .hero-description { max-width: 380px; margin: 34px 0 0; font-size: 14px; }
+  .hero-actions { display: flex; align-items: center; gap: 32px; margin-top: 36px; }
+  .explore { display: flex; align-items: center; gap: 14px; font-size: 11px; color: var(--color-muted); letter-spacing: .04em; }
   .explore:hover { color: var(--color-text); }
   figure { position: relative; }
-  figure img { height: clamp(440px, 42vw, 600px); object-fit: cover; object-position: 50% 38%; }
+  figure img { height: clamp(500px, 42vw, 620px); object-fit: cover; object-position: 50% 30%; }
   figcaption { margin-top: 12px; color: var(--color-muted); font-size: 10px; letter-spacing: .05em; }
-  .principles { display: flex; justify-content: space-between; border-top: 1px solid var(--color-border); padding-block: 23px; color: var(--color-muted); font-size: 11px; }
   @media (max-width: 767px) {
-    .hero { grid-template-columns: 1fr; gap: 34px; padding-top: 30px; padding-bottom: 28px; }
-    .hero-copy { padding-block: 14px 0; }
-    h1 { font-size: clamp(58px, 12vw, 88px); }
-    .hero-description { margin-block: 24px; max-width: 440px; }
-    figure img { height: 440px; object-position: 50% 34%; }
-    .principles { flex-wrap: wrap; justify-content: flex-start; gap: 12px 26px; font-size: 10px; }
+    .hero { min-height: auto; }
+    .hero-inner { grid-template-columns: 1fr; gap: 30px; padding-top: 30px; padding-bottom: 20px; }
+    .hero-copy { padding-bottom: 0; }
+    h1 { font-size: clamp(54px, 13vw, 90px); }
+    .hero-description { max-width: 440px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 20px; }
+    figure img { height: 460px; object-position: 50% 34%; }
+    figcaption { position: static; margin-top: 12px; }
   }
 </style>

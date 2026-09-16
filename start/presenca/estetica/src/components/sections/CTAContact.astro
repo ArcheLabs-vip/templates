@@ -2,16 +2,41 @@
 import { site, contactUrl } from '../../data/site';
 import Button from '../ui/Button.astro';
 ---
-<section id="contato" class="contact section" aria-labelledby="contact-title"><div class="container"><p class="eyebrow">{site.contact.eyebrow}</p><h2 id="contact-title">{site.contact.title}</h2><p class="intro">{site.contact.text}</p><Button href={contactUrl}>{site.contactLabel}</Button><p class="note">{site.contact.note}</p>
-  {contactUrl === '#contato-demo' && <aside id="contato-demo" tabindex="-1"><h3>{site.contact.demoTitle}</h3><p>{site.contact.demoText}</p></aside>}
-</div></section>
+<section id="contato" class="cta-final" aria-labelledby="contact-title">
+  <div class="container cta-grid">
+    <div class="cta-copy">
+      <p class="eyebrow">{site.contact.eyebrow}</p>
+      <h2 id="contact-title">{site.contact.title}</h2>
+      <p class="cta-text">{site.contact.text}</p>
+      <div class="cta-actions">
+        <Button href={contactUrl}>{site.contactLabel}</Button>
+        <span class="note">{site.contact.note}</span>
+      </div>
+    </div>
+    <figure>
+      <img src={site.contact.image} alt={site.contact.imageAlt} width="600" height="800" loading="lazy" decoding="async" />
+    </figure>
+  </div>
+  {contactUrl === '#contato-demo' && <div class="container"><aside id="contato-demo" tabindex="-1"><h3>{site.contact.demoTitle}</h3><p>{site.contact.demoText}</p></aside></div>}
+</section>
 <style>
-  .contact { text-align: center; background: var(--color-surface); }
-  h2 { font-size: clamp(54px, 7vw, 96px); }
-  .intro { margin-inline: auto; max-width: 460px; margin-bottom: 30px; }
-  .note { font-size: 11px; margin-top: 18px; }
-  aside { display: none; max-width: 530px; margin: 32px auto 0; padding: 25px; border: 1px solid var(--color-border); }
+  .cta-final { padding-block: var(--space-section); background: var(--color-surface); }
+  .cta-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8%; align-items: center; }
+  h2 { font-size: clamp(48px, 4.5vw, 76px); letter-spacing: -.04em; line-height: .97; }
+  .cta-text { max-width: 420px; margin-top: 24px; font-size: 14px; }
+  .cta-actions { display: flex; align-items: center; gap: 24px; margin-top: 32px; }
+  .note { font-size: 11px; color: var(--color-muted); }
+  figure img { height: clamp(300px, 28vw, 420px); object-fit: cover; object-position: 50% 30%; }
+  aside { display: none; max-width: 530px; margin-top: 32px; padding: 25px; border: 1px solid var(--color-border); }
   aside:target { display: block; }
   aside h3 { font-size: 28px; margin-bottom: 14px; }
   aside p { font-size: 13px; }
+  @media (max-width: 767px) {
+    .cta-grid { grid-template-columns: 1fr; gap: 28px; }
+    h2 { font-size: clamp(36px, 10vw, 48px); }
+    .cta-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
+    figure { order: -1; }
+    figure img { height: 240px; width: 100%; }
+  }
 </style>
+

@@ -25,6 +25,13 @@ export const site = {
     secondaryLabel: "Explore os tratamentos",
   },
   principles: ["Avaliação individual", "Escolhas conscientes", "Acompanhamento próximo"],
+  authority: {
+    items: [
+      { value: "10+", label: "anos de experiência" },
+      { value: "500+", label: "clientes atendidos" },
+      { value: "4.9", label: "avaliação média" },
+    ],
+  },
   services: {
     title: "O cuidado certo para o seu momento.",
     text: "Tudo começa pela escuta. Conheça nossas frentes de cuidado e descubra, na avaliação, o que faz sentido para você.",
@@ -69,10 +76,18 @@ export const site = {
       { question: "Posso conhecer os valores antes de agendar?", answer: "Entre em contato para consultar o valor da avaliação e as condições de atendimento. O investimento no plano de cuidado é apresentado após a avaliação, de acordo com o que for indicado." },
     ],
   },
+  testimonial: {
+    quote: "Nunca me senti tão ouvida. O cuidado começa muito antes do procedimento, e isso faz toda a diferença.",
+    name: "Carolina M.",
+    context: "Cliente há 3 anos",
+    rating: 5,
+  },
   contact: {
     eyebrow: "Seu próximo momento de cuidado",
-    title: "Vamos olhar para você?",
+    title: "Seu cuidado merece uma presença à altura.",
     text: "Conte o que você busca. Nossa equipe orienta os primeiros passos para a sua avaliação.",
+    image: "/images/portrait.webp",
+    imageAlt: "Detalhe de cuidado em ambiente acolhedor",
     note: "Atendimento com hora marcada.",
     demoTitle: "Você está conhecendo um template.",
     demoText: "A Alva é uma marca fictícia. O agendamento ficará disponível quando a clínica configurar seu contato.",

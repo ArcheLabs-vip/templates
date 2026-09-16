@@ -1,10 +1,25 @@
 ---
 import { site } from '../../data/site';
 ---
-<section id="espaco" class="section container" aria-labelledby="space-title"><h2 id="space-title">{site.space.title}</h2><p class="intro">{site.space.text}</p><figure><img src={site.space.image} alt={site.space.imageAlt} width="1500" height="1000" loading="lazy" decoding="async" /><figcaption>{site.space.caption}</figcaption></figure></section>
+<section id="espaco" class="fullbleed section" aria-labelledby="space-title">
+  <div class="container">
+    <div class="fullbleed-header">
+      <h2 id="space-title">{site.space.title}</h2>
+      <p class="intro">{site.space.text}</p>
+    </div>
+    <figure>
+      <img src={site.space.image} alt={site.space.imageAlt} width="1500" height="1000" loading="lazy" decoding="async" />
+      <figcaption>{site.space.caption}</figcaption>
+    </figure>
+  </div>
+</section>
 <style>
-  figure { margin-top: 42px; }
-  img { aspect-ratio: 2.3; object-fit: cover; }
-  figcaption { margin-top: 15px; font-size: 11px; color: var(--color-muted); }
-  @media (max-width: 767px) { img { aspect-ratio: 1.12; } }
+  .fullbleed-header { margin-bottom: 42px; }
+  figure { overflow: hidden; }
+  img { width: 100%; height: clamp(320px, 45vh, 520px); object-fit: cover; }
+  figcaption { margin-top: 14px; font-size: 11px; color: var(--color-muted); letter-spacing: .04em; }
+  @media (max-width: 767px) {
+    img { height: 55vh; }
+  }
 </style>
+

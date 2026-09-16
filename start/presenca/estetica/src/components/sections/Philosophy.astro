@@ -1,19 +1,41 @@
 ---
 import { site } from '../../data/site';
 ---
-<section id="essencia" class="philosophy section" aria-labelledby="philosophy-title"><div class="container">
-  <div class="statement"><p class="eyebrow">{site.philosophy.eyebrow}</p><h2 id="philosophy-title">{site.philosophy.title}</h2><p class="description">{site.philosophy.text}</p><p class="closing">{site.philosophy.closing}</p></div>
-  <div class="values">{site.philosophy.values.map(value => <article><h3>{value.title}</h3><p>{value.text}</p></article>)}</div>
-</div></section>
+<section id="essencia" class="manifesto section" aria-labelledby="philosophy-title">
+  <div class="container manifesto-grid">
+    <div class="statement">
+      <p class="eyebrow">{site.philosophy.eyebrow}</p>
+      <h2 id="philosophy-title">{site.philosophy.title}</h2>
+      <p class="closing">{site.philosophy.closing}</p>
+    </div>
+    <div class="aside">
+      <p class="description">{site.philosophy.text}</p>
+    </div>
+  </div>
+  <div class="container values-list">
+    {site.philosophy.values.map((value, i) => <article><span class="index">0{i + 1}</span><h3>{value.title}</h3><p>{value.text}</p></article>)}
+  </div>
+</section>
 <style>
-  .philosophy { background: var(--color-surface); }
-  .statement { text-align: center; max-width: 780px; margin-inline: auto; }
-  .statement h2 { font-size: clamp(44px, 5.3vw, 76px); }
-  .description { max-width: 550px; margin: 28px auto 20px; }
-  .closing { font-size: 12px; color: var(--color-accent); }
-  .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 55px; margin-top: 70px; }
-  article { padding-top: 26px; border-top: 1px solid var(--color-border); }
-  h3 { font-size: 28px; margin-bottom: 15px; }
-  article p { font-size: 12px; max-width: 290px; }
-  @media (max-width: 767px) { .values { grid-template-columns: 1fr; gap: 25px; margin-top: 46px; } article p { max-width: none; } }
+  .manifesto-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 8%; align-items: start; }
+  h2 { font-size: clamp(44px, 5.3vw, 76px); max-width: 620px; }
+  .closing { font-size: 12px; color: var(--color-accent); margin-top: 24px; max-width: 420px; }
+  .aside { padding-top: 12px; }
+  .description { font-size: 14px; max-width: 360px; }
+  .values-list { display: flex; flex-direction: column; gap: 0; margin-top: 70px; }
+  article { display: grid; grid-template-columns: 50px 1fr 1.2fr; gap: 20px; padding: 28px 0; border-top: 1px solid var(--color-border); align-items: baseline; }
+  article:last-child { border-bottom: 1px solid var(--color-border); }
+  .index { font-size: 11px; color: var(--color-accent); }
+  h3 { font-size: 28px; margin-bottom: 0; }
+  article p { font-size: 12px; }
+  @media (max-width: 767px) {
+    .manifesto-grid { grid-template-columns: 1fr; gap: 28px; }
+    .aside { padding-top: 0; }
+    .description { max-width: none; }
+    .values-list { margin-top: 46px; }
+    article { grid-template-columns: 40px 1fr; gap: 12px; }
+    article p { grid-column: 1 / -1; }
+    h3 { font-size: 22px; }
+  }
 </style>
+

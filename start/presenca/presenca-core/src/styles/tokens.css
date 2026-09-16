@@ -1,12 +1,12 @@
 :root {
   color-scheme: dark;
-  --color-background: #20221f;
-  --color-surface: #292c27;
-  --color-text: #f0ece3;
-  --color-muted: #bebfb4;
-  --color-accent: #d6bea0;
-  --color-border: #484a41;
-  --color-button-text: #252720;
+  --color-background: #1e1e1c;
+  --color-surface: #282724;
+  --color-text: #f1ede4;
+  --color-muted: #b5b0a6;
+  --color-accent: #d4b896;
+  --color-border: #3e3c38;
+  --color-button-text: #1f1e1b;
   --font-heading: "Cormorant Garamond", Georgia, serif;
   --font-body: "Manrope", Arial, sans-serif;
   --container-width: 1280px;
