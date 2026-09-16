@@ -1,0 +1,15 @@
+---
+import { site } from '../../data/site';
+---
+<section class="container process" aria-labelledby="process-title"><h2 id="process-title">{site.process.title}</h2><ol>{site.process.items.map(item => <li><h3>{item.title}</h3><p>{item.text}</p></li>)}</ol></section>
+<style>
+  .process { padding-bottom: var(--space-section); display: grid; grid-template-columns: 1fr 1fr; gap: 13%; }
+  h2 { max-width: 440px; }
+  ol { margin: 0; padding: 0; list-style: none; counter-reset: process; }
+  li { counter-increment: process; position: relative; padding: 0 0 30px 50px; }
+  li::before { content: '0' counter(process); position: absolute; left: 0; top: 4px; color: var(--color-accent); font-size: 11px; }
+  li:last-child { padding-bottom: 0; }
+  h3 { font-size: 29px; margin-bottom: 14px; }
+  li p { font-size: 13px; }
+  @media (max-width: 767px) { .process { grid-template-columns: 1fr; gap: 42px; } }
+</style>

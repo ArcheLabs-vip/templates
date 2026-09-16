@@ -4,7 +4,7 @@
 
 Presença é uma coleção do **plano Start**, voltada a marcas, profissionais e empresas que precisam transmitir autoridade, sofisticação, confiança e percepção de valor desde o primeiro contato.
 
-Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. Seu core e seus nichos estão planejados; as listas abaixo não representam componentes ou aplicações já implementados.
+Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e o nicho `estetica` estão implementados em `start/presenca/`, na variante Dark Premium. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
 
 As regras compartilhadas ficam em:
 

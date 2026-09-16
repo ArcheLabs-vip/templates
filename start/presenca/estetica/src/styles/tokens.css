@@ -1,0 +1,19 @@
+:root {
+  color-scheme: dark;
+  --color-background: #20221f;
+  --color-surface: #292c27;
+  --color-text: #f0ece3;
+  --color-muted: #bebfb4;
+  --color-accent: #d6bea0;
+  --color-border: #484a41;
+  --color-button-text: #252720;
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Manrope", Arial, sans-serif;
+  --container-width: 1280px;
+  --gutter: clamp(24px, 5.3vw, 88px);
+  --space-section: clamp(72px, 9vw, 132px);
+  --radius-sm: 4px;
+  --transition: 180ms ease;
+  /* Layer 2 is reserved for the navigation; no content overlaps it. */
+  --layer-navigation: 2;
+}

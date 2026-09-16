@@ -20,8 +20,9 @@ templates/
 │   │   ├── servicos-residenciais/
 │   │   ├── estetica/
 │   │   └── futuros-nichos/
-│   └── presenca/                 (planejado)
-│       └── presenca-core/        (planejado)
+│   └── presenca/
+│       ├── presenca-core/
+│       └── estetica/
 ├── pro/
 │   └── futuras-colecoes/
 └── referencias/
@@ -45,7 +46,7 @@ Distinguir propostas e componentes planejados de projetos já implementados. Uma
 
 Reúne coleções destinadas aos projetos do plano Start. As aplicações priorizam presença digital profissional, apresentação clara dos serviços, confiança e conversão por contato.
 
-Inclui a Essencial e a [Presença](../presenca/presenca.md). A Presença tem direção própria de impacto visual e autoridade; seu core e seus nichos estão planejados.
+Inclui a Essencial e a [Presença](../presenca/presenca.md). A Presença tem direção própria de impacto visual e autoridade; seu core Dark Premium e o nicho de estética estão implementados; os demais nichos permanecem planejados.
 
 ### Pro
 

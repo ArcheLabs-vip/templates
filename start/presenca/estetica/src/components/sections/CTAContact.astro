@@ -1,0 +1,17 @@
+---
+import { site, contactUrl } from '../../data/site';
+import Button from '../ui/Button.astro';
+---
+<section id="contato" class="contact section" aria-labelledby="contact-title"><div class="container"><p class="eyebrow">{site.contact.eyebrow}</p><h2 id="contact-title">{site.contact.title}</h2><p class="intro">{site.contact.text}</p><Button href={contactUrl}>{site.contactLabel}</Button><p class="note">{site.contact.note}</p>
+  {contactUrl === '#contato-demo' && <aside id="contato-demo" tabindex="-1"><h3>{site.contact.demoTitle}</h3><p>{site.contact.demoText}</p></aside>}
+</div></section>
+<style>
+  .contact { text-align: center; background: var(--color-surface); }
+  h2 { font-size: clamp(54px, 7vw, 96px); }
+  .intro { margin-inline: auto; max-width: 460px; margin-bottom: 30px; }
+  .note { font-size: 11px; margin-top: 18px; }
+  aside { display: none; max-width: 530px; margin: 32px auto 0; padding: 25px; border: 1px solid var(--color-border); }
+  aside:target { display: block; }
+  aside h3 { font-size: 28px; margin-bottom: 14px; }
+  aside p { font-size: 13px; }
+</style>
