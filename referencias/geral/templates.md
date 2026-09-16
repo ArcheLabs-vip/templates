@@ -15,11 +15,13 @@ Essa organização permite que o cliente visualize o site dentro do próprio seg
 ```text
 templates/
 ├── start/
-│   └── essencial/
-│       ├── essencial-core/
-│       ├── servicos-residenciais/
-│       ├── estetica/
-│       └── futuros-nichos/
+│   ├── essencial/
+│   │   ├── essencial-core/
+│   │   ├── servicos-residenciais/
+│   │   ├── estetica/
+│   │   └── futuros-nichos/
+│   └── presenca/                 (planejado)
+│       └── presenca-core/        (planejado)
 ├── pro/
 │   └── futuras-colecoes/
 └── referencias/
@@ -27,11 +29,23 @@ templates/
 
 Os nomes de diretórios devem usar letras minúsculas, sem acentos e separados por hífen.
 
+Manter o mesmo identificador para um mercado presente em várias coleções, como `clinicas-medicas` e `imobiliarias`.
+
+### Organização das referências
+
+`referencias/geral/` concentra regras compartilhadas. `referencias/<colecao>/` reúne decisões específicas daquela coleção, separadas dos projetos executáveis.
+
+Preferir um documento principal por coleção, reunindo posicionamento, direção visual, composição, nichos e ordem de produção. Documentos adicionais devem atender a um assunto independente, como uma investigação de bug. Regras gerais devem ser referenciadas por links, sem duplicar seu conteúdo em cada coleção.
+
+Distinguir propostas e componentes planejados de projetos já implementados. Uma direção visual premium não determina o plano comercial; o plano precisa ser definido antes da criação do projeto executável.
+
 ## 3. Planos
 
 ### Start
 
 Reúne coleções destinadas aos projetos do plano Start. As aplicações priorizam presença digital profissional, apresentação clara dos serviços, confiança e conversão por contato.
+
+Inclui a Essencial e a [Presença](../presenca/presenca.md). A Presença tem direção própria de impacto visual e autoridade; seu core e seus nichos estão planejados.
 
 ### Pro
 
@@ -49,6 +63,8 @@ Uma coleção é a família visual e estrutural do template. Ela define, entre o
 - estratégia de conversão.
 
 Alterações de cor, texto e imagens não criam uma nova coleção. Uma nova coleção deve representar uma direção estrutural ou visual realmente diferente.
+
+Variações internas de paleta, tipografia e apresentação podem usar tokens e variantes de componentes do mesmo core. Essas variações não criam novos planos, nichos ou cores e devem preservar os princípios da coleção.
 
 ## 5. Start — Coleção Essencial
 
@@ -91,6 +107,8 @@ O nicho adapta a coleção por meio de:
 - CTAs;
 - seções específicas do mercado.
 
+Hero, hierarquia e ordem das seções podem ser adaptados às necessidades do mercado, preservando o molde da coleção. Ativar ou remover seções conforme o conteúdo disponível; evitar seções genéricas usadas apenas para preencher a página.
+
 No portfólio, cada item deve ser apresentado somente pelo nome do nicho dentro de sua coleção. Não é necessário usar o termo “demonstração”.
 
 Exemplo:
@@ -110,6 +128,7 @@ Exemplos:
 
 ```text
 start/essencial/essencial-core/
+start/presenca/presenca-core/
 pro/editorial/editorial-core/
 pro/signature/signature-core/
 pro/vanguard/vanguard-core/
@@ -125,17 +144,29 @@ Cada nicho publicado deve continuar autônomo, sem imports que dependam de camin
 
 Para adicionar um nicho existente a uma coleção:
 
-1. duplicar uma aplicação da mesma coleção;
+1. copiar o core da coleção ou duplicar uma aplicação da mesma coleção;
 2. renomear o pacote para `@arche-labs/<plano>-<colecao>-<nicho>`;
 3. adaptar conteúdo, identidade, imagens e seções;
 4. atualizar o README do nicho;
-5. executar `npm run validate`.
+5. executar `npm run validate`, reunindo a checagem Astro e o build estático.
 
 Para criar um molde diferente, criar uma nova coleção dentro do plano correspondente em vez de misturá-lo à Coleção Essencial.
 
 Para criar o core dessa nova coleção, seguir o processo definido em [`cores-de-colecao.md`](cores-de-colecao.md).
 
-## 9. Regra final
+## 9. Conteúdo, confiança e conversão
+
+Estas regras se aplicam a todas as coleções; cada coleção define sua apresentação visual e o destaque de cada seção.
+
+- **Autoridade e prova social:** utilizar apenas dados verificáveis do cliente, como experiência, projetos, certificações, especializações, prêmios, parceiros, avaliações e credenciais. Não inventar números, depoimentos ou resultados. Dados de exemplo devem ser identificados como fictícios nas demonstrações e substituídos antes da entrega.
+- **Cases:** apresentar contexto, desafio, solução e resultado, usando evidências disponíveis. Antes e depois e outros formatos de prova devem ser adequados ao mercado e às regras profissionais aplicáveis.
+- **Sobre:** apresentar história, trajetória, filosofia, equipe e credenciais relevantes; evitar textos institucionais vazios.
+- **Processo:** descrever etapas reais do serviço, com nomenclatura apropriada ao nicho.
+- **Depoimentos:** priorizar relevância e qualidade. Destaques individuais, grupos pequenos, avaliações externas ou vídeos podem ser usados conforme o material disponível.
+- **FAQ:** responder objeções e dúvidas reais do público.
+- **CTAs:** indicar claramente a ação, como agendar consulta, solicitar proposta ou falar com um especialista. Evitar urgência artificial. O CTA final pode reunir título, texto curto, ação principal e contato alternativo quando necessário.
+
+## 10. Regra final
 
 A biblioteca deve maximizar clareza comercial e reaproveitamento técnico:
 

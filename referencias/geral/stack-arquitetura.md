@@ -637,7 +637,21 @@ Manutenção ou Handoff
 
 ---
 
-# 25. Regra final
+# 25. Composição responsiva e imagens
+
+Toda coleção deve funcionar em telas pequenas desde sua composição inicial:
+
+- escala tipográfica responsiva e texto confortável de ler;
+- espaçamento adequado entre conteúdo, imagens e ações;
+- imagens com enquadramento e recorte apropriados a cada tela;
+- CTA fácil de acessar e navegação simples;
+- nenhuma informação ou ação dependente exclusivamente de uma composição desktop ou de hover.
+
+Priorizar imagens relevantes ao negócio, com resolução suficiente e tratamento consistente. Texturas e sobreposições não devem prejudicar a leitura. A direção estética das imagens pertence à coleção.
+
+---
+
+# 26. Regra final
 
 A stack deve servir ao projeto.
 

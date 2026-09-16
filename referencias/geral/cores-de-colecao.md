@@ -26,8 +26,10 @@ Ele origina apenas os nichos da Coleção Essencial.
 
 ```text
 start/
-└── essencial/
-    └── essencial-core/
+├── essencial/
+│   └── essencial-core/
+└── presenca/
+    └── presenca-core/
 
 pro/
 ├── editorial/
@@ -47,11 +49,14 @@ O nome do pacote deve seguir:
 Exemplos:
 
 - `@arche-labs/start-essencial-core`;
+- `@arche-labs/start-presenca-core`;
 - `@arche-labs/pro-editorial-core`;
 - `@arche-labs/pro-signature-core`;
 - `@arche-labs/pro-vanguard-core`.
 
 ## 3. Base técnica compartilhada
+
+O `presenca-core` está planejado para o plano Start. Sua direção específica está documentada em [Coleção Presença](../presenca/presenca.md).
 
 Os próximos cores podem usar o `essencial-core` como bootstrap técnico. Devem ser preservados os fundamentos que não determinam a identidade de uma coleção:
 
@@ -160,6 +165,8 @@ O nicho adapta:
 - seções necessárias ao mercado.
 
 Depois da cópia, o nicho não deve depender do core por imports relativos ou por um pacote privado. Ele precisa permanecer executável e transferível de maneira independente.
+
+Melhorias identificadas em um nicho devem voltar ao core somente quando houver reutilização real dentro da coleção. Os nichos existentes não recebem essas mudanças automaticamente: cada incorporação deve ser revisada e validada no próprio projeto.
 
 ## 9. Critério para um novo core
 
