@@ -17,17 +17,17 @@ Plano
 O primeiro core implementado é:
 
 ```text
-start/presenca/presenca-core/
+start/essencial/essencial-core/
 ```
 
-Ele origina apenas os nichos da Coleção Presença.
+Ele origina apenas os nichos da Coleção Essencial.
 
 ## 2. Cores previstos
 
 ```text
 start/
-└── presenca/
-    └── presenca-core/
+└── essencial/
+    └── essencial-core/
 
 pro/
 ├── editorial/
@@ -46,14 +46,14 @@ O nome do pacote deve seguir:
 
 Exemplos:
 
-- `@arche-labs/start-presenca-core`;
+- `@arche-labs/start-essencial-core`;
 - `@arche-labs/pro-editorial-core`;
 - `@arche-labs/pro-signature-core`;
 - `@arche-labs/pro-vanguard-core`.
 
 ## 3. Base técnica compartilhada
 
-Os próximos cores podem usar o `presenca-core` como bootstrap técnico. Devem ser preservados os fundamentos que não determinam a identidade de uma coleção:
+Os próximos cores podem usar o `essencial-core` como bootstrap técnico. Devem ser preservados os fundamentos que não determinam a identidade de uma coleção:
 
 - Astro com TypeScript;
 - geração estática por padrão;
@@ -71,7 +71,7 @@ Os próximos cores podem usar o `presenca-core` como bootstrap técnico. Devem s
 - projeto final autônomo e transferível;
 - validação com `astro check` e build estático.
 
-Esses fundamentos são padrões técnicos da Arche Labs, não elementos visuais da Coleção Presença.
+Esses fundamentos são padrões técnicos da Arche Labs, não elementos visuais da Coleção Essencial.
 
 ## 4. Estrutura mínima de um core
 
@@ -99,20 +99,20 @@ Pastas específicas, como `local-business/`, só devem existir nos cores que rea
 
 Ao criar uma nova coleção, não transportar por padrão:
 
-- composição da página inicial da Presença;
+- composição da página inicial da Essencial;
 - ordem ou quantidade de seções;
 - `HeroService` e demais seções específicas;
 - Header e Footer sem revisão;
 - paleta, tipografia, espaçamento e raios;
 - componentes de negócios locais;
 - animações e interações características da coleção;
-- conteúdo, imagens ou dados fictícios da Presença.
+- conteúdo, imagens ou dados fictícios da Essencial.
 
 Uma nova coleção precisa ter diferença estrutural ou visual real. Caso contrário, trata-se de mais um nicho ou variante da coleção existente.
 
 ## 6. Elementos que podem ser reaproveitados após revisão
 
-Alguns arquivos do `presenca-core` podem acelerar a criação de outro core:
+Alguns arquivos do `essencial-core` podem acelerar a criação de outro core:
 
 - `astro.config.mjs`;
 - `tsconfig.json`;
@@ -128,9 +128,9 @@ Mesmo esses elementos devem ser revisados e renomeados quando a nova direção e
 ## 7. Processo para criar um novo core
 
 1. Criar a pasta da nova coleção dentro do plano correspondente.
-2. Copiar o `presenca-core` como ponto de partida técnico.
+2. Copiar o `essencial-core` como ponto de partida técnico.
 3. Renomear a pasta e o pacote para a nova coleção.
-4. Remover conteúdo, imagens e componentes exclusivos da Presença.
+4. Remover conteúdo, imagens e componentes exclusivos da Essencial.
 5. Definir a proposta, a composição e a linguagem visual da nova coleção.
 6. Criar ou adaptar tokens, layouts, seções e interações.
 7. Atualizar dados de exemplo, metadados e README.
@@ -143,8 +143,8 @@ Mesmo esses elementos devem ser revisados e renomeados quando a nova direção e
 Um nicho deve ser criado a partir do core da própria coleção:
 
 ```text
-presenca-core → Estética
-presenca-core → Serviços Residenciais
+`essencial-core` → Estética
+`essencial-core` → Serviços Residenciais
 editorial-core → Arquitetura
 editorial-core → Fotografia
 ```
@@ -178,4 +178,4 @@ Uma simples troca de cores, fontes ou imagens não justifica um novo core.
 
 > O padrão técnico é compartilhado; a composição e a identidade pertencem a cada coleção.
 
-O `presenca-core` inaugura esse padrão, mas não limita o desenho dos cores Editorial, Signature e Vanguard.
+O `essencial-core` inaugura esse padrão, mas não limita o desenho dos cores Editorial, Signature e Vanguard.

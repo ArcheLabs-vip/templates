@@ -6,7 +6,7 @@ O componente `HeroService` usa um layout grid com duas colunas no desktop: texto
 
 ## O problema
 
-A Coleção Presença utiliza animações de **reveal on scroll** via `IntersectionObserver`, aplicando as classes `reveal-on-scroll` e `reveal-delay-*` nos elementos. No `global.css`, a regra:
+A Coleção Essencial utiliza animações de **reveal on scroll** via `IntersectionObserver`, aplicando as classes `reveal-on-scroll` e `reveal-delay-*` nos elementos. No `global.css`, a regra:
 
 ```css
 .motion-enabled .reveal-on-scroll {
@@ -79,4 +79,4 @@ O simples `display: none` não é suficiente quando há animações CSS aplicada
 src/components/sections/HeroService.astro
 ```
 
-Ao criar um novo nicho da Coleção Presença, copie o `HeroService.astro` de um template já corrigido (ex: `psicologia`, `estetica`, `servicos-residenciais`) e verifique o mobile antes de considerar o template concluído.
+Ao criar um novo nicho da Coleção Essencial, copie o `HeroService.astro` de um template já corrigido (ex: `psicologia`, `estetica`, `servicos-residenciais`) e verifique o mobile antes de considerar o template concluído.

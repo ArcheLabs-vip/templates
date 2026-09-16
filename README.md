@@ -5,8 +5,8 @@ Biblioteca de templates organizada por plano, coleção e nicho.
 ```text
 templates/
 ├── start/
-│   └── presenca/
-│       ├── presenca-core/
+│   └── essencial/
+│       ├── essencial-core/
 │       ├── servicos-residenciais/
 │       └── estetica/
 ├── pro/
@@ -14,7 +14,7 @@ templates/
 ```
 
 - **Plano** define a oferta comercial, como `start` ou futuramente `pro`.
-- **Coleção** define o molde visual e estrutural, como `presenca`.
+- **Coleção** define o molde visual e estrutural, como `essencial`.
 - **Nicho** apresenta esse molde aplicado a um mercado específico.
 
 Cada pasta de nicho é um projeto Astro autônomo. Para executar um deles, entre em sua pasta e use `npm run dev`. Consulte [referencias/templates.md](referencias/templates.md) para as regras completas da biblioteca.

@@ -15,8 +15,8 @@ Essa organização permite que o cliente visualize o site dentro do próprio seg
 ```text
 templates/
 ├── start/
-│   └── presenca/
-│       ├── presenca-core/
+│   └── essencial/
+│       ├── essencial-core/
 │       ├── servicos-residenciais/
 │       ├── estetica/
 │       └── futuros-nichos/
@@ -50,9 +50,9 @@ Uma coleção é a família visual e estrutural do template. Ela define, entre o
 
 Alterações de cor, texto e imagens não criam uma nova coleção. Uma nova coleção deve representar uma direção estrutural ou visual realmente diferente.
 
-## 5. Start — Coleção Presença
+## 5. Start — Coleção Essencial
 
-Presença é a primeira coleção do plano Start. Seu molde é direto, completo e orientado à conversão.
+Essencial é a primeira coleção do plano Start. Seu molde é direto, completo e orientado à conversão.
 
 Estrutura-base:
 
@@ -97,7 +97,7 @@ Exemplo:
 
 ```text
 Plano Start
-└── Coleção Presença
+└── Coleção Essencial
     ├── Serviços Residenciais
     └── Estética
 ```
@@ -109,13 +109,13 @@ Cada coleção possui seu próprio core dentro da pasta da coleção. O core re�
 Exemplos:
 
 ```text
-start/presenca/presenca-core/
+start/essencial/essencial-core/
 pro/editorial/editorial-core/
 pro/signature/signature-core/
 pro/vanguard/vanguard-core/
 ```
 
-O `presenca-core` é exclusivo da Coleção Presença. Ele também funciona como primeiro bootstrap técnico para os próximos cores, mas componentes de seção e decisões visuais só devem ser mantidos quando fizerem sentido para a nova coleção.
+O `essencial-core` é exclusivo da Coleção Essencial. Ele também funciona como primeiro bootstrap técnico para os próximos cores, mas componentes de seção e decisões visuais só devem ser mantidos quando fizerem sentido para a nova coleção.
 
 As regras compartilhadas entre os cores estão documentadas em [`cores-de-colecao.md`](cores-de-colecao.md).
 
@@ -131,7 +131,7 @@ Para adicionar um nicho existente a uma coleção:
 4. atualizar o README do nicho;
 5. executar `npm run validate`.
 
-Para criar um molde diferente, criar uma nova coleção dentro do plano correspondente em vez de misturá-lo à Coleção Presença.
+Para criar um molde diferente, criar uma nova coleção dentro do plano correspondente em vez de misturá-lo à Coleção Essencial.
 
 Para criar o core dessa nova coleção, seguir o processo definido em [`cores-de-colecao.md`](cores-de-colecao.md).
 
