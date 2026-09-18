@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">{site.hero.eyebrow}</p>
+      <h1 id="hero-title">{site.hero.title}<em>{site.hero.emphasis}</em></h1>
+      <p class="hero-description">{site.hero.description}</p>
+      <div class="hero-actions">
+        <ContactLink>{site.hero.primaryCta}</ContactLink>
+        <a class="button button-outline" href="#tratamentos">{site.hero.secondaryCta}</a>
+      </div>
+      <div class="hero-assurance">
+        <span class="assurance-icon"><Icon name="heart" /></span>
+        <div><strong>Seu sorriso, em boas mãos</strong><span>Com escuta, planejamento e atenção aos detalhes.</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image">
+        <img src="/images/hero.webp" srcset="/images/hero-640.webp 640w, /images/hero.webp 960w" sizes="(max-width: 767px) 90vw, 45vw" width="960" height="1200" alt="Dentista conversando com uma paciente sobre sua radiografia" fetchpriority="high" />
+      </div>
+      <div class="care-badge"><span class="assurance-icon"><Icon name="check" /></span><div><strong>{site.hero.badgeTitle}</strong><span>{site.hero.badgeText}</span></div></div>
+      <div class="beauty-badge"><Icon name="heart" /><span>Mais motivos<br /><strong>para sorrir</strong></span></div>
+    </div>
+  </div>
+</section>

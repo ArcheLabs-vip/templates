@@ -1,19 +1,29 @@
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400 900; font-display: swap; src: url('/fonts/playfair-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/playfair-italic.woff2') format('woff2'); }
+
 :root {
-  color-scheme: dark;
-  --color-background: #1e1e1c;
-  --color-surface: #282724;
-  --color-text: #f1ede4;
-  --color-muted: #b5b0a6;
-  --color-accent: #d4b896;
-  --color-border: #3e3c38;
-  --color-button-text: #1f1e1b;
-  --font-heading: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Manrope", Arial, sans-serif;
-  --container-width: 1280px;
-  --gutter: clamp(24px, 5.3vw, 88px);
-  --space-section: clamp(72px, 9vw, 132px);
-  --radius-sm: 4px;
-  --transition: 180ms ease;
-  /* Layer 2 is reserved for the navigation; no content overlaps it. */
-  --layer-navigation: 2;
+  color-scheme: light;
+  --color-background: #fdf8f6;
+  --color-surface: #fff;
+  --color-rose-light: #f2e8e5;
+  --color-border: #e6d5d1;
+  --color-rose: #d4a39b;
+  --color-accent: #99665e;
+  --color-primary: #6b4c46;
+  --color-heading: #4a332f;
+  --color-text: #5e5754;
+  --color-muted: #736761;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+  --color-on-whatsapp: #063b25;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --radius-card: 1rem;
+  --radius-image: 2rem;
+  --radius-button: 100px;
+  --container: 1280px;
+  --space-section: clamp(4.5rem, 7vw, 6rem);
+  --shadow-small: 0 4px 10px rgb(74 51 47 / 4%);
+  --shadow-large: 0 20px 45px rgb(74 51 47 / 12%);
 }

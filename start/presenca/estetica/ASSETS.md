@@ -1,15 +1,27 @@
-# Origem dos assets
+# Assets da Aura Estética
 
-Gerados com image_gen integrada e otimizados em WebP com Sharp. Imagens conceituais; não são casos reais.
+As fotografias vêm dos URLs Unsplash presentes no HTML fornecido. Foram baixadas em WebP e são servidas localmente. São imagens ilustrativas, sem atribuição a pacientes, profissionais, resultados ou instalações de uma clínica real.
 
-## public/images/portrait.webp
+| Arquivo | URL de origem (ID da foto no Unsplash) |
+| --- | --- |
+| `hero.webp`, `hero-640.webp` | `https://images.unsplash.com/photo-1570172619644-dfd03ed5d881` |
+| `facial.webp` | `https://images.unsplash.com/photo-1616394584738-fc6e612e71b9` |
+| `botox.webp` | `https://images.unsplash.com/photo-1512290923902-8a9f81dc236c` |
+| `laser.webp` | `https://images.unsplash.com/photo-1598440947619-2c35fc9aa908` |
+| `skincare.webp` | `https://images.unsplash.com/photo-1552693673-1bf958298935` |
+| `corporal.webp` | `https://images.unsplash.com/photo-1544161515-4ab6ce6db874` |
+| `espaco.webp`, `contato.webp` | `https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2` |
 
-Prompt: Use case: photorealistic-natural. Asset type: hero photograph for a premium Brazilian aesthetic clinic website, fictional brand Alva. Create a portrait 1024x1536 beauty editorial photograph of an adult woman age 35 with brown hair swept back, warm olive skin with realistic pores and natural subtle freckles, head and upper shoulders, calm self-assured expression, looking slightly left of camera. Sculptural warm natural side lighting against a solid dark warm charcoal studio background. One hand gently touching neck, wearing a minimalist cream linen top. Composition face in upper middle, generous breathing space around head; understated intimate art direction, muted bronze and sand tones, analog photographic depth, no beauty retouch plasticity, no clinical equipment, no text, no logos, no collage. This is conceptual beauty imagery not a real clinician or patient result.
+A foto `photo-1615396895822-19e075051939`, usada no CTA original, retornou HTTP 404. O CTA reutiliza a foto válida do espaço, com enquadramento horizontal e sobreposição escura.
 
-## public/images/space.webp
-
-Prompt: Use case photorealistic-natural. Asset type website environment section photograph. Wide landscape 1536x1024 editorial architecture photo of a serene upscale Brazilian aesthetic clinic reception, sculptural sand colored limewash curved wall, dark walnut reception desk on left, large window on right filtered by sheer flax curtains, one travertine side table with single branch arrangement, two low cream linen armchairs, natural daylight, warm restrained palette, premium but believable small boutique clinic interior. No people, no text, no logos, no gold ornament, no collage. Realistic professional interior photography. Fictional concept space.
+Imagens obtidas com `fm=webp`, `fit=crop`, `q=82` e larguras de 640 a 1600 pixels. Referência de uso: [licença Unsplash](https://unsplash.com/license). Não foram obtidos registros individuais de autorização de imagem dos modelos; revise o material para a marca de destino.
 
 ## Fontes
 
-Cormorant Garamond e Manrope: WOFF2 obtidos do Google Fonts. Licenças SIL OFL 1.1 em public/fonts. O site não faz chamadas a fontes externas.
+- Inter normal variável: Google Fonts, licença SIL Open Font License, cópia em `public/fonts/OFL-inter.txt`.
+- Playfair Display normal variável e itálico: Google Fonts, licença SIL Open Font License, cópia em `public/fonts/OFL-playfair.txt`.
+- Subconjunto latino com caracteres usados em português; arquivos WOFF2 locais e `font-display: swap`.
+
+## Ícones
+
+Os paths SVG do coração, menu, confirmação, seta, aspas, WhatsApp e contato foram preservados do HTML fornecido em `src/components/Icon.astro`. O favicon reutiliza o coração da referência. Não foi adicionada uma biblioteca de ícones.

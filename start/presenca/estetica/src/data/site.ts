@@ -1,105 +1,94 @@
 export const site = {
-  name: "alva",
-  category: "Clínica de estética",
-  title: "Alva | Estética com naturalidade",
-  description: "Um olhar individual para a sua beleza. Conheça a proposta de cuidado facial e corporal da Alva, clínica de estética.",
-  url: "https://example.com",
+  name: 'Aura Estética',
+  title: 'Aura Estética | Realce sua Beleza Natural',
+  description: 'Tratamentos estéticos personalizados, acolhimento e cuidado com a sua individualidade. Conheça a Aura Estética.',
+  // Substitua os conteúdos ilustrativos e configure os contatos antes de publicar.
   demo: true,
-  // Preencha com DDI + DDD + número para ativar o contato real.
-  whatsapp: "",
-  message: "Olá! Gostaria de conversar sobre uma avaliação na Alva.",
-  contactLabel: "Agendar uma avaliação",
-  nav: [
-    { label: "Tratamentos", href: "#tratamentos" },
-    { label: "Nossa essência", href: "#essencia" },
-    { label: "O espaço", href: "#espaco" },
-  ],
+  demoNotice: 'Modelo demonstrativo. Dados, resultados e avaliações são ilustrativos.',
+  url: 'https://aura.example',
+  whatsapp: '5599999999999',
+  phone: '(99) 99999-9999',
+  phoneHref: 'tel:+5599999999999',
+  email: 'contato@aura.example',
+  address: 'Av. Paulista, 1000, Conj. 101, São Paulo, SP',
+  hours: 'Segunda a sexta, das 9h às 19h. Sábado, das 9h às 15h.',
+  instagram: '',
   hero: {
-    eyebrow: "Estética, com intenção",
-    title: "Sua essência.",
-    accent: "Em evidência.",
-    text: "Um olhar atento para o que faz você ser você. Cuidado facial e corporal que respeita a sua individualidade.",
-    image: "/images/portrait.webp",
-    imageAlt: "Retrato editorial de uma mulher em luz natural suave",
-    note: "Beleza singular. Cuidado por inteiro.",
-    secondaryLabel: "Explore os tratamentos",
+    eyebrow: 'Estética & Bem-estar',
+    title: 'Realce sua',
+    emphasis: 'Beleza Natural',
+    description: 'Tratamentos personalizados para valorizar seus traços e cuidar de você, em um ambiente acolhedor.',
+    primaryCta: 'Agendar Avaliação',
+    secondaryCta: 'Ver Tratamentos',
+    badgeTitle: 'Cuidado individualizado',
+    badgeText: 'Sua beleza, sua essência',
   },
-  principles: ["Avaliação individual", "Escolhas conscientes", "Acompanhamento próximo"],
-  authority: {
-    items: [
-      { value: "10+", label: "anos de experiência" },
-      { value: "500+", label: "clientes atendidos" },
-      { value: "4.9", label: "avaliação média" },
+  about: {
+    title: 'Acreditamos que a beleza verdadeira reflete o',
+    emphasis: 'seu bem-estar',
+    paragraphs: [
+      'A Aura Estética nasceu do desejo de criar um refúgio de cuidado e autoestima. Nossa proposta é valorizar sua beleza, respeitando a sua individualidade e harmonia facial.',
+      'Da primeira conversa ao acompanhamento, cada detalhe foi pensado para o seu conforto. Um espaço para desacelerar, tirar suas dúvidas e descobrir o cuidado que faz sentido para você.',
     ],
-  },
-  services: {
-    title: "O cuidado certo para o seu momento.",
-    text: "Tudo começa pela escuta. Conheça nossas frentes de cuidado e descubra, na avaliação, o que faz sentido para você.",
-    items: [
-      { number: "01", title: "Estética facial", subtitle: "Equilíbrio, textura e vitalidade", text: "Cuidados com a pele pensados a partir da sua rotina, das suas necessidades e dos seus objetivos.", detail: "Na avaliação, conversamos sobre sua pele, hábitos e histórico para definir os cuidados indicados e suas limitações. Limpeza e hidratação são algumas das possibilidades, conforme avaliação profissional." },
-      { number: "02", title: "Estética corporal", subtitle: "Bem-estar em cada detalhe", text: "Uma abordagem individual para cuidar do corpo com atenção, conforto e expectativas realistas.", detail: "O plano considera suas prioridades e a avaliação profissional. Você recebe orientações sobre possibilidades de cuidado, contraindicações e acompanhamento antes de decidir." },
-      { number: "03", title: "Qualidade da pele", subtitle: "Cuidado que acompanha você", text: "Uma rotina bem orientada para valorizar a saúde e a aparência da sua pele ao longo do tempo.", detail: "Revisamos sua rotina e definimos cuidados compatíveis com seu momento. A frequência das sessões e as orientações para casa são conversadas de forma individual." },
-    ],
-  },
-  philosophy: {
-    eyebrow: "A essência Alva",
-    title: "A beleza está nos detalhes que são só seus.",
-    text: "Acreditamos em uma estética que começa com uma boa conversa. Entender sua história, acolher suas escolhas e respeitar seu tempo faz parte do cuidado.",
-    closing: "Naturalidade como intenção. Individualidade como ponto de partida.",
     values: [
-      { title: "Escuta antes de tudo", text: "Espaço para falar sobre seus desejos e esclarecer cada dúvida." },
-      { title: "Clareza em cada escolha", text: "Orientações sobre possibilidades, limites e cuidados antes de começar." },
-      { title: "Respeito ao seu ritmo", text: "Um plano pensado para a sua rotina, sem pressa e sem excessos." },
+      { title: 'Escuta', text: 'Seu cuidado começa com uma conversa' },
+      { title: 'Respeito', text: 'A sua individualidade vem primeiro' },
     ],
   },
-  space: {
-    title: "Um respiro na sua rotina.",
-    text: "Um ambiente acolhedor, pensado para que o seu momento de cuidado também seja um momento de pausa.",
-    image: "/images/space.webp",
-    imageAlt: "Conceito de recepção com madeira, poltronas claras e luz natural",
-    caption: "Privacidade, conforto e atenção em cada encontro.",
-  },
-  process: {
-    title: "Seu cuidado começa com uma conversa.",
-    items: [
-      { title: "Nos conhecemos", text: "Você compartilha seus objetivos. Nós ouvimos sua história e esclarecemos suas dúvidas." },
-      { title: "Desenhamos o plano", text: "Após a avaliação, apresentamos as opções, os cuidados e o investimento de forma clara." },
-      { title: "Cuidamos de perto", text: "Acompanhamos cada etapa e ajustamos o plano de acordo com a sua evolução." },
-    ],
-  },
-  faq: {
-    title: "Antes do primeiro encontro.",
-    items: [
-      { question: "Como funciona a primeira avaliação?", answer: "É um momento de conversa e avaliação individual. Entendemos seus objetivos e histórico, esclarecemos dúvidas e apresentamos um plano de cuidado. A indicação de qualquer procedimento depende dessa avaliação." },
-      { question: "Como saber qual tratamento escolher?", answer: "Você não precisa chegar com um tratamento definido. A avaliação ajuda a entender as possibilidades, os limites e os cuidados adequados ao seu momento." },
-      { question: "Quantas sessões são necessárias?", answer: "A frequência e a quantidade de sessões variam conforme o cuidado indicado e a resposta individual. Essas expectativas são alinhadas antes de iniciar e revistas no acompanhamento." },
-      { question: "Posso conhecer os valores antes de agendar?", answer: "Entre em contato para consultar o valor da avaliação e as condições de atendimento. O investimento no plano de cuidado é apresentado após a avaliação, de acordo com o que for indicado." },
-    ],
-  },
-  testimonial: {
-    quote: "Nunca me senti tão ouvida. O cuidado começa muito antes do procedimento, e isso faz toda a diferença.",
-    name: "Carolina M.",
-    context: "Cliente há 3 anos",
-    rating: 5,
-  },
-  contact: {
-    eyebrow: "Seu próximo momento de cuidado",
-    title: "Seu cuidado merece uma presença à altura.",
-    text: "Conte o que você busca. Nossa equipe orienta os primeiros passos para a sua avaliação.",
-    image: "/images/portrait.webp",
-    imageAlt: "Detalhe de cuidado em ambiente acolhedor",
-    note: "Atendimento com hora marcada.",
-    demoTitle: "Você está conhecendo um template.",
-    demoText: "A Alva é uma marca fictícia. O agendamento ficará disponível quando a clínica configurar seu contato.",
-  },
-  footer: {
-    signature: "Estética com naturalidade.",
-    notice: "Template demonstrativo da coleção Presença. Marca e ambientes fictícios. Imagens conceituais geradas por IA; não representam pacientes, profissionais ou resultados.",
-    credits: "Design por Arche Labs",
+  cta: {
+    title: 'Pronta para realçar sua melhor versão?',
+    description: 'Fale diretamente com nossa equipe pelo WhatsApp. Tire suas dúvidas, conheça os valores e consulte os horários disponíveis.',
+    label: 'Falar com uma Especialista',
   },
 };
 
-const digits = site.whatsapp.replace(/\D/g, "");
-export const contactUrl = /^\d{10,15}$/.test(digits)
-  ? `https://wa.me/${digits}?text=${encodeURIComponent(site.message)}`
-  : "#contato-demo";
+export const navigation = [
+  { label: 'Tratamentos', href: '#tratamentos' },
+  { label: 'Nossa Essência', href: '#sobre' },
+  { label: 'Depoimentos', href: '#depoimentos' },
+];
+
+export const treatments = [
+  {
+    id: 'harmonizacao', title: 'Harmonização Facial', image: 'facial',
+    alt: 'Retrato de pele e traços faciais',
+    description: 'Um olhar atento às proporções do seu rosto, com um plano de cuidado que valoriza seus traços de forma suave e natural.',
+  },
+  {
+    id: 'botox', title: 'Toxina Botulínica (Botox)', image: 'botox',
+    alt: 'Detalhe de cuidado facial',
+    description: 'Cuidado com as linhas de expressão a partir de uma avaliação individual, respeitando as características do seu rosto.',
+  },
+  {
+    id: 'laser', title: 'Depilação a Laser', image: 'laser',
+    alt: 'Fotografia de cuidados com a pele',
+    description: 'Um plano de sessões pensado para o seu tipo de pele e pelo. Converse com a equipe sobre indicação, cuidados e expectativas.',
+  },
+  {
+    id: 'skincare', title: 'Skin Care Premium', image: 'skincare',
+    alt: 'Cuidado e relaxamento facial',
+    description: 'Limpeza de pele, hidratação e cuidados faciais personalizados. Um momento de atenção à textura e às necessidades da sua pele.',
+  },
+  {
+    id: 'corporal', title: 'Estética Corporal', image: 'corporal',
+    alt: 'Massagem em um ambiente de bem-estar',
+    description: 'Massagens e cuidados corporais que combinam acolhimento e atenção a você. Conheça as opções na sua avaliação.',
+  },
+];
+
+// Depoimentos fictícios do HTML de referência. Exibidos apenas em modo demo.
+// Para produção, use exclusivamente relatos autorizados e verificáveis.
+export const testimonials = [
+  { initials: 'MS', name: 'Mariana Silva', quote: 'A equipe me deixou super tranquila! Fui acolhida desde a primeira conversa e pude tirar todas as minhas dúvidas.' },
+  { initials: 'CR', name: 'Camila Ribeiro', quote: 'O ambiente é incrível, parece um spa. É um momento que reservo para mim e sempre saio me sentindo muito bem.' },
+  { initials: 'AP', name: 'Amanda Prado', quote: 'As meninas são muito atenciosas. Adorei o cuidado em explicar cada etapa e respeitar o meu tempo.' },
+];
+
+export const contactReady = /^\d{10,15}$/.test(site.whatsapp);
+export const contactHref = contactReady
+  ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Olá! Gostaria de agendar uma avaliação na Aura Estética.')}`
+  : '#contato';
+
+if (!site.demo && (!contactReady || site.whatsapp === '5599999999999' || !site.url.startsWith('https://') || site.url.includes('.example'))) {
+  throw new Error('Configure site.url e site.whatsapp com os dados reais antes de desativar o modo demo.');
+}

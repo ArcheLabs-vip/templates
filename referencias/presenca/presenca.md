@@ -4,7 +4,15 @@
 
 Presença é uma coleção do **plano Start**, voltada a marcas, profissionais e empresas que precisam transmitir autoridade, sofisticação, confiança e percepção de valor desde o primeiro contato.
 
-Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e o nicho `estetica` estão implementados em `start/presenca/`, na variante Dark Premium. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
+Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica` e `odontologia` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
+
+### Base implementada e referência vigente
+
+A aplicação Aura é a referência visual e técnica atual. Sua composição é: Header, Hero, Tratamentos, Nossa Essência, Depoimentos, Contato e Footer. O core contém a mesma base, com dados demonstrativos para personalização, assets locais, CSS nativo e JavaScript pontual. Core e nicho são autônomos, sem imports entre pastas.
+
+Os componentes atuais são `Header`, `Hero`, `Treatments`, `About`, `Testimonials`, `Contact`, `Footer`, `Booking`, `Brand`, `ContactLink` e `Icon`. Os contatos abrem um modal para escolher o assunto e revisar a mensagem antes de continuar no WhatsApp; o telefone padrão é `(99) 99999-9999`. Uma faixa superior concentra o aviso de que dados, resultados e avaliações são ilustrativos. O modo real exige substituir domínio e número de exemplo. Depoimentos de exemplo são ocultados fora do modo demo.
+
+As propostas Dark Premium e outras composições mais abaixo não substituem essa base aprovada. Novos nichos devem partir de `presenca-core` e adaptar o conteúdo ao segmento. A anterior direção escura não é mais a implementação padrão.
 
 As regras compartilhadas ficam em:
 
@@ -49,7 +57,7 @@ A escala tem Hero muito grande, H2 grande, H3 médio, corpo confortável e metad
 
 ### Variações internas
 
-As três direções abaixo pertencem ao mesmo `presenca-core` e preservam os princípios da Presença.
+As três direções abaixo são possibilidades de evolução da coleção e preservam os princípios da Presença. A implementação vigente é a base Aura descrita na seção 1; essas variantes não estão disponíveis como alternâncias prontas no core.
 
 | Variação | Paleta e composição | Aplicações indicadas |
 |---|---|---|
@@ -363,9 +371,9 @@ Outras expansões futuras: Harmonização, Engenharia, Agência Premium e Servi�
 
 ## 7. Organização dos projetos
 
-A coleção terá seu próprio `presenca-core`, usando `start/essencial/essencial-core/` como bootstrap técnico conforme o processo geral. Sua composição e identidade devem ser próprias.
+A coleção possui seu próprio `presenca-core`, atualizado a partir da aplicação Aura de estética. O padrão técnico segue as referências gerais; composição, assets e identidade pertencem à Presença.
 
-A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficarão em `start/presenca/`.
+A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica` e `odontologia` estão implementados; os demais nichos são planejados.
 
 ```text
 templates/
@@ -394,7 +402,7 @@ Pacote do core: `@arche-labs/start-presenca-core`. Pacotes dos nichos: `@arche-l
 8. Arquitetura.
 9. Clínicas Médicas.
 
-Estética é o primeiro nicho recomendado: aproveita a direção Dark Premium, demonstra o conceito visual e evidencia a diferença em relação à Essencial. Seguir o processo de criação e validação definido nas referências gerais.
+Estética é o primeiro nicho implementado e a referência aprovada para a base Aura. Novas aplicações devem seguir o processo de criação e validação definido nas referências gerais, preservando a autonomia de cada pasta.
 
 ## 9. Critério de resultado
 
