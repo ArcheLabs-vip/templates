@@ -1,0 +1,29 @@
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400 900; font-display: swap; src: url('/fonts/playfair-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/playfair-italic.woff2') format('woff2'); }
+
+:root {
+  color-scheme: light;
+  --color-background: #f7f9f5;
+  --color-surface: #fff;
+  --color-rose-light: #e9eee4;
+  --color-border: #d2ddca;
+  --color-rose: #a4b799;
+  --color-accent: #5b7350;
+  --color-primary: #42583a;
+  --color-heading: #2d4028;
+  --color-text: #596354;
+  --color-muted: #687460;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+  --color-on-whatsapp: #063b25;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --radius-card: 1rem;
+  --radius-image: 2rem;
+  --radius-button: 100px;
+  --container: 1280px;
+  --space-section: clamp(4.5rem, 7vw, 6rem);
+  --shadow-small: 0 4px 10px rgb(45 64 40 / 4%);
+  --shadow-large: 0 20px 45px rgb(45 64 40 / 12%);
+}

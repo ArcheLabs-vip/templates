@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site';
+---
+<section id="sobre" class="section about" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div class="about-image"><img src="/images/espaco.webp" width="1100" height="614" alt="Consultório com poltronas, plantas e iluminação natural" loading="lazy" decoding="async" /></div>
+    <div class="about-copy">
+      <p class="eyebrow">Nosso Espaço</p>
+      <h2 id="about-title">{site.about.title} <em>{site.about.emphasis}</em></h2>
+      {site.about.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+      <div class="about-values">{site.about.values.map(value => <div><h3>{value.title}</h3><p>{value.text}</p></div>)}</div>
+    </div>
+  </div>
+</section>

@@ -56,7 +56,7 @@ Exemplos:
 
 ## 3. Base técnica compartilhada
 
-O `presenca-core` está implementado no plano Start, com a base Aura de tema claro rosado e os nichos de estética e odontologia. Os nichos adaptam conteúdo e identidade da composição aprovada, mantendo projetos autônomos. Sua direção específica está documentada em [Coleção Presença](../presenca/presenca.md).
+O `presenca-core` está implementado no plano Start, com a base Aura de tema claro rosado e os nichos de estética, odontologia e psicologia. Os nichos adaptam conteúdo e identidade da composição aprovada, mantendo projetos autônomos. Sua direção específica está documentada em [Coleção Presença](../presenca/presenca.md).
 
 Os próximos cores podem usar o `essencial-core` como bootstrap técnico. Devem ser preservados os fundamentos que não determinam a identidade de uma coleção:
 

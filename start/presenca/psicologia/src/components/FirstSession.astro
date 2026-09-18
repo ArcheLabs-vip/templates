@@ -1,0 +1,13 @@
+---
+import { steps } from '../data/site';
+---
+<section class="section section-white" aria-labelledby="first-title">
+  <div class="container">
+    <div class="section-heading"><p class="eyebrow">O primeiro encontro</p><h2 id="first-title">Um começo, no seu ritmo</h2><p>Você pode dar o primeiro passo com uma pergunta.</p></div>
+    <ol class="steps">{steps.map((step, index) => <li><span aria-hidden="true">0{index + 1}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
+  </div>
+</section>
+<style>
+  .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;list-style:none;padding:0;margin:0}.steps li{border-top:1px solid var(--color-border);padding-top:24px}.steps span{font-family:var(--font-heading);font-size:2rem;color:var(--color-accent)}.steps h3{font-size:1.4rem;margin:18px 0 12px}.steps p{line-height:1.8;color:var(--color-text)}
+  @media(max-width:767px){.steps{grid-template-columns:1fr;gap:32px}}
+</style>

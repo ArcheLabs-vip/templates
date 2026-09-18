@@ -12,7 +12,8 @@ templates/
 │   └── presenca/
 │       ├── presenca-core/
 │       ├── estetica/
-│       └── odontologia/
+│       ├── odontologia/
+│       └── psicologia/
 ├── pro/
 └── referencias/
 ```

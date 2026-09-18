@@ -1,0 +1,39 @@
+---
+import { treatments } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="atendimentos" class="section section-white" aria-labelledby="treatments-title">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">O que oferecemos</p>
+      <h2 id="treatments-title">Encontre seu espaço de escuta</h2>
+      <p>Conheça a proposta de psicoterapia e as modalidades de atendimento.</p>
+    </div>
+    <div class="treatments-grid">
+      {treatments.map(treatment => (
+        <article class="treatment-card" id={treatment.id}>
+          <div class="treatment-image"><img src={`/images/${treatment.image}.webp`} width="720" height="480" alt={treatment.alt} loading="lazy" decoding="async" /></div>
+          <div class="treatment-copy">
+            <h3>{treatment.title}</h3>
+            <p>{treatment.description}</p>
+            <ContactLink class="text-link" treatment={treatment.title} label={`Saiba mais sobre ${treatment.title}`}>Saiba mais <Icon name="arrow" /></ContactLink>
+          </div>
+        </article>
+      ))}
+      <article class="treatment-cta">
+        <Icon name="heart" />
+        <h3>Não sabe por onde começar?</h3>
+        <p>Converse com a equipe para conhecer a proposta de atendimento e combinar seu primeiro encontro.</p>
+        <ContactLink class="button button-light">Agendar Sessão</ContactLink>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+.treatment-cta{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;text-align:left;gap:12px 40px;padding:36px 40px;min-height:auto}
+.treatment-cta > :global(svg){display:none}.treatment-cta h3{max-width:none}.treatment-cta p{grid-column:1;margin:0;max-width:650px}.treatment-cta :global(.button){grid-column:2;grid-row:1/3}
+@media(min-width:541px) and (max-width:1023px){.treatment-card:nth-child(3){grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}.treatment-card:nth-child(3) .treatment-image{height:100%;min-height:240px}}
+@media(max-width:767px){.treatment-cta{display:flex;align-items:flex-start;gap:20px;padding:30px;min-height:auto}}
+</style>

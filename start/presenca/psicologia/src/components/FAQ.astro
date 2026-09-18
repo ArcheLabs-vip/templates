@@ -1,0 +1,12 @@
+---
+import { faqs } from '../data/site';
+---
+<section id="duvidas" class="section" aria-labelledby="faq-title">
+  <div class="container faq-container">
+    <div class="section-heading"><p class="eyebrow">Dúvidas frequentes</p><h2 id="faq-title">Antes do primeiro encontro</h2><p>Algumas respostas para você se sentir mais à vontade.</p></div>
+    {faqs.map(faq => <details><summary>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}
+  </div>
+</section>
+<style>
+  .faq-container{max-width:920px}details{border-bottom:1px solid #d2ddca}summary{display:flex;align-items:center;justify-content:space-between;gap:24px;cursor:pointer;list-style:none;padding:24px 0;font-size:1.1rem;font-weight:600}summary::-webkit-details-marker{display:none}summary span{font-weight:400;font-size:1.6rem;transition:transform .2s}details[open] summary span{transform:rotate(45deg)}details p{max-width:740px;line-height:1.85;margin:0 0 26px;color:#596354}@media(prefers-reduced-motion:reduce){summary span{transition:none}}
+</style>

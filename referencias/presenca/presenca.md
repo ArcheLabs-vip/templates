@@ -4,7 +4,7 @@
 
 Presença é uma coleção do **plano Start**, voltada a marcas, profissionais e empresas que precisam transmitir autoridade, sofisticação, confiança e percepção de valor desde o primeiro contato.
 
-Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica` e `odontologia` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
+Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica`, `odontologia` e `psicologia` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. Psicologia usa tons de sálvia e a marca Instituto Presença, com modalidades, primeiro encontro e dúvidas frequentes. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
 
 ### Base implementada e referência vigente
 
@@ -373,7 +373,7 @@ Outras expansões futuras: Harmonização, Engenharia, Agência Premium e Servi�
 
 A coleção possui seu próprio `presenca-core`, atualizado a partir da aplicação Aura de estética. O padrão técnico segue as referências gerais; composição, assets e identidade pertencem à Presença.
 
-A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica` e `odontologia` estão implementados; os demais nichos são planejados.
+A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica`, `odontologia` e `psicologia` estão implementados; os demais nichos são planejados.
 
 ```text
 templates/

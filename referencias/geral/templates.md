@@ -22,7 +22,9 @@ templates/
 │   │   └── futuros-nichos/
 │   └── presenca/
 │       ├── presenca-core/
-│       └── estetica/
+│       ├── estetica/
+│       ├── odontologia/
+│       └── psicologia/
 ├── pro/
 │   └── futuras-colecoes/
 └── referencias/
@@ -46,7 +48,7 @@ Distinguir propostas e componentes planejados de projetos já implementados. Uma
 
 Reúne coleções destinadas aos projetos do plano Start. As aplicações priorizam presença digital profissional, apresentação clara dos serviços, confiança e conversão por contato.
 
-Inclui a Essencial e a [Presença](../presenca/presenca.md). A Presença tem direção própria de impacto visual e autoridade; seu core e os nichos de estética e odontologia estão implementados. A base Aura é adaptada por identidade e conteúdo em cada segmento; os demais nichos permanecem planejados.
+Inclui a Essencial e a [Presença](../presenca/presenca.md). A Presença tem direção própria de impacto visual e autoridade; seu core e os nichos de estética, odontologia e psicologia estão implementados. A base Aura é adaptada por identidade e conteúdo em cada segmento; os demais nichos permanecem planejados.
 
 ### Pro
 

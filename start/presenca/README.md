@@ -4,6 +4,8 @@
 - [Estética](estetica/README.md): Aura Estética, aplicação de referência da coleção, com fotografia em arco, modal de contato com revisão da mensagem antes do WhatsApp e faixa de demonstração no topo.
 - [Odontologia](odontologia/README.md): Arche Odonto, aplicação da base aprovada com identidade azul-petróleo, fotografias odontológicas e tratamentos próprios do segmento.
 
+- [Psicologia](psicologia/README.md): Instituto Presença, identidade sálvia, modalidades de atendimento, primeiro encontro e dúvidas frequentes.
+
 [Direção da coleção](../../referencias/presenca/presenca.md). O core e o nicho compartilham a mesma base visual e técnica, mas cada projeto é independente. Outras variantes e nichos permanecem planejados.
 
-Desenvolvimento local: core em `http://localhost:4320`, estética em `http://localhost:4321` e odontologia em `http://localhost:4322`.
+Desenvolvimento local: core em `http://localhost:4320`, estética em `http://localhost:4321`, odontologia em `http://localhost:4322` e psicologia em `http://localhost:4323`.
