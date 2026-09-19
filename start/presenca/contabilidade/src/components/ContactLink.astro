@@ -1,0 +1,11 @@
+---
+import { site, contactHref, contactReady } from '../data/site';
+interface Props { class?: string; service?: string; label?: string; }
+const { class: className = 'button button-primary', service, label } = Astro.props;
+const href = contactReady && service
+  ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre ${service} na ${site.name}.`)}`
+  : contactHref;
+---
+<a class={className} href={href} data-booking={contactReady ? '' : undefined} data-service={service} aria-label={label} target={contactReady ? '_blank' : undefined} rel={contactReady ? 'noopener noreferrer' : undefined}>
+  <slot />
+</a>

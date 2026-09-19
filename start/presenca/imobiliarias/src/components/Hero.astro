@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+import ContactLink from './ContactLink.astro';
+---
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">{site.hero.eyebrow}</p>
+      <h1 id="hero-title">{site.hero.title} <em>{site.hero.emphasis}</em></h1>
+      <p class="hero-description">{site.hero.description}</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#imoveis">{site.hero.primaryCta}</a>
+        <ContactLink class="button button-outline">{site.hero.secondaryCta}</ContactLink>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image">
+        <img src="/images/hero.webp" srcset="/images/hero-640.webp 640w, /images/hero.webp 960w" sizes="(max-width: 767px) 90vw, 45vw" width="960" height="1200" alt={site.hero.imageAlt} fetchpriority="high" />
+      </div>
+    </div>
+  </div>
+</section>

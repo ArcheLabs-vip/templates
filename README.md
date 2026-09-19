@@ -13,7 +13,12 @@ templates/
 │       ├── presenca-core/
 │       ├── estetica/
 │       ├── odontologia/
-│       └── psicologia/
+│       ├── psicologia/
+│       ├── veterinarias/
+│       ├── academias/
+│       ├── clinicas-medicas/
+│       ├── contabilidade/
+│       └── imobiliarias/
 ├── pro/
 └── referencias/
 ```

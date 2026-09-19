@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={`Termos de Uso | ${site.name}`} description={`Informações sobre os serviços e o atendimento da ${site.name}.`}><main id="conteudo" class="container legal-page">
+  <a href="/">← Voltar para {site.name}</a>
+  <h1>Termos de Uso</h1>
+  <p>Conheça as modalidades, o espaço e os planos da {site.name}. Nossa equipe está à disposição para esclarecer suas dúvidas e apresentar as condições de matrícula.</p>
+  <h2>Experiência de contato</h2>
+  <p>A disponibilidade, os valores e a confirmação da aula experimental são combinados com a equipe. Abrir o WhatsApp ou enviar uma mensagem não confirma um horário nem realiza matrícula.</p>
+  <h2>Planos e modalidades</h2>
+  <p>Consulte a frequência de aulas e as condições de adesão, reposição e cancelamento antes da contratação. O site não recebe pagamentos nem conclui contratos.</p>
+  <h2>Orientação nas aulas</h2>
+  <p>As descrições apresentam as aulas de Pilates do estúdio. A organização dos exercícios é feita com os instrutores, considerando o seu momento e seus objetivos. Não há promessa de resultados individuais.</p>
+  <h2>Horário de funcionamento</h2>
+  <p>{site.hours} Os horários das turmas e a disponibilidade para visitas podem ser consultados com a equipe.</p>
+</main></BaseLayout>

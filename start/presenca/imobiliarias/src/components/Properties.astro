@@ -1,0 +1,117 @@
+---
+import { site, properties, ownerSubject, propertySubject, formatPrice } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="imoveis" class="section section-white properties" aria-labelledby="properties-title">
+  <div class="container">
+    <div class="section-heading"><p class="eyebrow">Imóveis em destaque</p><h2 id="properties-title">{site.properties.title}</h2><p>{site.properties.description}</p></div>
+    <div class="property-toolbar" hidden>
+      <div class="property-filters" role="group" aria-label="Filtrar imóveis por finalidade">
+        <button type="button" data-filter="todos" aria-pressed="true" aria-controls="property-list">Todos</button>
+        <button type="button" data-filter="comprar" aria-pressed="false" aria-controls="property-list">Comprar</button>
+        <button type="button" data-filter="alugar" aria-pressed="false" aria-controls="property-list">Alugar</button>
+      </div>
+      <p id="property-count" role="status" aria-live="polite" aria-atomic="true">{properties.length} imóveis na seleção</p>
+    </div>
+    {site.demo && <p class="property-demo">Seleção ilustrativa: imóveis, imagens e valores fictícios.</p>}
+    <div id="property-list" class="services-grid">
+      {properties.map(property => <article class="service-card property-card" id={property.id} data-purpose={property.purpose} data-region={property.region}>
+        <div class="service-image">
+          <img src={`/images/${property.image}.webp`} width="720" height="480" alt={property.alt} loading="lazy" decoding="async" />
+          <span class="property-purpose">{property.purpose === 'comprar' ? 'À venda' : 'Para alugar'}</span>
+        </div>
+        <div class="service-copy">
+          <p class="property-location"><Icon name="pin" />{property.location}</p>
+          <h3>{property.title}</h3>
+          <p class="property-description">{property.description}</p>
+          <ul class="property-features" aria-label="Características do imóvel">
+            <li><Icon name="area" /><span>{property.area} m²</span></li>
+            <li><Icon name="bed" /><span>{property.bedrooms} {property.bedrooms === 1 ? 'dorm.' : 'dorms.'}</span></li>
+            <li><Icon name="car" /><span>{property.parking ? `${property.parking} ${property.parking === 1 ? 'vaga' : 'vagas'}` : 'Sem vaga'}</span></li>
+          </ul>
+          <p class="property-price"><strong>{formatPrice(property.price)}</strong>{property.purpose === 'alugar' && <span> / mês</span>}</p>
+          <details class="property-details">
+            <summary>Detalhes e encargos <span aria-hidden="true">+</span></summary>
+            <div>
+              <p>{property.details}</p>
+              <dl>
+                <div><dt>Condomínio mensal</dt><dd>{property.condominium ? formatPrice(property.condominium) : 'Sem condomínio'}</dd></div>
+                <div><dt>IPTU mensal</dt><dd>{formatPrice(property.iptu)}</dd></div>
+                {property.purpose === 'alugar' && <div class="property-total"><dt>Total mensal</dt><dd>{formatPrice(property.price + property.condominium + property.iptu)}</dd></div>}
+              </dl>
+              <p class="property-conditions">{site.demo ? 'Valores demonstrativos. ' : ''}Consulte disponibilidade, encargos e condições com a equipe.</p>
+            </div>
+          </details>
+          <div class="property-bottom"><ContactLink class="text-link" service={propertySubject(property)} label={`Quero conhecer ${property.title}, referência ${property.reference}`}>Quero conhecer <Icon name="arrow" /></ContactLink><span class="property-reference">{property.reference}</span></div>
+        </div>
+      </article>)}
+      <article class="service-cta owner-cta">
+        <Icon name="key" /><h3>{site.properties.ctaTitle}</h3><p>{site.properties.ctaDescription}</p>
+        <ContactLink class="button button-light" service={ownerSubject}>{site.properties.ctaLabel}</ContactLink>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.querySelector<HTMLElement>('#imoveis');
+  if (section) {
+    const toolbar = section.querySelector<HTMLElement>('.property-toolbar');
+    const buttons = [...section.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const cards = [...section.querySelectorAll<HTMLElement>('[data-purpose]')];
+    const count = section.querySelector<HTMLElement>('#property-count');
+    function filter(purpose: string, region?: string) {
+      let visible = 0;
+      cards.forEach(card => {
+        card.hidden = (purpose !== 'todos' && card.dataset.purpose !== purpose) || Boolean(region && card.dataset.region !== region);
+        if (!card.hidden) visible++;
+      });
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === purpose)));
+      if (count) count.textContent = `${visible} ${visible === 1 ? 'imóvel' : 'imóveis'}${region ? ` em ${region}` : ' na seleção'}`;
+    }
+    buttons.forEach(button => button.addEventListener('click', () => filter(button.dataset.filter || 'todos')));
+    document.querySelectorAll<HTMLAnchorElement>('[data-region-link]').forEach(link => link.addEventListener('click', () => filter('todos', link.dataset.regionLink)));
+    if (toolbar) toolbar.hidden = false;
+  }
+</script>
+
+<style>
+  .section-heading { max-width: 690px; }
+  .property-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+  .property-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .property-filters button { min-height: 44px; padding: 9px 22px; border: 1px solid var(--color-border); border-radius: var(--radius-button); background: white; font-size: .85rem; }
+  .property-filters button:hover { border-color: var(--color-accent); }
+  .property-filters button[aria-pressed="true"] { background: var(--color-heading); border-color: var(--color-heading); color: white; }
+  #property-count { font-size: .8rem; }
+  .property-demo { font-size: .75rem; margin-bottom: 18px; color: var(--color-muted); }
+  .service-image { position: relative; }
+  .property-purpose { position: absolute; left: 18px; top: 18px; background: white; color: var(--color-heading); border-radius: var(--radius-button); padding: 6px 13px; font-size: .72rem; font-weight: 600; }
+  .service-copy { padding: 25px 26px 20px; }
+  .service-copy .property-location { display: flex; align-items: center; gap: 5px; font-size: .72rem; color: var(--color-accent); margin-bottom: 9px; }
+  .property-location :global(svg) { width: 15px; height: 15px; }
+  .service-copy h3 { font-size: 1.22rem; margin-bottom: 10px; }
+  .property-description { flex: 1; }
+  .property-features { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 17px; padding: 0 0 18px; margin: 0; font-size: .75rem; }
+  .property-features li { display: flex; gap: 6px; align-items: center; }
+  .property-features :global(svg) { width: 18px; height: 18px; color: var(--color-accent); }
+  .service-copy .property-price { margin: 0 0 14px; line-height: 1.4; }
+  .property-price strong { font: 600 1.5rem var(--font-heading); letter-spacing: -.035em; color: var(--color-heading); }
+  .property-price > span { font-size: .8rem; }
+  .property-details { width: 100%; border-block: 1px solid var(--color-border); }
+  .property-details summary { display: flex; justify-content: space-between; align-items: center; gap: 14px; min-height: 44px; font-size: .76rem; list-style: none; color: var(--color-primary); }
+  .property-details summary::-webkit-details-marker { display: none; }
+  .property-details summary span { font-size: 1.15rem; }
+  .property-details[open] summary span { transform: rotate(45deg); }
+  .property-details > div { padding-bottom: 16px; }
+  .property-details p { font-size: .78rem; margin-bottom: 10px; }
+  .property-details dl { margin: 0 0 12px; font-size: .72rem; }
+  .property-details dl > div { display: flex; justify-content: space-between; gap: 12px; padding-block: 5px; }
+  .property-details dd { margin: 0; text-align: right; white-space: nowrap; }
+  .property-total { font-weight: 600; color: var(--color-heading); }
+  .property-details .property-conditions { margin: 0; font-size: .7rem; }
+  .property-bottom { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-top: 10px; }
+  .property-reference { font-size: .65rem; color: var(--color-muted); }
+  .owner-cta .button { padding-inline: 20px; font-size: .825rem; }
+  @media (max-width: 359px) { .service-copy { padding-inline: 20px; } .property-filters button { padding-inline: 17px; } .property-features { gap: 10px; } }
+</style>

@@ -1,0 +1,31 @@
+---
+import { site, treatments } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="cuidados" class="section section-white" aria-labelledby="treatments-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="treatments-title">{site.services.title}</h2>
+      <p>{site.services.description}</p>
+    </div>
+    <div class="treatments-grid">
+      {treatments.map(treatment => (
+        <article class="treatment-card" id={treatment.id}>
+          <div class="treatment-image"><img src={`/images/${treatment.image}.webp`} width="720" height="480" alt={treatment.alt} loading="lazy" decoding="async" /></div>
+          <div class="treatment-copy">
+            <h3>{treatment.title}</h3>
+            <p>{treatment.description}</p>
+            <ContactLink class="text-link" treatment={treatment.title} label={`Saiba mais sobre ${treatment.title}`}>Saiba mais <Icon name="arrow" /></ContactLink>
+          </div>
+        </article>
+      ))}
+      <article class="treatment-cta">
+        <Icon name="heart" />
+        <h3>{site.services.ctaTitle}</h3>
+        <p>{site.services.ctaDescription}</p>
+        <ContactLink class="button button-light">{site.services.ctaLabel}</ContactLink>
+      </article>
+    </div>
+  </div>
+</section>

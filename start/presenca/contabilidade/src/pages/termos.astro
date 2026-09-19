@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={`Termos de Uso | ${site.name}`} description={`Informações sobre os serviços e o atendimento da ${site.name}.`}><main id="conteudo" class="container legal-page">
+  <a href="/">← Voltar para {site.name}</a>
+  <h1>Termos de Uso</h1>
+  <p>Conheça os serviços e a proposta de trabalho da {site.name}. A equipe está disponível para conversar sobre o momento da sua empresa e esclarecer dúvidas sobre o atendimento.</p>
+  <h2>Experiência de contato</h2>
+  <p>O contato pelo WhatsApp inicia uma conversa. Escopo, honorários, responsabilidades e condições são definidos em proposta e contrato próprios. O envio da mensagem não contrata serviços automaticamente.</p>
+  <h2>Informações sobre os serviços</h2>
+  <p>As descrições apresentam as áreas de atuação do escritório. Orientações específicas dependem da análise das informações da empresa e do serviço contratado. Não há promessa de economia tributária ou de resultados financeiros.</p>
+  <h2>Documentos e informações</h2>
+  <p>A equipe combina os documentos necessários e os canais de compartilhamento durante o atendimento. O site não solicita senhas, certificados digitais, informações bancárias ou arquivos confidenciais.</p>
+  <h2>Horários de atendimento</h2>
+  <p>{site.hours} As mensagens são respondidas durante o horário de funcionamento. Reuniões e prazos de entrega são combinados com a equipe.</p>
+</main></BaseLayout>

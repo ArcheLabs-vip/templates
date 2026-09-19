@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+---
+<section class="section" aria-labelledby="why-title">
+  <div class="container centered">
+    <div class="spacer-64"></div>
+    <div class="grid grid-full">
+      <div class="left-col">
+        <div class="text-box-s">
+          <div class="overflow-hidden">
+            <h2 id="why-title" class="heading-h2 slide-up">
+              {site.whyChooseUs.title} <span class="highlight">{site.whyChooseUs.highlight}</span>
+            </h2>
+          </div>
+          <p class="paragraph paragraph-large fade-in">{site.whyChooseUs.text}</p>
+          <div class="rating-wrap fade-in">
+            <img src={site.whyChooseUs.starsIcon} alt="5 stars" class="stars-icon" />
+            <div class="avatars-outer">
+              <div class="avatars-wrap">
+                {site.whyChooseUs.ratingAvatars.map((avatar, i) => (
+                  <img src={avatar} alt="Rating photo" class="rating-avatar" loading="lazy" />
+                ))}
+              </div>
+              <p class="paragraph no-margin"><strong>4.8/5</strong> rating on Trustpilot</p>
+            </div>
+          </div>
+        </div>
+        <div class="spacer-32"></div>
+      </div>
+      <div class="right-col height-100">
+        <div class="parallax-wrap">
+          <div class="parallax-mask">
+            <img src={site.whyChooseUs.image} alt="Our spa" class="parallax-image" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

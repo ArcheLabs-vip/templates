@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+---
+<section class="section" aria-labelledby="discount-title">
+  <div class="container centered">
+    <div class="spacer-64"></div>
+    <div class="discount-wrap">
+      <div class="grid grid-full" style="gap:0;">
+        <div class="left-col discount-pad">
+          <h3 class="heading-h4 no-top-margin">{site.discount.title}</h3>
+          <p class="heading-h6" style="margin-top:10px;">{site.discount.subtitle}</p>
+          <h2 class="heading-h2 no-top-margin" style="color:var(--color-green);margin-bottom:10px;">{site.discount.code}</h2>
+          <p class="paragraph">{site.discount.text}</p>
+          <a href="#contact" class="button button-dark">Book Now</a>
+        </div>
+        <div class="right-col" style="padding:0;overflow:hidden;border-radius:0 var(--radius-card) var(--radius-card) 0;">
+          <img src={site.discount.image} alt="Discount" class="discount-image" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

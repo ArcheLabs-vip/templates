@@ -1,0 +1,24 @@
+---
+import { site, audiences } from '../data/site';
+import Icon from './Icon.astro';
+---
+<section class="section section-white audiences" aria-labelledby="audiences-title">
+  <div class="container">
+    <div class="section-heading"><h2 id="audiences-title">{site.audience.title}</h2><p>{site.audience.description}</p></div>
+    <div class="audiences-grid">
+      {audiences.map(audience => <article>
+        <Icon name={audience.icon as 'briefcase' | 'store' | 'file'} />
+        <h3>{audience.title}</h3><p>{audience.text}</p>
+      </article>)}
+    </div>
+  </div>
+</section>
+<style>
+  .audiences-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+  article { padding-right: 24px; }
+  article :global(svg) { width: 34px; height: 34px; color: var(--color-accent); margin-bottom: 24px; }
+  h3 { font-size: 1.25rem; margin-bottom: 14px; }
+  article p { font-size: .9rem; line-height: 1.8; max-width: 36ch; }
+  @media (max-width: 1023px) { .audiences-grid { gap: 28px; } article { padding: 0; } }
+  @media (max-width: 767px) { .audiences-grid { grid-template-columns: 1fr; gap: 36px; } article p { max-width: none; } article :global(svg) { margin-bottom: 16px; } }
+</style>

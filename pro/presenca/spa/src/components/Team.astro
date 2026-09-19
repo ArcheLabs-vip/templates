@@ -1,0 +1,28 @@
+---
+import { team } from '../data/site';
+---
+<section id="team" class="section" aria-labelledby="team-title">
+  <div class="container centered">
+    <div class="spacer-128"></div>
+    <div class="text-box-m">
+      <h2 id="team-title" class="heading-h2 text-centered fade-in">
+        Discover the Team <span class="highlight">Behind Our Spa</span>
+      </h2>
+      <p class="paragraph paragraph-large paragraph-centered fade-in">Experts that will take care of you and make you feel right at home.</p>
+    </div>
+    <div class="spacer-64"></div>
+    <div class="grid grid-3x2">
+      {team.map(member => (
+        <div class="team-card slide-up">
+          <div class="team-image-wrap">
+            <img src={member.image} alt={member.name} class="team-image" loading="lazy" decoding="async" />
+          </div>
+          <div class="member-details">
+            <h3 class="heading-h4 text-centered no-bottom-margin">{member.name}</h3>
+            <p class="paragraph paragraph-centered">{member.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

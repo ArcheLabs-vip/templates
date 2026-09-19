@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={`Política de Privacidade | ${site.name}`} description={`Informações sobre a navegação e os canais de contato da ${site.name}.`}><main id="conteudo" class="container legal-page">
+  <a href="/">← Voltar para {site.name}</a>
+  <h1>Políticas de Privacidade</h1>
+  <p>Você pode conhecer nossos serviços e nossa proposta de cuidado sem fornecer dados pessoais. A mensagem de contato permanece no seu navegador até você escolher abrir o WhatsApp.</p>
+  <h2>Cookies e serviços externos</h2>
+  <p>Este site não utiliza cookies de rastreamento, ferramentas de análise ou armazenamento local. As fontes e fotografias são servidas pelo próprio site.</p>
+  <h2>Contato pelo WhatsApp</h2>
+  <p>Os botões de contato permitem escolher o assunto e revisar a mensagem antes de abrir o WhatsApp. O envio acontece dentro do WhatsApp. As informações compartilhadas nesse serviço também estão sujeitas à política de privacidade dele.</p>
+  <h2>Fale com a equipe</h2>
+  <p>Para esclarecer dúvidas sobre os canais de atendimento, utilize os contatos disponíveis no rodapé da página inicial.</p>
+</main></BaseLayout>

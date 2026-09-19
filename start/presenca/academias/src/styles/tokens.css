@@ -1,0 +1,29 @@
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 200 800; font-display: swap; src: url('/fonts/manrope-latin.woff2') format('woff2'); }
+
+:root {
+  color-scheme: light;
+  --color-background: #f4f7f4;
+  --color-surface: #fff;
+  --color-tint: #e5eee7;
+  --color-border: #d2dfd5;
+  --color-soft: #a4bdaa;
+  --color-accent: #526f5c;
+  --color-primary: #365741;
+  --color-heading: #263e31;
+  --color-text: #536458;
+  --color-muted: #607165;
+  --color-input-border: #819688;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+  --color-on-whatsapp: #063b25;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-heading: 'Manrope', Arial, sans-serif;
+  --radius-card: 1rem;
+  --radius-image: 2rem;
+  --radius-button: 100px;
+  --container: 1280px;
+  --space-section: clamp(4.5rem, 7vw, 6rem);
+  --shadow-small: 0 4px 10px rgb(38 62 49 / 3%);
+  --shadow-large: 0 20px 45px rgb(38 62 49 / 8%);
+}

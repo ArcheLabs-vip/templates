@@ -1,0 +1,93 @@
+---
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+import { site, treatments, contactReady } from '../data/site';
+---
+<ContactLink class="whatsapp-fab" label="Fale conosco no WhatsApp"><Icon name="whatsapp" /></ContactLink>
+{contactReady && <dialog id="booking-dialog" aria-labelledby="booking-title" data-name={site.name} data-phone={site.whatsapp} data-default={site.booking.defaultValue}>
+  <form method="dialog" class="dialog-close"><button aria-label="Fechar agendamento">×</button></form>
+  <h2 id="booking-title">{site.booking.title}</h2>
+  <p>{site.booking.description}</p>
+  <form id="booking-form">
+    <label for="booking-treatment">Sobre o que gostaria de conversar?</label>
+    <select id="booking-treatment" name="treatment">
+      <option value={site.booking.defaultValue}>{site.booking.defaultLabel}</option>
+      {treatments.map(treatment => <option value={treatment.title}>{treatment.title}</option>)}
+    </select>
+    <label for="booking-message">Sua mensagem</label>
+    <textarea id="booking-message" name="message" rows="4" required maxlength="1000"></textarea>
+    <button class="button button-whatsapp" type="submit"><Icon name="whatsapp" />Continuar no WhatsApp</button>
+  </form>
+  <p class="booking-note">{site.booking.note}</p>
+</dialog>}
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#booking-dialog');
+  const form = document.querySelector<HTMLFormElement>('#booking-form');
+  const treatment = document.querySelector<HTMLSelectElement>('#booking-treatment');
+  const message = document.querySelector<HTMLTextAreaElement>('#booking-message');
+  if (dialog && form && treatment && message) {
+    let trigger: HTMLAnchorElement | null = null;
+    const compose = () => {
+      message.value = `Olá! Gostaria de conversar sobre ${treatment.value} na ${dialog.dataset.name}. Podem me ajudar?`;
+      message.setCustomValidity('');
+    };
+    document.querySelectorAll<HTMLAnchorElement>('[data-booking]').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof dialog.showModal !== 'function') return;
+        event.preventDefault();
+        trigger = link;
+        treatment.value = link.dataset.treatment || dialog.dataset.default || 'uma consulta';
+        compose();
+        dialog.showModal();
+        document.body.classList.add('booking-open');
+        treatment.focus();
+      });
+    });
+    treatment.addEventListener('change', compose);
+    message.addEventListener('input', () => message.setCustomValidity(''));
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const text = message.value.trim();
+      if (!text) {
+        message.setCustomValidity('Escreva uma mensagem para continuar.');
+        message.reportValidity();
+        return;
+      }
+      window.open(`https://wa.me/${dialog.dataset.phone}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    });
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('booking-open');
+      trigger?.focus({ preventScroll: true });
+    });
+    dialog.addEventListener('click', event => {
+      const rect = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
+    });
+    dialog.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const controls = [...dialog.querySelectorAll<HTMLElement>('button, select, textarea')];
+      const first = controls[0], last = controls.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    });
+  }
+</script>
+
+<style>
+  :global(body.booking-open) { overflow: hidden; }
+  dialog { width: min(540px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 48px 32px 28px; border: 1px solid var(--color-border); border-radius: 24px; background: var(--color-background); color: var(--color-text); box-shadow: var(--shadow-large); }
+  dialog::backdrop { background: rgb(20 44 58 / 55%); }
+  h2 { font-size: 2rem; margin-bottom: 14px; }
+  p { font-size: .875rem; }
+  .dialog-close { position: absolute; top: 8px; right: 8px; }
+  .dialog-close button { width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--color-heading); font-size: 28px; }
+  .dialog-close button:hover { background: var(--color-tint); }
+  #booking-form { display: grid; gap: 12px; margin-top: 24px; }
+  label { color: var(--color-heading); font-size: .8rem; font-weight: 500; }
+  select, textarea { width: 100%; min-width: 0; border: 1px solid var(--color-input-border); border-radius: 8px; background: white; color: var(--color-heading); padding: 12px; font: inherit; font-size: .875rem; line-height: 1.6; }
+  textarea { resize: vertical; min-height: 120px; }
+  .button { margin-top: 8px; }
+  .booking-note { border-top: 1px solid var(--color-border); padding-top: 16px; margin-top: 22px; font-size: .75rem; }
+  @media (max-width: 540px) { dialog { padding-inline: 22px; } h2 { font-size: 1.8rem; } .button { padding-inline: 14px; font-size: .85rem; } }
+</style>

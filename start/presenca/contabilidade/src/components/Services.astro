@@ -1,0 +1,31 @@
+---
+import { site, services } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="servicos" class="section section-white" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="services-title">{site.services.title}</h2>
+      <p>{site.services.description}</p>
+    </div>
+    <div class="services-grid">
+      {services.map(service => (
+        <article class="service-card" id={service.id}>
+          <div class="service-image"><img src={`/images/${service.image}.webp`} width="720" height="480" alt={service.alt} loading="lazy" decoding="async" /></div>
+          <div class="service-copy">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <ContactLink class="text-link" service={service.title} label={`Saiba mais sobre ${service.title}`}>Saiba mais <Icon name="arrow" /></ContactLink>
+          </div>
+        </article>
+      ))}
+      <article class="service-cta">
+        <Icon name="calculator" />
+        <h3>{site.services.ctaTitle}</h3>
+        <p>{site.services.ctaDescription}</p>
+        <ContactLink class="button button-light">{site.services.ctaLabel}</ContactLink>
+      </article>
+    </div>
+  </div>
+</section>

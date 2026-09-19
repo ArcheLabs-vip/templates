@@ -1,0 +1,24 @@
+---
+import { site, steps } from '../data/site';
+---
+<section id="como-funciona" class="section process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="section-heading"><h2 id="process-title">{site.process.title}</h2><p>{site.process.description}</p></div>
+    <ol class="steps">
+      {steps.map((step, index) => <li>
+        <span class="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <h3>{step.title}</h3>
+        <p>{step.text}</p>
+      </li>)}
+    </ol>
+  </div>
+</section>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; list-style: none; margin: 0; padding: 0; }
+  .steps li { border-top: 1px solid var(--color-border); padding-top: 24px; }
+  .step-number { display: block; font-family: var(--font-heading); color: var(--color-accent); font-size: 2rem; font-weight: 400; margin-bottom: 22px; }
+  h3 { font-size: 1.25rem; margin-bottom: 14px; }
+  .steps p { font-size: .9rem; line-height: 1.8; max-width: 36ch; }
+  @media (max-width: 1023px) { .steps { gap: 28px; } }
+  @media (max-width: 767px) { .steps { grid-template-columns: 1fr; gap: 32px; } .steps p { max-width: none; } .step-number { margin-bottom: 12px; } }
+</style>

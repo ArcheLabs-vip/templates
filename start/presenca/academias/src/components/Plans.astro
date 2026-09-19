@@ -1,0 +1,42 @@
+---
+import { site, plans } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+---
+<section id="planos" class="section section-white" aria-labelledby="plans-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="plans-title">{site.pricing.title}</h2>
+      <p>{site.pricing.description}</p>
+    </div>
+    <div class="plans-grid">
+      {plans.map(plan => <article class:list={['plan', { 'plan-featured': plan.featured }]} aria-labelledby={`plan-${plan.id}`}>
+        <h3 id={`plan-${plan.id}`}>{plan.name}</h3>
+        <p class="plan-description">{plan.description}</p>
+        <p class="plan-price"><strong>{currency.format(plan.price)}</strong><span>/mês</span></p>
+        <ul>{plan.features.map(feature => <li><Icon name="check" /><span>{feature}</span></li>)}</ul>
+        <ContactLink class={plan.featured ? 'button button-primary' : 'button button-outline'} subject={plan.subject} label={`Conhecer o plano ${plan.name}`}>Conhecer o plano <Icon name="arrow" /></ContactLink>
+      </article>)}
+    </div>
+    <p class="plans-note">{site.pricing.note}</p>
+  </div>
+</section>
+<style>
+  .plans-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .plan { padding: 36px 30px; border: 1px solid var(--color-border); border-radius: var(--radius-card); display: flex; flex-direction: column; }
+  .plan-featured { background: var(--color-background); border-color: var(--color-accent); }
+  h3 { font-size: 1.75rem; }
+  .plan-description { font-size: .875rem; margin-top: 12px; max-width: 28ch; min-height: 3.3em; }
+  .plan-price { display: flex; align-items: baseline; gap: 8px; margin: 28px 0; color: var(--color-heading); }
+  .plan-price strong { font-family: var(--font-heading); font-size: 2.75rem; font-weight: 500; line-height: 1.15; letter-spacing: -.045em; }
+  .plan-price span { font-size: .875rem; color: var(--color-muted); }
+  ul { display: grid; gap: 16px; list-style: none; margin: 0 0 32px; padding: 24px 0 0; border-top: 1px solid var(--color-border); }
+  li { display: flex; align-items: flex-start; gap: 10px; font-size: .84rem; }
+  li :global(svg) { width: 18px; height: 18px; margin-top: 2px; color: var(--color-accent); }
+  .plan :global(.button) { width: 100%; margin-top: auto; }
+  .plan :global(.button svg) { width: 16px; height: 16px; }
+  .plans-note { max-width: 680px; margin: 26px auto 0; text-align: center; font-size: .8rem; }
+  @media (max-width: 1023px) { .plan { padding: 28px 22px; } .plan :global(.button) { padding-inline: 12px; font-size: .8rem; } }
+  @media (max-width: 767px) { .plans-grid { grid-template-columns: 1fr; max-width: 500px; margin-inline: auto; gap: 20px; } .plan { padding: 30px; } .plan-description { max-width: none; } }
+</style>

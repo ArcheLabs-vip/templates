@@ -1,0 +1,46 @@
+---
+import { site, blogPosts } from '../data/site';
+---
+<section class="section" aria-labelledby="blog-title">
+  <div class="container centered">
+    <div class="eyebrow-wrap">
+      <span class="eyebrow-text">BLOG</span>
+    </div>
+    <div class="text-box-m">
+      <div class="overflow-hidden">
+        <h2 id="blog-title" class="heading-h2 text-centered slide-up">
+          {site.blog.title} <span class="highlight">{site.blog.highlight}</span>
+        </h2>
+      </div>
+      <div class="spacer-32"></div>
+    </div>
+    <div class="grid" style="width:100%;max-width:none;grid-template-columns:1fr 2fr;">
+      <div class="left-col">
+        <div style="padding:16px 0;">
+          <p class="blog-text fade-in">{site.blog.subtitle}</p>
+          <div class="overflow-hidden">
+            <div class="slide-up" style="display:flex;">
+              <a href="/blog" class="button button-dark">Read All Posts</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-col">
+        <div class="grid grid-full" style="grid-template-columns:1fr;">
+          {blogPosts.map(post => (
+            <a href={post.href} class="post-thumbnail-wrap">
+              <img src={post.image} alt={post.title} class="post-thumbnail" loading="lazy" decoding="async" />
+              <div class="post-details">
+                <h3 class="heading-h4 post-heading-light no-margin">{post.title}</h3>
+                <div class="category-date">
+                  <p class="paragraph paragraph-light no-margin">{post.category}</p>
+                  <p class="paragraph paragraph-light no-margin">{post.date}</p>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

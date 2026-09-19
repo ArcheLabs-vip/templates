@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={`Termos de Uso | ${site.name}`} description={`Informações sobre os serviços e o atendimento da ${site.name}.`}><main id="conteudo" class="container legal-page">
+  <a href="/">← Voltar para {site.name}</a>
+  <h1>Termos de Uso</h1>
+  <p>Conheça a proposta de cuidado da {site.name} e os serviços para cães e gatos. Nossa equipe está à disposição para esclarecer suas dúvidas sobre o atendimento.</p>
+  <h2>Experiência de contato</h2>
+  <p>A disponibilidade, os valores e a confirmação de horários devem ser combinados diretamente com a equipe. Abrir o WhatsApp ou enviar uma mensagem não confirma automaticamente um agendamento.</p>
+  <h2>Informações sobre os cuidados</h2>
+  <p>O conteúdo apresenta os serviços da clínica e não substitui uma consulta veterinária. A indicação de exames, vacinas ou tratamentos depende da avaliação do animal pelo médico-veterinário.</p>
+  <h2>Atendimento individualizado</h2>
+  <p>Na consulta, conversamos sobre o histórico e a rotina do seu pet e explicamos os próximos passos antes de definir o acompanhamento.</p>
+  <h2>Horários de atendimento</h2>
+  <p>{site.hours} Não oferecemos plantão 24 horas. O WhatsApp é destinado a informações e agendamentos, sem atendimento de emergência por mensagem.</p>
+</main></BaseLayout>

@@ -4,7 +4,7 @@
 
 Presença é uma coleção do **plano Start**, voltada a marcas, profissionais e empresas que precisam transmitir autoridade, sofisticação, confiança e percepção de valor desde o primeiro contato.
 
-Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica`, `odontologia` e `psicologia` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. Psicologia usa tons de sálvia e a marca Instituto Presença, com modalidades, primeiro encontro e dúvidas frequentes. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
+Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica`, `odontologia`, `psicologia`, `veterinarias`, `academias`, `clinicas-medicas`, `contabilidade` e `imobiliarias` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. Psicologia usa tons de sálvia e a marca Instituto Presença, com modalidades, primeiro encontro e dúvidas frequentes. Veterinárias usa verde-floresta e a marca Arche Vet, com cuidados para cães e gatos, imagens ilustrativas próprias e dúvidas sobre a primeira visita. Academias foi adaptado para um estúdio de Pilates: verde-sálvia, marca Arche Pilates, Manrope nos títulos, Inter no corpo, aulas, planos por frequência e solicitação de aula experimental. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
 
 ### Base implementada e referência vigente
 
@@ -293,7 +293,9 @@ Preferência:
 
 ---
 
-### Nicho — Clínicas Médicas
+### Nicho implementado — Clínicas Médicas
+
+Aplicação `start/presenca/clinicas-medicas/`, com a marca Arche Saúde, azul-petróleo, Manrope + Inter e fotografia em arco. Inclui cinco especialidades, equipe, estrutura e diferenciais, etapas do atendimento, relatos demonstrativos, FAQ e contato com revisão da mensagem. Identificação médica configurável, sem números de registros inventados. Consulte o [README do nicho](../../start/presenca/clinicas-medicas/README.md).
 
 #### Objetivo
 Transmitir segurança, estrutura e cuidado profissional.
@@ -322,25 +324,25 @@ Agendamento
 
 ---
 
-### Nicho futuro — Imobiliárias
+### Nicho implementado — Veterinárias
 
-Expansão futura.
+Aplicação `start/presenca/veterinarias/`, com a marca Arche Vet. Mantém a base Aura com Hero em arco, grade de cinco cuidados e CTA, clínica, relatos de tutores, FAQ, contato e rodapé. Identidade verde-floresta, Playfair Display e Inter, imagens locais e layout responsivo.
 
-```text
-Hero
-Imóveis em destaque
-Experiência
-Regiões
-Consultoria
-Cases
-Depoimentos
-Contato
-```
+O contato permite selecionar o cuidado e revisar a mensagem antes do WhatsApp. O escopo demonstrativo atende cães e gatos durante os horários informados, sem anunciar plantão 24 horas. Não há dados inventados de experiência ou credenciais; os relatos e imagens são identificados na faixa de demonstração. Leia o [README do nicho](../../start/presenca/veterinarias/README.md) para personalização e validação.
 
-Visual:
-- Dark Premium ou Light Editorial;
-- fotografia de alto nível;
-- foco em exclusividade.
+### Nicho implementado — Academias
+
+Aplicação `start/presenca/academias/`, adaptada para a marca Arche Pilates. Mantém a fotografia em arco e a composição da base Aura, com identidade verde-sálvia. Usa Manrope nos títulos e Inter no corpo. Inclui Pilates em aparelhos e no solo, aulas individuais e em dupla, mobilidade, apresentação do estúdio, três planos demonstrativos por frequência semanal, relatos, FAQ, contato e rodapé.
+
+Modalidades e planos preselecionam o assunto no modal antes da revisão da mensagem para o WhatsApp. Não há cobrança, matrícula ou agendamento automático. Os valores, relatos e fotografias são ilustrativos, identificados na faixa superior. Consulte o [README do nicho](../../start/presenca/academias/README.md).
+
+### Nicho implementado — Contabilidade
+
+Aplicação `start/presenca/contabilidade/`, com a marca Arche Contábil, grafite e cobre, Manrope + Inter e fotografia em arco. Inclui cinco serviços, escritório, segmentos atendidos, etapas da parceria, relatos demonstrativos, FAQ e contato com revisão da mensagem. Os assuntos são preselecionados conforme o serviço. Registros profissionais configuráveis no rodapé, sem números inventados. Consulte o [README do nicho](../../start/presenca/contabilidade/README.md).
+
+### Nicho implementado — Imobiliárias
+
+Aplicação `start/presenca/imobiliarias/`, com a marca Arche Imóveis, azul profundo, Manrope + Inter e fotografia em arco. Inclui cinco imóveis demonstrativos, filtros de compra e aluguel, seleção por região, detalhes e encargos, apresentação da imobiliária, etapas do atendimento, relatos, FAQ e contato com revisão da mensagem. Cada imóvel preseleciona título e referência no WhatsApp. Inclui assunto para proprietários e campos configuráveis de CRECI, sem registros inventados. Consulte o [README do nicho](../../start/presenca/imobiliarias/README.md).
 
 ---
 
@@ -373,7 +375,7 @@ Outras expansões futuras: Harmonização, Engenharia, Agência Premium e Servi�
 
 A coleção possui seu próprio `presenca-core`, atualizado a partir da aplicação Aura de estética. O padrão técnico segue as referências gerais; composição, assets e identidade pertencem à Presença.
 
-A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica`, `odontologia` e `psicologia` estão implementados; os demais nichos são planejados.
+A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica`, `odontologia`, `psicologia`, `veterinarias`, `academias`, `clinicas-medicas`, `contabilidade` e `imobiliarias` estão implementados; os demais nichos são planejados.
 
 ```text
 templates/
@@ -382,13 +384,18 @@ templates/
         ├── presenca-core/
         ├── estetica/
         ├── odontologia/
+        ├── psicologia/
+        ├── veterinarias/
+        ├── academias/
         ├── advocacia/
         ├── arquitetura/
         ├── consultoria/
-        └── clinicas-medicas/
+        ├── clinicas-medicas/
+        ├── contabilidade/
+        └── imobiliarias/
 ```
 
-Pacote do core: `@arche-labs/start-presenca-core`. Pacotes dos nichos: `@arche-labs/start-presenca-<nicho>`. A expansão imobiliária usará `imobiliarias`.
+Pacote do core: `@arche-labs/start-presenca-core`. Pacotes dos nichos: `@arche-labs/start-presenca-<nicho>`. A aplicação imobiliária usa `imobiliarias`.
 
 ## 8. Ordem de produção
 

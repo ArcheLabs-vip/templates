@@ -1,0 +1,21 @@
+---
+import { site, testimonials } from '../data/site';
+import Icon from './Icon.astro';
+---
+{site.demo && <section id="depoimentos" class="section section-white" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="testimonials-title">{site.testimonials.title}</h2>
+      <p>{site.testimonials.description}</p>
+    </div>
+    {site.demo ? <div class="testimonials-grid">
+      {testimonials.map(testimonial => (
+        <figure class="testimonial">
+          <Icon name="quote" />
+          <blockquote><p>“{testimonial.quote}”</p></blockquote>
+          <figcaption><span class="avatar" aria-hidden="true">{testimonial.initials}</span><div><strong>{testimonial.name}</strong><span class="testimonial-context">{testimonial.context}</span></div></figcaption>
+        </figure>
+      ))}
+    </div> : null}
+  </div>
+</section>}

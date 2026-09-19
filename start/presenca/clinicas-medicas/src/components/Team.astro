@@ -1,0 +1,30 @@
+---
+import { site, professionals } from '../data/site';
+---
+<section id="equipe" class="section team" aria-labelledby="team-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="team-title">{site.team.title}</h2>
+      <p>{site.team.description}</p>
+    </div>
+    <div class="team-grid">
+      {professionals.map(person => <article class="professional">
+        <div class="professional-photo"><img src={`/images/${person.image}.webp`} width="640" height="800" alt={person.alt} loading="lazy" decoding="async" /></div>
+        <h3>{person.name}</h3>
+        <p class="professional-specialty">{person.specialty}</p>
+        {(person.crm || person.rqe) && <p class="professional-credentials">{person.crm}{person.rqe && ` · RQE ${person.rqe}`}</p>}
+        {site.demo && person.demoProfile && <p class="professional-credentials">Perfil demonstrativo</p>}
+      </article>)}
+    </div>
+  </div>
+</section>
+<style>
+  .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+  .professional-photo { overflow: hidden; border-radius: 1.5rem 1.5rem .5rem .5rem; background: var(--color-tint); }
+  .professional-photo img { aspect-ratio: 1; object-fit: cover; object-position: center 25%; }
+  h3 { font-size: 1.25rem; margin-top: 24px; }
+  .professional-specialty { margin-top: 6px; color: var(--color-primary); font-size: .875rem; }
+  .professional-credentials { margin-top: 10px; color: var(--color-muted); font-size: .75rem; }
+  @media (max-width: 1023px) { .team-grid { gap: 24px; } h3 { font-size: 1.125rem; } }
+  @media (max-width: 767px) { .team-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; gap: 40px; } h3 { font-size: 1.375rem; } }
+</style>

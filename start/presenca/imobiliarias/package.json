@@ -1,0 +1,20 @@
+{
+  "name": "@arche-labs/start-presenca-imobiliarias",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4328",
+    "build": "astro build",
+    "preview": "astro preview --port 4328",
+    "check": "astro check",
+    "validate": "npm run check && npm run build"
+  },
+  "dependencies": {
+    "astro": "^7.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "typescript": "^5.7.0"
+  }
+}

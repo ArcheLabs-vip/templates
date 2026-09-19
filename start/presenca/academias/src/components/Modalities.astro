@@ -1,0 +1,31 @@
+---
+import { site, modalities } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="modalidades" class="section section-white" aria-labelledby="modalities-title">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="modalities-title">{site.services.title}</h2>
+      <p>{site.services.description}</p>
+    </div>
+    <div class="modalities-grid">
+      {modalities.map(modality => (
+        <article class="modality-card" id={modality.id}>
+          <div class="modality-image"><img src={`/images/${modality.image}.webp`} width="720" height="480" alt={modality.alt} loading="lazy" decoding="async" /></div>
+          <div class="modality-copy">
+            <h3>{modality.title}</h3>
+            <p>{modality.description}</p>
+            <ContactLink class="text-link" subject={modality.title} label={`Saiba mais sobre ${modality.title}`}>Saiba mais <Icon name="arrow" /></ContactLink>
+          </div>
+        </article>
+      ))}
+      <article class="modality-cta">
+        <Icon name="stretching" />
+        <h3>{site.services.ctaTitle}</h3>
+        <p>{site.services.ctaDescription}</p>
+        <ContactLink class="button button-light">{site.services.ctaLabel}</ContactLink>
+      </article>
+    </div>
+  </div>
+</section>

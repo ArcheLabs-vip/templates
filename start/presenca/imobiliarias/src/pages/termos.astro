@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={`Termos de Uso | ${site.name}`} description={`Informações sobre os serviços e o atendimento da ${site.name}.`}><main id="conteudo" class="container legal-page">
+  <a href="/">← Voltar para {site.name}</a>
+  <h1>Termos de Uso</h1>
+  <p>Conheça a seleção de imóveis e o atendimento da {site.name}. A equipe está disponível para conversar sobre compra, locação e divulgação de imóveis.</p>
+  <h2>Experiência de contato</h2>
+  <p>O contato pelo WhatsApp inicia uma conversa. Visitas dependem de confirmação do corretor. O envio de uma mensagem não reserva um imóvel nem conclui uma negociação.</p>
+  <h2>Informações sobre os imóveis</h2>
+  <p>{site.demo ? 'Este é um modelo demonstrativo, com imóveis, imagens, metragens e valores fictícios. ' : ''}Consulte a equipe para confirmar disponibilidade, características, valores e condições antes de tomar uma decisão. Condomínio e IPTU são apresentados separadamente do preço principal.</p>
+  <h2>Documentos e informações</h2>
+  <p>Não é necessário enviar documentos na primeira mensagem. A equipe combina as informações necessárias e os canais de compartilhamento durante o atendimento.</p>
+  <h2>Horários de atendimento</h2>
+  <p>{site.hours} As mensagens são respondidas durante o horário de funcionamento.</p>
+</main></BaseLayout>

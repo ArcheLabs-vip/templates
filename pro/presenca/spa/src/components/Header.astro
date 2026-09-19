@@ -1,0 +1,60 @@
+---
+import { site, navigation } from '../data/site';
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="header-logo-link">
+      <img src={site.logo} alt={site.name} class="header-logo" />
+    </a>
+    <div class="header-nav">
+      <div class="header-btn-wrap">
+        <a href="#contact" class="button button-dark">Book Now</a>
+      </div>
+      <button class="burger-menu" id="burger-toggle" aria-label="Open menu" aria-expanded="false">
+        <div class="burger-bars">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar burger-bar-green"></span>
+        </div>
+        <span class="burger-label">MENU</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <nav class="mobile-menu-links" aria-label="Mobile navigation">
+    {navigation.map(link => <a href={link.href} class="mobile-menu-link">{link.label}</a>)}
+  </nav>
+  <div class="mobile-contacts">
+    <p class="paragraph">{site.phone}</p>
+    <p class="heading-h4 no-top-margin">{site.email}</p>
+    <div style="opacity:.2;background:#1d1916;width:100%;height:1px;"></div>
+  </div>
+</div>
+
+<script>
+  const burger = document.getElementById('burger-toggle');
+  const menu = document.getElementById('mobile-menu');
+  burger?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', String(isOpen));
+    burger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  menu?.querySelectorAll('a').forEach(link =>
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      burger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    })
+  );
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu?.classList.contains('is-open')) {
+      menu.classList.remove('is-open');
+      burger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      burger?.focus();
+    }
+  });
+</script>
