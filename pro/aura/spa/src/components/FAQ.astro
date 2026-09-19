@@ -1,0 +1,64 @@
+---
+import { faq } from '../data/site';
+---
+<section class="section" aria-labelledby="faq-title">
+  <div class="container centered">
+    <div class="faq-wrap">
+      <div class="faq-heading">
+        <div class="text-box-m" style="text-align:left;">
+          <div class="eyebrow-wrap">
+            <span class="eyebrow-text" data-i18n="faq.eyebrow">FAQ</span>
+          </div>
+          <div class="text-box-m">
+            <div class="overflow-hidden">
+              <h2 id="faq-title" class="heading-h2 slide-up">
+                <span data-i18n="faq.title">Your Spa</span> <span class="highlight"><br/><span data-i18n="faq.highlight">Questions Answered</span></span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer-32"></div>
+      <div class="faq-items">
+        {faq.map((item, i) => {
+          const qKeys = ['faq.q1', 'faq.q2', 'faq.q3', 'faq.q4', 'faq.q5'];
+          const aKeys = ['faq.a1', 'faq.a2', 'faq.a3', 'faq.a4', 'faq.a5'];
+          return (
+          <div class="faq-item fade-in" data-faq>
+            <button class="faq-question heading-h4 no-margin" aria-expanded="false">
+              <span data-i18n={qKeys[i]}>{item.question}</span>
+              <div class="open-icon-wrap">
+                <svg class="open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p class="paragraph paragraph-large no-margin" data-i18n={aKeys[i]}>{item.answer}</p>
+              </div>
+            </div>
+          </div>
+          );
+        })}
+        <div class="spacer-32"></div>
+        <div style="display:flex; justify-content:flex-end;">
+          <div class="info-wrap fade-in">
+            <div class="info-icon-wrap">
+              <span style="font-weight:bold; font-size:14px; font-family:var(--font-heading);">?</span>
+            </div>
+            <p class="paragraph no-margin" style="font-weight:600; font-size:14px;" data-i18n="faq.info">Ask us about membership perks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-faq]').forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn?.addEventListener('click', () => {
+      const isOpen = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+</script>

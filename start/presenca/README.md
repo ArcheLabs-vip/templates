@@ -14,6 +14,8 @@
 
 - [Imobiliárias](imobiliarias/README.md): Arche Imóveis, azul profundo, seleção de imóveis com filtros, regiões, detalhes de encargos e contato por referência no WhatsApp.
 
+- [Advocacia](advocacia/README.md): Almeida & Prado, verde profundo, Playfair Display + Inter, áreas de atuação, escritório, profissionais, etapas, conteúdos, FAQ e contato por assunto no WhatsApp.
+
 [Direção da coleção](../../referencias/presenca/presenca.md). O core e o nicho compartilham a mesma base visual e técnica, mas cada projeto é independente. Outras variantes e nichos permanecem planejados.
 
-Desenvolvimento local: core em `http://localhost:4320`, estética em `http://localhost:4321`, odontologia em `http://localhost:4322`, psicologia em `http://localhost:4323`, veterinárias em `http://localhost:4324`, academias em `http://localhost:4325`, clínicas médicas em `http://localhost:4326`, contabilidade em `http://localhost:4327` e imobiliárias em `http://localhost:4328`.
+Desenvolvimento local: core em `http://localhost:4320`, estética em `http://localhost:4321`, odontologia em `http://localhost:4322`, psicologia em `http://localhost:4323`, veterinárias em `http://localhost:4324`, academias em `http://localhost:4325`, clínicas médicas em `http://localhost:4326`, contabilidade em `http://localhost:4327`, imobiliárias em `http://localhost:4328` e advocacia em `http://localhost:4329`.

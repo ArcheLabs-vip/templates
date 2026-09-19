@@ -4,7 +4,7 @@
 
 Presença é uma coleção do **plano Start**, voltada a marcas, profissionais e empresas que precisam transmitir autoridade, sofisticação, confiança e percepção de valor desde o primeiro contato.
 
-Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica`, `odontologia`, `psicologia`, `veterinarias`, `academias`, `clinicas-medicas`, `contabilidade` e `imobiliarias` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. Psicologia usa tons de sálvia e a marca Instituto Presença, com modalidades, primeiro encontro e dúvidas frequentes. Veterinárias usa verde-floresta e a marca Arche Vet, com cuidados para cães e gatos, imagens ilustrativas próprias e dúvidas sobre a primeira visita. Academias foi adaptado para um estúdio de Pilates: verde-sálvia, marca Arche Pilates, Manrope nos títulos, Inter no corpo, aulas, planos por frequência e solicitação de aula experimental. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
+Este documento reúne as decisões específicas de posicionamento, identidade visual, composição, nichos e produção da coleção. O `presenca-core` e os nichos `estetica`, `odontologia`, `psicologia`, `veterinarias`, `academias`, `clinicas-medicas`, `contabilidade`, `imobiliarias` e `advocacia` estão implementados em `start/presenca/`. A base Aura aprovada usa títulos em Playfair Display, corpo em Inter e fotografia em arco; estética mantém o tema rosado e odontologia adapta a identidade para azul-petróleo, com a marca Arche Odonto. Psicologia usa tons de sálvia e a marca Instituto Presença, com modalidades, primeiro encontro e dúvidas frequentes. Veterinárias usa verde-floresta e a marca Arche Vet, com cuidados para cães e gatos, imagens ilustrativas próprias e dúvidas sobre a primeira visita. Academias foi adaptado para um estúdio de Pilates: verde-sálvia, marca Arche Pilates, Manrope nos títulos, Inter no corpo, aulas, planos por frequência e solicitação de aula experimental. As demais variantes, componentes e aplicações descritas abaixo continuam planejadas.
 
 ### Base implementada e referência vigente
 
@@ -202,7 +202,9 @@ Evitar estética clínica genérica excessivamente azul.
 
 ---
 
-### Nicho — Advocacia
+### Nicho implementado — Advocacia
+
+Aplicação `start/presenca/advocacia/`, com a marca demonstrativa Almeida & Prado Advocacia. Mantém a base clara e a fotografia em arco, com verde profundo, Playfair Display e Inter. Inclui quatro áreas de atuação, escritório, profissionais, etapas do atendimento, dois conteúdos com páginas próprias, FAQ e contato com seleção de assunto e revisão da mensagem. Os registros OAB são configuráveis, sem números inventados; não há promessas de resultado, estatísticas ou depoimentos. Consulte o [README do nicho](../../start/presenca/advocacia/README.md).
 
 #### Objetivo
 Transmitir confiança, discrição e especialização.
@@ -375,7 +377,7 @@ Outras expansões futuras: Harmonização, Engenharia, Agência Premium e Servi�
 
 A coleção possui seu próprio `presenca-core`, atualizado a partir da aplicação Aura de estética. O padrão técnico segue as referências gerais; composição, assets e identidade pertencem à Presença.
 
-A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica`, `odontologia`, `psicologia`, `veterinarias`, `academias`, `clinicas-medicas`, `contabilidade` e `imobiliarias` estão implementados; os demais nichos são planejados.
+A Presença pertence ao plano Start, ao lado da Essencial. Seus projetos ficam em `start/presenca/`. Na estrutura abaixo, `presenca-core`, `estetica`, `odontologia`, `psicologia`, `veterinarias`, `academias`, `clinicas-medicas`, `contabilidade`, `imobiliarias` e `advocacia` estão implementados; os demais nichos são planejados.
 
 ```text
 templates/

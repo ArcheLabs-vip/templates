@@ -1,10 +1,14 @@
 # Plano Pro
 
-Espaço reservado para as futuras coleções de templates do plano Pro da Arche Labs.
+Coleções de templates do plano Pro da Arche Labs, voltadas a um público exigente com identidades visuais sofisticadas e premium.
 
-Cada coleção deverá possuir uma pasta própria e organizar suas aplicações pelo nome de cada nicho.
+Cada coleção possui uma pasta própria e organiza suas aplicações pelo nome de cada nicho.
 
-Cada coleção também terá um core próprio: `editorial-core`, `signature-core` e `vanguard-core`. Eles seguirão o padrão técnico comum documentado em [`referencias/cores-de-colecao.md`](../referencias/cores-de-colecao.md), sem reutilizar obrigatoriamente a composição visual da Coleção Essencial.
+As coleções podem possuir um core próprio (por exemplo: `aura-core`), seguindo o padrão técnico comum documentado em [`referencias/cores-de-colecao.md`](../referencias/cores-de-colecao.md), sem reutilizar obrigatoriamente a composição visual da Coleção Essencial.
+
+## Coleções Atuais
+
+- **Aura** — design focado em bem-estar, luz, relaxamento e serviços estéticos premium (ex: `spa`).
 
 ## Futuras coleções
 

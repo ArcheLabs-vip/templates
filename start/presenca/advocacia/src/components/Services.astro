@@ -1,0 +1,16 @@
+---
+import { site, services } from '../data/site';
+import Icon from './Icon.astro';
+import ContactLink from './ContactLink.astro';
+---
+<section id="atuacao" class="section section-white" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-heading"><h2 id="services-title">{site.services.title}</h2><p>{site.services.description}</p></div>
+    <div class="services-grid">{services.map(service => <article class="service" id={service.id}>
+      <div class="service-icon"><Icon name={service.icon} /></div>
+      <div class="service-content"><h3>{service.title}</h3><p>{service.description}</p>
+        <ContactLink class="text-link" treatment={service.title} label={`Consultar atendimento em ${service.title}`}>Consultar atendimento<Icon name="arrow" /></ContactLink>
+      </div>
+    </article>)}</div>
+  </div>
+</section>

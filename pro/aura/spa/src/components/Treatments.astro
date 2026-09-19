@@ -1,0 +1,33 @@
+---
+import { treatments } from '../data/site';
+---
+<section class="section" aria-labelledby="treatments-title">
+  <div class="container centered">
+    <div class="eyebrow-wrap">
+      <span class="eyebrow-text" data-i18n="treatments.eyebrow">TREATMENTS</span>
+    </div>
+    <h2 id="treatments-title" class="heading-h2 text-centered fade-in"><span data-i18n="treatments.title">Our Signature</span> <span class="highlight" data-i18n="treatments.highlight">Treatments</span></h2>
+    <div class="text-box-m">
+      <p class="paragraph paragraph-large paragraph-centered fade-in" data-i18n="blog.subtitle">Enjoy hot stone massages and facials, loved by fellow spa-goers.</p>
+      <div class="spacer-64"></div>
+    </div>
+    <div class="grid grid-3">
+      {treatments.map((treatment, i) => {
+        const titleKeys = ['treatment.glow', 'treatment.sleep', 'treatment.serenity'];
+        const descKeys = ['treatment.glowDesc', 'treatment.sleepDesc', 'treatment.serenityDesc'];
+        return (
+        <a href={`/treatments/${treatment.slug}`} class="treatment-card slide-up">
+          <div class="treatment-image-wrap">
+            <img src={treatment.image} alt={treatment.title} class="treatment-thumbnail" loading="lazy" decoding="async" />
+          </div>
+          <h3 class="heading-h4" data-i18n={titleKeys[i]}>{treatment.title}</h3>
+          <p class="paragraph" data-i18n={descKeys[i]}>{treatment.description}</p>
+          <div class="treatment-btn-wrap">
+            <span class="button button-no-underline" data-i18n="treatments.learnMore">Learn More</span>
+          </div>
+        </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

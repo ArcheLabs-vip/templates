@@ -1,0 +1,32 @@
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400 900; font-display: swap; src: url('/fonts/playfair-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/playfair-italic.woff2') format('woff2'); }
+
+:root {
+  color-scheme: light;
+  --color-background: #f6f7f3;
+  --color-surface: #fdfefd;
+  --color-soft: #e9ede7;
+  --color-border: #d4ddd4;
+  --color-accent: #526c56;
+  --color-primary: #294b3b;
+  --color-heading: #193b2d;
+  --color-text: #4f5b53;
+  --color-muted: #637167;
+  --color-on-primary: #f8faf6;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #20bd5a;
+  --color-on-whatsapp: #063b25;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --radius-card: 12px;
+  --radius-image: 20px;
+  --radius-button: 100px;
+  --container: 1240px;
+  --space-section: clamp(64px, 7.5vw, 104px);
+  --shadow-large: 0 18px 55px rgb(25 59 45 / 10%);
+  /* Layer scale: sticky header 20, demo banner 30, skip link 40, native dialog top layer. */
+  --layer-header: 20;
+  --layer-banner: 30;
+  --layer-skip: 40;
+}

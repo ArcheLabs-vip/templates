@@ -1,0 +1,11 @@
+---
+import { site, questions } from '../data/site';
+---
+<section id="duvidas" class="section faq" aria-labelledby="faq-title">
+  <div class="container faq-grid">
+    <div><h2 id="faq-title">{site.faq.title}</h2><p class="faq-intro">{site.faq.description}</p></div>
+    <div class="faq-list">{questions.map(item => <details>
+      <summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p>
+    </details>)}</div>
+  </div>
+</section>

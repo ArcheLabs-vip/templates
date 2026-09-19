@@ -1,0 +1,43 @@
+---
+import { site } from '../data/site';
+---
+<section class="section" aria-labelledby="about-title">
+  <div class="container centered">
+    <div class="eyebrow-wrap">
+      <span class="eyebrow-text" data-i18n="about.eyebrow">About</span>
+    </div>
+    <div class="overflow-hidden">
+      <h2 id="about-title" class="heading-h2 text-centered slide-up">
+        <span data-i18n="about.title">{site.about.title}</span> <span class="highlight" data-i18n="about.highlight">{site.about.highlight}</span>
+      </h2>
+    </div>
+    <div class="text-box-m">
+      <p class="paragraph paragraph-large paragraph-centered fade-in" data-i18n="about.subtitle">{site.about.subtitle}</p>
+      <div class="spacer-64"></div>
+    </div>
+    <div class="grid grid-full">
+      <div class="left-col centered">
+        <div class="text-box-s">
+          <h3 class="heading-h3 fade-in">
+            <span data-i18n="about.innerTitle">{site.about.innerTitle}</span> <span class="highlight" data-i18n="about.innerHighlight">{site.about.innerHighlight}</span>
+          </h3>
+          <p class="paragraph paragraph-large fade-in" data-i18n="about.innerText">{site.about.innerText}</p>
+          <div class="spacer-32"></div>
+        </div>
+        <div class="overflow-hidden">
+          <div class="fade-in" style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="#team" class="button" data-i18n="about.meetTeam">Meet Our Team</a>
+            <a href="/treatments" class="button button-outline" data-i18n="about.learnMore">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="right-col centered" style="height:100%;">
+        <div class="parallax-wrap">
+          <div class="parallax-mask">
+            <img src={site.about.image} alt="About our spa" class="parallax-image" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

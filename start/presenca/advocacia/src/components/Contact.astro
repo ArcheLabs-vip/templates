@@ -1,0 +1,16 @@
+---
+import { site } from '../data/site';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+---
+<section id="contato" class="section contact-section" aria-labelledby="contact-title">
+  <div class="container contact-grid">
+    <div class="contact-content"><p class="eyebrow">Contato</p><h2 id="contact-title">{site.cta.title}</h2><p>{site.cta.description}</p>
+      <ContactLink class="button button-primary"><Icon name="whatsapp" />{site.cta.label}</ContactLink>
+    </div>
+    <div class="contact-details">
+      <div><h3>Visite o escritório</h3><p>{site.address}</p><p>Atendimento presencial com horário marcado.</p></div>
+      <div><h3>Horários e canais</h3><p>{site.hours}</p><a href={site.phoneHref}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a></div>
+    </div>
+  </div>
+</section>

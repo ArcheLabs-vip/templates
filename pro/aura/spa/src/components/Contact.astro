@@ -1,0 +1,68 @@
+---
+import { site } from '../data/site';
+---
+<section id="contact" class="section section-white" aria-labelledby="contact-title">
+  <div class="container">
+    <h2 id="contact-title" class="heading-h2 text-centered fade-in">
+      <span data-i18n="contact.title">{site.contact.title}</span> <span class="highlight" data-i18n="contact.highlight">{site.contact.highlight}</span>
+    </h2>
+    <div class="spacer-32"></div>
+    <div class="grid">
+      <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
+        <div class="contact-left" style="align-self: start; width: 100%;">
+        <div class="eyebrow-wrap" style="align-self: flex-start; background-color: var(--color-white);">
+          <span class="eyebrow-text" data-i18n="contact.eyebrow">Contact</span>
+        </div>
+        <h3 class="heading-h3" data-i18n="contact.formTitle">{site.contact.formTitle}</h3>
+        <p class="paragraph paragraph-large" data-i18n="contact.formSubtitle">{site.contact.formSubtitle}</p>
+        <form class="contact-form" id="contact-form" name="contact" method="POST">
+          <input class="text-field" type="text" name="name" placeholder="Your Name" data-i18n-placeholder="contact.name" maxlength="256" />
+          <input class="text-field" type="email" name="email" placeholder="Your Email" data-i18n-placeholder="contact.email" required maxlength="256" />
+          <textarea class="text-field text-area" name="message" placeholder="Your Message" data-i18n-placeholder="contact.message" maxlength="5000"></textarea>
+          <button type="submit" class="button button-dark" style="align-self: flex-start;" data-i18n="contact.submit">Submit</button>
+        </form>
+        <div class="form-done" id="form-done">
+          <p data-i18n="contact.success">Thank you! Your submission has been received!</p>
+        </div>
+        <div class="form-fail" id="form-fail">
+          <p data-i18n="contact.error">Oops! Something went wrong while submitting the form.</p>
+        </div>
+        </div>
+        <div class="bottom-col-wrap">
+          <div class="socials-outer">
+            <h4 class="heading-h5 no-margin"><span data-i18n="contact.followUs">Follow Us On</span> <span class="highlight" data-i18n="contact.socials">Socials</span></h4>
+            <div class="socials-wrap">
+              {site.socials.map(social => (
+                <a href={social.href} target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label={social.name}>
+                  <div class="contact-social-box">
+                    <img src={social.icon} alt={social.name} class="contact-social-icon" loading="lazy" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div class="logo-icon-wrap">
+            <img src={site.iconLogo} alt={site.name} class="logo-icon" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="contact-image-wrap">
+          <img src={site.contact.image} alt="Contact us" class="contact-image" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const done = document.getElementById('form-done');
+  const fail = document.getElementById('form-fail');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Demo behavior: just show success
+    form.style.display = 'none';
+    if (done) done.style.display = 'block';
+  });
+</script>

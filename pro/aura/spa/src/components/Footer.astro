@@ -1,0 +1,31 @@
+---
+import { site, navigation } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-copyright">© {site.name} Template</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-heading" data-i18n="footer.pages">Pages</h4>
+        {navigation.map((link, i) => {
+          const keys = ['nav.home', 'nav.treatments', 'nav.blog'];
+          return <a href={link.href} class="footer-link" data-i18n={keys[i]}>{link.label}</a>;
+        })}
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-heading" data-i18n="footer.admin">Admin</h4>
+        <a href="/admin/licensing" class="footer-link" data-i18n="footer.licensing">Licensing</a>
+        <a href="/admin/change-log" class="footer-link" data-i18n="footer.changeLog">Change Log</a>
+        <a href="/admin/style-guide" class="footer-link" data-i18n="footer.styleGuide">Style Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-heading" data-i18n="footer.contact">Contact</h4>
+        <a href="tel:+5511999999999" class="footer-link"><span data-i18n="footer.phone">Phone:</span> {site.phone}</a>
+        <a href={`mailto:${site.email}`} class="footer-link"><span data-i18n="footer.email">Email:</span> {site.email}</a>
+      </div>
+    </div>
+    <div class="footer-logo">Aura</div>
+  </div>
+</footer>

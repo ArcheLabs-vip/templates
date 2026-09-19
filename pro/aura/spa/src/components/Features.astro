@@ -1,0 +1,23 @@
+---
+import { features } from '../data/site';
+---
+<section class="section" aria-labelledby="features-title">
+  <div class="container centered">
+    <div class="spacer-128"></div>
+    <div class="grid grid-3x2 grid-32">
+      {features.map((feature, i) => {
+        const titleKeys = ['feature.naturalHerbs', 'feature.bridalServices', 'feature.seasonalDiscounts', 'feature.childFriendly', 'feature.hairSalon', 'feature.nutrition'];
+        const descKeys = ['feature.naturalHerbsDesc', 'feature.bridalServicesDesc', 'feature.seasonalDiscountsDesc', 'feature.childFriendlyDesc', 'feature.hairSalonDesc', 'feature.nutritionDesc'];
+        return (
+        <div class="feature-card fade-in">
+          <div class="beige-icon-wrap">
+            <img src={feature.icon} alt={feature.title} class="feature-icon" loading="lazy" />
+          </div>
+          <h3 class="heading-h6" data-i18n={titleKeys[i]}>{feature.title}</h3>
+          <p class="paragraph paragraph-centered" data-i18n={descKeys[i]}>{feature.description}</p>
+        </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

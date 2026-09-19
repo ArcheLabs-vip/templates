@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+---
+<section class="section" aria-labelledby="skincare-title">
+  <div class="container">
+    <div class="grid grid-64">
+      <div class="left-col">
+        <div class="skin-image-wrap">
+          <img src={site.skinCare.image} alt="Skin treatment" class="skin-image" loading="lazy" decoding="async" />
+        </div>
+      </div>
+      <div class="right-col">
+        <div class="eyebrow-wrap">
+          <span class="eyebrow-text" data-i18n="skincare.eyebrow">TREATMENTS</span>
+        </div>
+        <h2 id="skincare-title" class="heading-h2 fade-in">
+          <span data-i18n="skincare.title">{site.skinCare.title}</span> <span class="highlight" data-i18n="skincare.highlight">{site.skinCare.highlight}</span>
+        </h2>
+        <div class="text-box-m">
+          <p class="paragraph paragraph-large fade-in" data-i18n="skincare.text">{site.skinCare.text}</p>
+        </div>
+        <div class="spacer-32"></div>
+        <div class="fade-in" style="display:flex;">
+          <a href="/treatments" class="button button-dark" data-i18n="skincare.learnMore">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

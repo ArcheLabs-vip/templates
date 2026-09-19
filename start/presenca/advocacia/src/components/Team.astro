@@ -1,0 +1,16 @@
+---
+import { site, professionals } from '../data/site';
+const visibleProfessionals = professionals.filter(person => site.demo || !person.illustrative);
+---
+{visibleProfessionals.length > 0 && <section id="profissionais" class="section section-white" aria-labelledby="team-title">
+  <div class="container team-grid">
+    <div class="team-content">
+      <h2 id="team-title">{site.team.title}</h2><p>{site.team.description}</p>
+      <div class="team-list">{visibleProfessionals.map(person => <article>
+        <p class="person-role">{person.role}</p><h3>{person.name}</h3><p>{person.areas}</p>
+        {person.oab && <p class="registration">{person.oab}</p>}
+      </article>)}</div>
+    </div>
+    <img class="team-photo" src="/images/equipe.webp" srcset="/images/equipe-640.webp 640w, /images/equipe.webp 1200w" sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1240px) 48vw, 608px" width="1200" height="900" alt={site.team.imageAlt} loading="lazy" decoding="async" />
+  </div>
+</section>}

@@ -1,0 +1,11 @@
+---
+// Tabler Icons v3.34.1 (MIT), vendored locally; no runtime network dependency.
+const files = import.meta.glob<string>('../assets/icons/*.svg', { query: '?raw', import: 'default', eager: true });
+const icons = { file: 'file-description', users: 'users', briefcase: 'briefcase', building: 'building-estate', arrow: 'arrow-right', menu: 'menu-2', whatsapp: 'brand-whatsapp' };
+interface Props { name: keyof typeof icons; class?: string; }
+const { name, class: className } = Astro.props;
+const source = files[`../assets/icons/${icons[name]}.svg`];
+if (!source) throw new Error(`Ícone local ausente: ${icons[name]}`);
+const paths = source.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>[\s\S]*$/, '');
+---
+<svg class={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" set:html={paths} />

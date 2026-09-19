@@ -1,0 +1,49 @@
+---
+import { site, blogPosts } from '../data/site';
+---
+<section class="section" aria-labelledby="blog-title">
+  <div class="container centered">
+    <div class="eyebrow-wrap">
+      <span class="eyebrow-text" data-i18n="blog.eyebrow">BLOG</span>
+    </div>
+    <div class="text-box-m">
+      <div class="overflow-hidden">
+        <h2 id="blog-title" class="heading-h2 text-centered slide-up">
+          <span data-i18n="blog.title">{site.blog.title}</span> <span class="highlight" data-i18n="blog.highlight">{site.blog.highlight}</span>
+        </h2>
+      </div>
+      <div class="spacer-32"></div>
+    </div>
+    <div class="grid" style="width:100%;max-width:none;grid-template-columns:1fr 2fr;">
+      <div class="left-col" style="display:flex; flex-direction:column; justify-content:space-between;">
+        <div style="padding:16px 0;">
+          <p class="blog-text fade-in" style="font-family: var(--font-heading); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;" data-i18n="blog.subtitle">{site.blog.subtitle}</p>
+        </div>
+        <div class="fade-in">
+          <a href="/blog" class="button button-dark" data-i18n="blog.readAll">Read All Posts</a>
+        </div>
+      </div>
+      <div class="right-col">
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap: 24px;">
+          {blogPosts.map((post, i) => {
+            const titleKeys = ['blog.post1.title', 'blog.post2.title'];
+            const catKeys = ['blog.post1.category', 'blog.post2.category'];
+            const dateKeys = ['blog.post1.date', 'blog.post2.date'];
+            return (
+            <a href={post.href} class="post-thumbnail-wrap">
+              <img src={post.image} alt={post.title} class="post-thumbnail" loading="lazy" decoding="async" />
+              <div class="post-details">
+                <h3 class="heading-h4 post-heading-light no-margin" data-i18n={titleKeys[i]}>{post.title}</h3>
+                <div class="category-date">
+                  <p class="paragraph paragraph-light no-margin" data-i18n={catKeys[i]}>{post.category}</p>
+                  <p class="paragraph paragraph-light no-margin" data-i18n={dateKeys[i]}>{post.date}</p>
+                </div>
+              </div>
+            </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

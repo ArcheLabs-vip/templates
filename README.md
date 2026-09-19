@@ -18,8 +18,11 @@ templates/
 │       ├── academias/
 │       ├── clinicas-medicas/
 │       ├── contabilidade/
-│       └── imobiliarias/
+│       ├── imobiliarias/
+│       └── advocacia/
 ├── pro/
+│   └── aura/
+│       └── spa/
 └── referencias/
 ```
 

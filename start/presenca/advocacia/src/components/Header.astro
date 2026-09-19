@@ -1,0 +1,37 @@
+---
+import Brand from './Brand.astro';
+import ContactLink from './ContactLink.astro';
+import Icon from './Icon.astro';
+import { navigation } from '../data/site';
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <Brand />
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      {navigation.map(link => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <ContactLink class="button button-primary header-contact">Entrar em contato</ContactLink>
+    <details class="mobile-menu">
+      <summary aria-label="Abrir menu" aria-controls="mobile-navigation"><Icon name="menu" /></summary>
+      <nav id="mobile-navigation" aria-label="Navegação mobile">
+        {navigation.map(link => <a href={link.href}>{link.label}</a>)}
+        <ContactLink>Entrar em contato</ContactLink>
+      </nav>
+    </details>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  const toggle = menu?.querySelector('summary');
+  menu?.addEventListener('toggle', () => toggle?.setAttribute('aria-label', menu.open ? 'Fechar menu' : 'Abrir menu'));
+  menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.open = false; }));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu?.open) { menu.open = false; toggle?.focus(); }
+  });
+  document.addEventListener('click', event => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+  });
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', event => {
+    if (event.matches && menu) menu.open = false;
+  });
+</script>

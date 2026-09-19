@@ -1,0 +1,34 @@
+---
+import { site } from '../data/site';
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title = site.title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+---
+<!doctype html>
+<html lang="pt-BR" class:list={{ 'has-demo-notice': site.demo }}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f6f7f3" />
+    <meta name="color-scheme" content="light" />
+    {site.demo && <meta name="robots" content="noindex, nofollow" />}
+    {!site.demo && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!site.demo && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={site.demo ? '/images/hero.webp' : new URL('/images/hero.webp', site.url).href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/inter-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-normal.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    {site.demo && <p class="demo-notice">{site.demoNotice}</p>}
+    <slot />
+  </body>
+</html>

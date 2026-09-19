@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title={`Privacidade | ${site.name}`} description="Informações sobre a navegação e os canais de contato do escritório."><main id="conteudo" class="container legal-page">
+  <a class="text-link" href="/">← Voltar ao site</a><h1>Privacidade</h1>
+  <p>Você pode conhecer o escritório e suas áreas de atuação sem criar uma conta ou enviar dados pessoais.</p>
+  <h2>Navegação neste site</h2><p>Esta versão não utiliza cookies de rastreamento, ferramentas de análise ou armazenamento local. Fontes e imagens são servidas pelo próprio site. O provedor de hospedagem pode manter registros técnicos de acesso conforme sua configuração e política.</p>
+  <h2>Mensagem de contato</h2><p>A mensagem escrita no modal permanece no navegador até você escolher continuar no WhatsApp. Ela não é enviada nem armazenada por este site. Ao abrir o WhatsApp, o texto é incluído no endereço de destino; o envio ao escritório é concluído por você naquele serviço.</p>
+  <h2>Serviços externos</h2><p>O uso do WhatsApp, do aplicativo de e-mail e de outros canais externos está sujeito às políticas desses serviços. No primeiro contato, compartilhe apenas o necessário para organizar o atendimento. Combine com a equipe um canal apropriado antes de enviar documentos ou informações confidenciais.</p>
+  <h2>Contato sobre privacidade</h2><p>Para esclarecer dúvidas ou solicitar informações sobre os dados compartilhados com o escritório, escreva para <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+</main></BaseLayout>
